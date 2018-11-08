@@ -1,0 +1,43 @@
+{
+  "name": "configcat-js",
+  "version": "2.0.15",
+  "description": "ConfigCat is a cloud based configuration as a service. It integrates with your apps, backends, websites, and other programs, so you can configure them through this website (https://www.configcat.com) even after they are deployed.",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "test": "mocha --require ts-node/register tests/**/*.ts --exit --timeout 30000",
+    "build": "tsc",
+    "prepare": "npm run build",
+    "test-only": "gulp test-only"
+  },
+  "keywords": [
+    "configcat",
+    "config",
+    "configuration",
+    "remoteconfiguration",
+    "configcatclient"
+  ],
+  "author": "ConfigCat",
+  "license": "MIT",
+  "dependencies": {
+    "events": "^2.0.0",
+    "js-sha1": "^0.6.0"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.1.6",
+    "@types/mocha": "^5.2.5",
+    "@types/node": "^10.12.0",
+    "chai": "^4.2.0",
+    "del": "^3.0.0",
+    "gulp": "^4.0.0",
+    "gulp-mocha": "^6.0.0",
+    "gulp-typescript": "^4.0.2",
+    "mocha": "^5.2.0",
+    "ts-node": "^7.0.1",
+    "typescript": "^2.9.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/configcat/node-sdk"
+  }
+}

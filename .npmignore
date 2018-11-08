@@ -1,0 +1,15 @@
+.vscode/
+node_modules/
+src/
+samples/
+tests/
+coverage/
+gulpfile.js
+package-lock.json
+tsconfig.json
+.gitignore
+.travis.yml
+*.tgz
+.idea/
+.nyc_output/
+*.log
