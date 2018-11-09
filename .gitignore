@@ -60,4 +60,4 @@ typings/
 lib/
 package-lock.json
 .idea/
-
+dist/
