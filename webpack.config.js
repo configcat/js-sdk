@@ -4,7 +4,7 @@ module.exports = {
   devtool: 'source-map',
   output: {
     filename: "configcat.js",
-    library: "ConfigCat"
+    library: "configcat"
   },
   resolve: {
     // Add `.ts` and `.tsx` as a resolvable extension.
