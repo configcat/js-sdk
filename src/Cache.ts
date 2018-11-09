@@ -1,12 +1,7 @@
-import { ProjectConfig } from "./ProjectConfigService";
+import { ICache } from "configcat-common";
+import { ProjectConfig } from "configcat-common/lib/ProjectConfigService";
 
-export interface ICache {
-    Set(config: ProjectConfig): void;
-
-    Get(): ProjectConfig;
-}
-
-export class InMemoryCache implements ICache {
+export class LocalStorageCache implements ICache {
     cache: ProjectConfig;
 
     Set(config: ProjectConfig): void {

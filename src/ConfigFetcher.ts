@@ -1,25 +1,24 @@
-import { ProjectConfig } from "./ProjectConfigService";
+import { IConfigFetcher, IConfigCatLogger } from "configcat-common";
+import { ProjectConfig } from "configcat-common/lib/ProjectConfigService";
 
 declare const Promise: any;
-
-export interface IConfigFetcher {
-    fetchLogic(lastProjectConfig: ProjectConfig, callback: (newProjectConfig: ProjectConfig) => void): void;
-}
 
 export class HttpConfigFetcher implements IConfigFetcher {
 
     url: string;
     productVersion: string;
+    logger: IConfigCatLogger;
 
-    constructor(url: string, productVersion: string) {
+    constructor(url: string, productVersion: string, logger: IConfigCatLogger ) {
         this.url = url;
         this.productVersion = productVersion;
+        this.logger = logger;
     }
 
     fetchLogic(lastProjectConfig: ProjectConfig, callback: (newProjectConfig: ProjectConfig) => void): void {
 
         const httpRequest = new XMLHttpRequest();
-        httpRequest.onreadystatechange = function() {
+        httpRequest.onreadystatechange = () => {
             if (httpRequest.readyState == 4) {
                 const etag = httpRequest.getResponseHeader("ETag");
                 if (httpRequest.status === 200) {
@@ -27,7 +26,7 @@ export class HttpConfigFetcher implements IConfigFetcher {
                 } else if (httpRequest.status === 304) {
                     callback(new ProjectConfig(new Date().getTime(), lastProjectConfig.JSONConfig, etag));
                 } else {
-                    console.log("ConfigCat HTTPRequest error: " + httpRequest.statusText);
+                    this.logger.log("ConfigCat HTTPRequest error: " + httpRequest.statusText);
                     callback(lastProjectConfig);
                 }
             }
