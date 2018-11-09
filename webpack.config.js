@@ -1,7 +1,6 @@
 module.exports = {
   mode: "production",
   entry: "./src/index.ts",
-  devtool: 'source-map',
   output: {
     filename: "configcat.js",
     library: "configcat"
