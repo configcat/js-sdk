@@ -1,21 +1,15 @@
 import { IConfigFetcher, IConfigCatLogger } from "configcat-common";
 import { ProjectConfig } from "configcat-common/lib/ProjectConfigService";
+import { ConfigurationBase } from "configcat-common/lib/ConfigCatClientConfiguration";
 
 declare const Promise: any;
 
 export class HttpConfigFetcher implements IConfigFetcher {
 
-    url: string;
-    productVersion: string;
-    logger: IConfigCatLogger;
-
-    constructor(url: string, productVersion: string, logger: IConfigCatLogger ) {
-        this.url = url;
-        this.productVersion = productVersion;
-        this.logger = logger;
+    constructor() {
     }
 
-    fetchLogic(lastProjectConfig: ProjectConfig, callback: (newProjectConfig: ProjectConfig) => void): void {
+    fetchLogic(clientConfiguration: ConfigurationBase, lastProjectConfig: ProjectConfig, callback: (newProjectConfig: ProjectConfig) => void): void {
 
         const httpRequest = new XMLHttpRequest();
         httpRequest.onreadystatechange = () => {
@@ -26,14 +20,14 @@ export class HttpConfigFetcher implements IConfigFetcher {
                 } else if (httpRequest.status === 304) {
                     callback(new ProjectConfig(new Date().getTime(), lastProjectConfig.JSONConfig, etag));
                 } else {
-                    this.logger.log("ConfigCat HTTPRequest error: " + httpRequest.statusText);
+                    clientConfiguration.logger.log("ConfigCat HTTPRequest error: " + httpRequest.statusText);
                     callback(lastProjectConfig);
                 }
             }
         };
 
-        httpRequest.open( "GET", this.url, true );
-        httpRequest.setRequestHeader("X-ConfigCat-UserAgent", "ConfigCat-JS/" + this.productVersion);
+        httpRequest.open( "GET", clientConfiguration.getUrl(), true );
+        httpRequest.setRequestHeader("X-ConfigCat-UserAgent", "ConfigCat-JS/" + clientConfiguration.productVersion);
         httpRequest.setRequestHeader("If-None-Match", lastProjectConfig ? lastProjectConfig.HttpETag : null);
         httpRequest.send( null );
     }
