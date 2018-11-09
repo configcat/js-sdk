@@ -1,8 +1,10 @@
 module.exports = {
-  mode: "development",
-  entry: "./src/indexPure.ts",
+  mode: "production",
+  entry: "./src/index.ts",
+  devtool: 'source-map',
   output: {
-    filename: "configcat.js"
+    filename: "configcat.js",
+    library: "ConfigCat"
   },
   resolve: {
     // Add `.ts` and `.tsx` as a resolvable extension.
