@@ -1,25 +1,29 @@
+<!doctype html>
 <html>
 	<head>
+			<meta charset="utf-8">
+			
+			<script type="text/javascript" src="../../dist/configcat.js"></script>
+
+			<script type="text/javascript">
+				// Insert your API key
+				var client = configcat.createClient("PKDVCLf-Hq-h-kCzMp-L7Q/PaDVCFk9EpmD6sLpGLltTA");
+	
+				var myUser = {
+					identifier : "435170f4-8a8b-4b67-a723-505ac7cdea92"
+				}; 
+	
+				// Get your config value:
+				client.getValue("keySampleText", "N/A", myUser, (value) => {
+					console.log("keySampleText: " + value);
+				});
+	
+				// Get your config value:
+				client.getValue("keySampleText_NOTEXISTS", "N/A", myUser, (value) => {
+					console.log("keySampleText: " + value);
+				});
+			</script>
 	</head>
 	<body>
-		<script type="text/javascript" src="../../dist/configcat.js"></script>
-		<script type="text/javascript">
-			var client = configcat.createClient("tlfVCEbtsnLEbAmkZRMWlw/tlfVCIrvTggTQp38nwq0JA");
-			
-			var myUser = { identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92"};
-			// Get your config value(s):
-			client.getValue("Debugmode", false, myUser, (value) => {
-				console.log("Debugmode: " + value);
-			});
-
-			client.getValue("asdasd", true, myUser, (value) => {
-				console.log("asdasd: " + value);
-			});
-
-			client.getValue("text", "asdasd", myUser, (value) => {
-				console.log("text: " + value);
-			});
-		</script>
-
 	</body>
 </html>
