@@ -7,8 +7,7 @@
   "scripts": {
     "test": "mocha --require ts-node/register tests/**/*.ts --exit --timeout 30000",
     "build": "tsc",
-    "prepare": "npm run build",
-    "test-only": "gulp test-only"
+    "prepare": "npm run build"
   },
   "keywords": [
     "configcat",
@@ -29,16 +28,7 @@
     "configcat-common": "^1.1.4"
   },
   "devDependencies": {
-    "@types/chai": "^4.1.6",
-    "@types/mocha": "^5.2.5",
     "@types/node": "^10.12.0",
-    "chai": "^4.2.0",
-    "del": "^3.0.0",
-    "gulp": "^4.0.0",
-    "gulp-mocha": "^6.0.0",
-    "gulp-typescript": "^4.0.2",
-    "mocha": "^5.2.0",
-    "ts-node": "^7.0.1",
     "typescript": "^2.9.2"
   },
   "repository": {
