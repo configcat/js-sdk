@@ -1,25 +1,28 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import * as configcat from 'configcat-js';
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+    this.client = configcat.createClient("PKDVCLf-Hq-h-kCzMp-L7Q/psuH7BGHoUmdONrzzUOY7A");
+  }
+
+  handleClick() {
+    var myUser = { identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92"};
+    this.client.getValue("keySampleText", "default value", (value) => {
+      console.log("keySampleText: " + value);
+    }, myUser);
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <button onClick={this.handleClick}>
+        ClickMe!
+      </button>
       </div>
     );
   }
