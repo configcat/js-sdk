@@ -1,3 +1,5 @@
+var WebpackAutoInject = require('webpack-auto-inject-version');
+
 module.exports = {
   mode: "production",
   entry: "./src/index.ts",
@@ -14,5 +16,12 @@ module.exports = {
       // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
       { test: /\.tsx?$/, loader: "ts-loader" }
     ]
-  }
+  },
+  plugins: [
+    new WebpackAutoInject({
+        components: {
+            AutoIncreaseVersion: false
+        }
+    })
+  ],
 };
