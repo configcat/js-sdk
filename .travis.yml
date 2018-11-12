@@ -6,7 +6,7 @@ install:
  - npm install
 before_script: 
  - npm run build
- script:
+script:
  - npm run test
 after_success:
  - codecov
