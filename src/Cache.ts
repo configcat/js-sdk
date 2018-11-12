@@ -1,17 +1,14 @@
 import { ICache } from "configcat-common";
-import { ProjectConfig } from "configcat-common/lib/ProjectConfigService";
+import { ProjectConfig } from "configcat-common/lib/ConfigServiceBase";
 
 export class LocalStorageCache implements ICache {
-    cache: ProjectConfig;
+    cache:  { [apiKey: string] : ProjectConfig; } = {};
 
-    Set(config: ProjectConfig): void {
-        this.cache = config;
+    Set(apiKey: string, config: ProjectConfig): void {
+        this.cache[apiKey] = config;
     }
-    Get(): ProjectConfig {
-        var c: ProjectConfig = this.cache;
 
-        return c;
+    Get(apiKey: string): ProjectConfig {
+        return this.cache[apiKey];
     }
 }
-
-export default ICache;

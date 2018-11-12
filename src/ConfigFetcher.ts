@@ -1,5 +1,5 @@
 import { IConfigFetcher, IConfigCatLogger } from "configcat-common";
-import { ProjectConfig } from "configcat-common/lib/ProjectConfigService";
+import { ProjectConfig } from "configcat-common/lib/ConfigServiceBase";
 import { OptionsBase } from "configcat-common/lib/ConfigCatClientOptions";
 
 declare const Promise: any;
