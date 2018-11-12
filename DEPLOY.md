@@ -1,10 +1,10 @@
-## Deploy steps
-
-
 ### 1. Create a new version (patch, minor, major)
- ```PowerShell
-  npm version patch | minor | major
- ```
+Increase version number by using `npm version patch | minor | major`
+
+ *Example: increasing patch version* 
+```PowerShell
+npm version patch
+```
 
 ### 2. Push tag to remote
  ```PowerShell
