@@ -6,6 +6,11 @@ install:
  - npm install
 before_script: 
  - npm run build
+ script:
+ - npm run test
+after_success:
+ - codecov
+ - test $TRAVIS_BRANCH = "master" && npm pack 
 stage:
  - build
  - release
