@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import * as configcat from 'configcat-js';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +7,4 @@ import * as configcat from 'configcat-js';
 })
 export class AppComponent {
   title = 'angular-sample';
-
-  public result: String;
-
-  click() {
-  }
 }
