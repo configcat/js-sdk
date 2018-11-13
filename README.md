@@ -12,9 +12,17 @@ https://configcat.com
 
 **1. Install and import package:**
 
-*via NPM [package]( https://npmjs.com/package/configcat-js):*
+*via NPM [package](https://npmjs.com/package/configcat-js):*
 ```PowerShell
 npm i configcat-js
+```
+```js
+import * as configcat from "configcat-js";
+```
+
+*via Yarn [package](https://yarnpkg.com/package/configcat-js):*
+```PowerShell
+yarn add configcat-js
 ```
 ```js
 import * as configcat from "configcat-js";
