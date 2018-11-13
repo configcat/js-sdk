@@ -10,20 +10,23 @@ https://configcat.com
 
 ## Getting Started
 
-1. Install [NPM](https://docs.npmjs.com/cli/install) package: [configcat-js]( https://npmjs.com/package/configcat-js)
- ```PowerShell
-  npm i configcat-js
- ```
+1. Install and import package:
+   - via NPM:
+        ```PowerShell
+        npm i configcat-js
+        ```
+        ```js
+        import * as configcat from "configcat-js";
+        ```
+    - via CDN:
 2. <a href="https://configcat.com/Account/Login" target="_blank">Log in to ConfigCat Management Console</a> and go to your *Project* to get your *API Key*:
 ![API-KEY](https://raw.githubusercontent.com/ConfigCat/js-sdk/master/media/readme01.png  "API-KEY")
 
 1. Create a **ConfigCat** client instance:
     ```javascript
-    var configcat = require("configcat-js");
-
     var client = configcat.createClient("#YOUR-API-KEY#");
     ```
-1. Get your setting value:
+2. Get your setting value:
     ```javascript
     client.getValue("isMyAwesomeFeatureEnabled", false, (value) => {
         if(value) {
@@ -48,6 +51,11 @@ client.getValue("isMyAwesomeFeatureEnabled", false, (value) => {
     {identifier : "#USER-IDENTIFIER#"}
 });
 ```
+
+## Sample/Demo apps
+  - [Angular 2+](https://github.com/configcat/js-sdk/tree/master/samples/angular-sample)
+  - [React](https://github.com/configcat/js-sdk/tree/master/samples/react-sample)
+  - [Pure HTML + JS](https://github.com/configcat/js-sdk/tree/master/samples/html)
 
 ## Caching Policies
 The ConfigCat SDK supports three different caching policies to acquire the configuration values from ConfigCat. When the client downloads the latest configuration value, puts it into the internal cache and then serves all requests the from cache. With the following caching policies you can customize the caching to suit your needs.
