@@ -38,12 +38,12 @@ import * as configcat from "configcat-js";
 ![API-KEY](https://raw.githubusercontent.com/ConfigCat/js-sdk/master/media/readme01.png  "API-KEY")
 
 **3. Create a *ConfigCat* client instance:**
-```javascript
+```js
 var client = configcat.createClient("#YOUR-API-KEY#");
 ```
 
 **4. Get your setting value:**
-```javascript
+```js
 client.getValue("isMyAwesomeFeatureEnabled", false, (value) => {
     if(value) {
         do_the_new_thing();
