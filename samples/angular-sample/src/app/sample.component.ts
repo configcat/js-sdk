@@ -29,7 +29,8 @@ export class SampleComponent implements OnInit {
         const userObject = new User('#SOME-USER-ID#', this.userEmail);
         this.configCatClient.getValue('isPOCFeatureEnabled', false, (value) => {
             this.isPOCEnabled = value;
-        },
-            userObject);
+          },
+          userObject
+        );
     }
 }

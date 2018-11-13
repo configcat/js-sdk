@@ -6,26 +6,18 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/configcat-js@1.1.12/dist/configcat.min.js"></script>
 
     <script type="text/javascript">
-      // Insert your API key
-      var configCatClient = configcat.createClient("PKDVCLf-Hq-h-kCzMp-L7Q/PaDVCFk9EpmD6sLpGLltTA");
+      var configCatClient = configcat.createClient("PKDVCLf-Hq-h-kCzMp-L7Q/HhOWfwVtZ0mb30i9wi17GQ");
 
-      var myUser = {
-        identifier : "435170f4-8a8b-4b67-a723-505ac7cdea92"
-      };
+      configCatClient.getValue("isAwesomeFeatureEnabled", false, function(value) {
+        console.log("isAwesomeFeatureEnabled: " + value);
+      });
 
-      // Get your config value:
-      configCatClient.getValue("keySampleText", "N/A", 
-        function(value) {
-          console.log("keySampleText: " + value);
+      var userObject = { identifier: "#SOME-USER-ID#", email: "configcat@example.com" };
+      configCatClient.getValue("isPOCFeatureEnabled", false, function(value) {
+          console.log("isPOCFeatureEnabled: " + value);
         }, 
-        myUser);
-
-      // Get your config value:
-      configCatClient.getValue("keySampleText_NOTEXISTS", "N/A", 
-        function(value) {
-          console.log("keySampleText: " + value);
-        }, 
-        myUser);
+        userObject
+      );
     </script>
   </head>
   <body>
