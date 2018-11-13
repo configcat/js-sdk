@@ -18,7 +18,7 @@ export class HttpConfigFetcher implements IConfigFetcher {
                 if (httpRequest.status === 200) {
                     callback(new ProjectConfig(new Date().getTime(), httpRequest.responseText, etag));
                 } else if (httpRequest.status === 304) {
-                    callback(new ProjectConfig(new Date().getTime(), lastProjectConfig.JSONConfig, etag));
+                    callback(new ProjectConfig(new Date().getTime(), JSON.stringify(lastProjectConfig.ConfigJSON), etag));
                 } else {
                     options.logger.log("ConfigCat HTTPRequest error: " + httpRequest.statusText);
                     callback(lastProjectConfig);
