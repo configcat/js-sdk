@@ -12,7 +12,7 @@ module.exports = function(config) {
             "**/*.ts": ["karma-typescript"]
         },
 
-        reporters: ["progress"],
+        reporters: ["progress", 'karma-typescript'],
 
         browsers: ["ChromeHeadless"],
 
