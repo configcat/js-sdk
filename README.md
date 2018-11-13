@@ -55,9 +55,9 @@ client.getValue("isMyAwesomeFeatureEnabled", false, (value) => {
         do_the_new_thing();
     } else {
         do_the_old_thing();
-    },
+    }},
     {identifier : "#USER-IDENTIFIER#"}
-});
+);
 ```
 
 ## Sample/Demo apps
