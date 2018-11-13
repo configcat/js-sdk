@@ -3,7 +3,7 @@
 	<head>
 			<meta charset="utf-8">
 			
-			<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/configcat-js@1.1.11/dist/configcat.min.js"></script>
+			<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/configcat-js@1.1.12/dist/configcat.min.js"></script>
 
 			<script type="text/javascript">
 				// Insert your API key
@@ -14,14 +14,18 @@
 				}; 
 	
 				// Get your config value:
-				client.getValue("keySampleText", "N/A", (value) => {
-					console.log("keySampleText: " + value);
-				}, myUser);
+				client.getValue("keySampleText", "N/A", 
+					function(value) {
+						console.log("keySampleText: " + value);
+					}, 
+					myUser);
 	
 				// Get your config value:
-				client.getValue("keySampleText_NOTEXISTS", "N/A", (value) => {
-					console.log("keySampleText: " + value);
-				}, myUser);
+				client.getValue("keySampleText_NOTEXISTS", "N/A", 
+					function(value) {
+						console.log("keySampleText: " + value);
+					}, 
+					myUser);
 			</script>
 	</head>
 	<body>
