@@ -12,7 +12,7 @@ https://configcat.com
 
 **1. Install and import package:**
 
-*via NPM:*
+*via NPM [package]( https://npmjs.com/package/configcat-js):*
 ```PowerShell
 npm i configcat-js
 ```
