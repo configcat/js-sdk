@@ -9,9 +9,9 @@ import { User } from 'configcat-common/lib/RolloutEvaluator';
 })
 
 export class SampleComponent implements OnInit {
-    constructor() {}
+    constructor() { }
 
-        public isAwesomeEnabled: Boolean = undefined;
+    public isAwesomeEnabled: Boolean = undefined;
     public isPOCEnabled: Boolean = undefined;
     public userEmail = 'configcat@example.com';
 
