@@ -1,15 +1,15 @@
 <div class="wrapper">
+    <h2>Simple feature flag.</h2>
     <button (click)="checkAwesome()">Check if Awesome Feature is turned ON</button>
-    <div class="wrapper">
-        <div class="green dot" *ngIf="isAwesomeEnabled"></div>
-        <div class="red dot" *ngIf="!isAwesomeEnabled"></div>
-    </div>
-    <div class="wrapper">
-        <input type="text" [(ngModel)]="userEmail">
-        <button (click)="checkProofOfConcept()" >Check POC feature with Email</button>
-    </div>
-    <div class="wrapper">
-        <div class="green dot" *ngIf="isPOCEnabled"></div>
-        <div class="red dot" *ngIf="!isPOCEnabled"></div>
-    </div>
+    <p>Value returned from ConfigCat: <b>{{isAwesomeEnabled}}</b></p>
+    <h2>Feature with Targeting</h2>
+    <p> Set up to be enabled only for users with an e-mail address that contains "@example.com"</p>
+
+    <input type="text" [(ngModel)]="userEmail">
+    <button (click)="checkProofOfConcept()">Check POC feature with Email</button>
+    <p>Value returned from ConfigCat: <b>{{isPOCEnabled}}</b></p>
+
+    <p>A screenshot to see how the ConfigCat Management Console looks like for this Sample Project.</p>
+    <img src="../assets/mgmt_console.png">
+
 </div>

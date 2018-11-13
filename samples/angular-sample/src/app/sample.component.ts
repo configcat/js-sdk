@@ -15,9 +15,9 @@ export class SampleComponent implements OnInit {
     }
 
     private client: IConfigCatClient;
-    public isAwesomeEnabled: Boolean = false;
-    public isPOCEnabled: Boolean = false;
-    public userEmail: String = '';
+    public isAwesomeEnabled: Boolean = undefined;
+    public isPOCEnabled: Boolean = undefined;
+    public userEmail = 'configcat@example.com';
 
 
     ngOnInit() { }
@@ -28,10 +28,11 @@ export class SampleComponent implements OnInit {
         });
     }
 
-    checkProofOfConcept(userEmail) {
-        const userObject = new User("1234-testuserID", )
+    checkProofOfConcept() {
+        const userObject = new User('1234-testuserID', this.userEmail);
         this.client.getValue('isPOCFeatureEnabled', false, (value) => {
             this.isPOCEnabled = value;
-        },userObject);
+        },
+        userObject);
     }
 }
