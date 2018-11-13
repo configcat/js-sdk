@@ -14,14 +14,18 @@
 				}; 
 	
 				// Get your config value:
-				client.getValue("keySampleText", "N/A", function(value){
-					console.log("keySampleText: " + value);
-				}, myUser);
+				client.getValue("keySampleText", "N/A", 
+					function(value) {
+						console.log("keySampleText: " + value);
+					}, 
+					myUser);
 	
 				// Get your config value:
-				client.getValue("keySampleText_NOTEXISTS", "N/A", function(value){
-					console.log("keySampleText: " + value);
-				}, myUser);
+				client.getValue("keySampleText_NOTEXISTS", "N/A", 
+					function(value) {
+						console.log("keySampleText: " + value);
+					}, 
+					myUser);
 			</script>
 	</head>
 	<body>
