@@ -13,3 +13,8 @@ tsconfig.json
 .idea/
 .nyc_output/
 *.log
+media/
+test/
+DEPLOY.md
+karma.conf.js
+webpack.config.js
