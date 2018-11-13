@@ -9,9 +9,7 @@ class App extends Component {
     super(props)
     this.client = configcat.createClient("PKDVCLf-Hq-h-kCzMp-L7Q/HhOWfwVtZ0mb30i9wi17GQ");
   }
-
-
-
+  
   render() {
     return (
       <div className="wrapper">
