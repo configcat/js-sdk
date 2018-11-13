@@ -10,32 +10,40 @@ https://configcat.com
 
 ## Getting Started
 
-1. Install and import package:
-   - via NPM:
-        ```PowerShell
-        npm i configcat-js
-        ```
-        ```js
-        import * as configcat from "configcat-js";
-        ```
-    - via CDN:
-2. <a href="https://configcat.com/Account/Login" target="_blank">Log in to ConfigCat Management Console</a> and go to your *Project* to get your *API Key*:
+**1. Install and import package:**
+
+*via NPM:*
+```PowerShell
+npm i configcat-js
+```
+```js
+import * as configcat from "configcat-js";
+```
+
+*via CDN:*
+```html
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/configcat-js@1.1.12/dist/configcat.min.js"></script>
+```
+
+**2. <a href="https://configcat.com/Account/Login" target="_blank">Log in to ConfigCat Management Console</a> and go to your *Project* to get your *API Key*:**
+
 ![API-KEY](https://raw.githubusercontent.com/ConfigCat/js-sdk/master/media/readme01.png  "API-KEY")
 
-1. Create a **ConfigCat** client instance:
-    ```javascript
-    var client = configcat.createClient("#YOUR-API-KEY#");
-    ```
-2. Get your setting value:
-    ```javascript
-    client.getValue("isMyAwesomeFeatureEnabled", false, (value) => {
-        if(value) {
-            do_the_new_thing();
-        } else {
-            do_the_old_thing();
-        }
-    });
-    ```
+**3. Create a *ConfigCat* client instance:**
+```javascript
+var client = configcat.createClient("#YOUR-API-KEY#");
+```
+
+**4. Get your setting value:**
+```javascript
+client.getValue("isMyAwesomeFeatureEnabled", false, (value) => {
+    if(value) {
+        do_the_new_thing();
+    } else {
+        do_the_old_thing();
+    }
+});
+```
 
 ## Getting user specific setting values with Targeting
 Using this feature you will be able get different setting values for different users in your application by passing a `User Object` to the `getValue()` function.
