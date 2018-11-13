@@ -9,4 +9,4 @@ npm install
 ```
 npm start
 ```
-3. Open browser at 
+3. Open browser at `http://localhost:3000/`
