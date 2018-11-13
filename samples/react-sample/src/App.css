@@ -30,3 +30,23 @@
     transform: rotate(360deg);
   }
 }
+
+.logos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.heart {
+  font-size: 2em;
+}
+
+.cat {
+  margin-right: 20px;
+}
+
+.wrapper {
+  padding: 40px;
+  text-align: center;
+}

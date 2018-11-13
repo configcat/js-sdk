@@ -29,7 +29,7 @@ export class SampleComponent implements OnInit {
     }
 
     checkProofOfConcept() {
-        const userObject = new User('1234-testuserID', this.userEmail);
+        const userObject = new User('#SOME-USER-ID#', this.userEmail);
         this.client.getValue('isPOCFeatureEnabled', false, (value) => {
             this.isPOCEnabled = value;
         },

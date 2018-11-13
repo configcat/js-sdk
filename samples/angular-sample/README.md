@@ -14,6 +14,6 @@ npm install
 ```
 ng serve
 ```
-
+3. Open browser at `http://localhost:4200/`
 
 
