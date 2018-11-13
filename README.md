@@ -31,12 +31,12 @@ import * as configcat from "configcat-js";
 
 **3. Create a *ConfigCat* client instance:**
 ```js
-var client = configcat.createClient("#YOUR-API-KEY#");
+var configCatClient = configcat.createClient("#YOUR-API-KEY#");
 ```
 
 **4. Get your setting value:**
 ```js
-client.getValue("isMyAwesomeFeatureEnabled", false, (value) => {
+configCatClient.getValue("isMyAwesomeFeatureEnabled", false, (value) => {
     if(value) {
         do_the_new_thing();
     } else {
@@ -50,7 +50,7 @@ Using this feature, you will be able to get different setting values for differe
 
 Read more about [Targeting here](https://docs.configcat.com/docs/advanced/targeting/).
 ```js
-client.getValue("isMyAwesomeFeatureEnabled", false, (value) => {
+configCatClient.getValue("isMyAwesomeFeatureEnabled", false, (value) => {
     if(value) {
         do_the_new_thing();
     } else {
