@@ -12,6 +12,7 @@ export class HttpConfigFetcher implements IConfigFetcher {
     fetchLogic(options: OptionsBase, lastProjectConfig: ProjectConfig, callback: (newProjectConfig: ProjectConfig) => void): void {
 
         const httpRequest = new XMLHttpRequest();
+        httpRequest.timeout = options.requestTimeoutMs;
         httpRequest.onreadystatechange = () => {
             if (httpRequest.readyState == 4) {
                 const etag = httpRequest.getResponseHeader("ETag");
@@ -31,8 +32,6 @@ export class HttpConfigFetcher implements IConfigFetcher {
         httpRequest.setRequestHeader("If-None-Match", lastProjectConfig ? lastProjectConfig.HttpETag : null);
         httpRequest.send( null );
     }
-
-
 }
 
 export default IConfigFetcher;

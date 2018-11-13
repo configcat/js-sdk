@@ -127,4 +127,49 @@ describe("Integration - ConfigCatClient", () => {
     }, 
     new User("nacho@gmail.com"));
   });
+
+  
+  it("GetValue - AutoPoll - With wrong apikey - Returns NOT_CAT", (done) => {
+    
+    const defaultValue: string = "NOT_CAT";
+    let client: IConfigCatClient = configcatClient.createClientWithAutoPoll("WRONG_API_KEY", {requestTimeoutMs: 500});
+
+    client.getValue("stringDefaultCat", defaultValue, actual => {
+
+      assert.strictEqual(actual, defaultValue);
+
+      done();
+    });
+  });
+
+  it("GetValue - ManualPoll - With wrong apikey - Returns NOT_CAT", (done) => {
+    
+    const defaultValue: string = "NOT_CAT";
+    let client: IConfigCatClient = configcatClient.createClientWithManualPoll("WRONG_API_KEY", {requestTimeoutMs: 500});
+
+    client.getValue("stringDefaultCat", defaultValue, actual => {
+
+      assert.strictEqual(actual, defaultValue);
+
+      client.forceRefresh(function(){
+        client.getValue("stringDefaultCat", defaultValue, actual => {
+
+          assert.strictEqual(actual, defaultValue);
+          done();
+        });
+      });
+    });
+  });
+
+  it("GetValue - LazyLoad - With wrong apikey - Returns NOT_CAT", (done) => {
+    
+    const defaultValue: string = "NOT_CAT";
+    let client: IConfigCatClient = configcatClient.createClientWithLazyLoad("WRONG_API_KEY", {requestTimeoutMs: 500});
+
+    client.getValue("stringDefaultCat", defaultValue, actual => {
+      
+      assert.strictEqual(actual, defaultValue);
+      done();
+    });
+  });
 });
