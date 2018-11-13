@@ -2,7 +2,7 @@
 
 ConfigCat SDK for JavaScript provides easy integration between ConfigCat service and frontend applications.
 
-ConfigCat is a feature flag, feature toggle and configuration management service. That lets you launch new features and change your software configuration remotely without actually (re)deploying code.
+ConfigCat is a feature flag, feature toggle, and configuration management service. That lets you launch new features and change your software configuration remotely without actually (re)deploying code.
 https://configcat.com  
 
 [![Build Status](https://travis-ci.com/configcat/js-sdk.svg?branch=master)](https://travis-ci.com/configcat/js-sdk) [![codecov](https://codecov.io/gh/configcat/js-sdk/branch/master/graph/badge.svg)](https://codecov.io/gh/configcat/js-sdk) [![Known Vulnerabilities](https://snyk.io/test/github/configcat/js-sdk/badge.svg?targetFile=package.json)](https://snyk.io/test/github/configcat/js-sdk?targetFile=package.json) ![License](https://img.shields.io/github/license/configcat/js-sdk.svg) [![](https://data.jsdelivr.com/v1/package/npm/configcat-js/badge)](https://www.jsdelivr.com/package/npm/configcat-js) \
@@ -46,7 +46,7 @@ client.getValue("isMyAwesomeFeatureEnabled", false, (value) => {
 ```
 
 ## Getting user specific setting values with Targeting
-Using this feature you will be able get different setting values for different users in your application by passing a `User Object` to the `getValue()` function.
+Using this feature, you will be able to get different setting values for different users in your application by passing a `User Object` to the `getValue()` function.
 
 Read more about [Targeting here](https://docs.configcat.com/docs/advanced/targeting/).
 ```js
@@ -66,7 +66,7 @@ client.getValue("isMyAwesomeFeatureEnabled", false, (value) => {
   - [Pure HTML + JS](https://github.com/configcat/js-sdk/tree/master/samples/html)
 
 ## Caching Policies
-The ConfigCat SDK supports three different caching policies to acquire the configuration values from ConfigCat. When the client downloads the latest configuration value, puts it into the internal cache and then serves all requests the from cache. With the following caching policies you can customize the caching to suit your needs.
+The ConfigCat SDK supports three different caching policies to acquire the configuration values from ConfigCat. When the client downloads the latest configuration value, puts it into the internal cache and then serves all requests from the cache. With the following caching policies you can customize the caching to suit your needs.
 
 Read more in the [ConfigCat Docs](https://docs.configcat.com/docs/sdk-reference/js/)
 
