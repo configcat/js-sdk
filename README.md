@@ -56,7 +56,7 @@ client.getValue("isMyAwesomeFeatureEnabled", false, (value) => {
     } else {
         do_the_old_thing();
     }},
-    {identifier : "#USER-IDENTIFIER#"}
+    { identifier : "#USER-IDENTIFIER#" }
 );
 ```
 
