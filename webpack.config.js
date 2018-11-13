@@ -4,7 +4,7 @@ module.exports = {
   mode: "production",
   entry: "./src/index.ts",
   output: {
-    filename: "configcat.min.js",
+    filename: "configcat.js",
     library: "configcat"
   },
   resolve: {
