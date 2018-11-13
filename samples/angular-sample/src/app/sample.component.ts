@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as configcat from 'configcat-js';
 import { IConfigCatClient } from 'configcat-common/lib/ConfigCatClient';
+import { User } from 'configcat-common/lib/RolloutEvaluator';
 
 @Component({
     selector: 'app-sample',
@@ -15,6 +16,9 @@ export class SampleComponent implements OnInit {
 
     private client: IConfigCatClient;
     public isAwesomeEnabled: Boolean = false;
+    public isPOCEnabled: Boolean = false;
+    public userEmail: String = '';
+
 
     ngOnInit() { }
 
@@ -22,5 +26,12 @@ export class SampleComponent implements OnInit {
         this.client.getValue('isAwesomeFeatureEnabled', false, (value) => {
             this.isAwesomeEnabled = value;
         });
+    }
+
+    checkProofOfConcept(userEmail) {
+        const userObject = new User("1234-testuserID", )
+        this.client.getValue('isPOCFeatureEnabled', false, (value) => {
+            this.isPOCEnabled = value;
+        },userObject);
     }
 }
