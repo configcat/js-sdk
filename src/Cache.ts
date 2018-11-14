@@ -25,6 +25,7 @@ export class LocalStorageCache implements ICache {
             if (configString) {
                 let config = JSON.parse(atob(configString));
                 if (config) {
+                    this.cache[apiKey] = config;
                     return config;
                 }
             }
