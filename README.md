@@ -68,7 +68,11 @@ configCatClient.getValue("isMyAwesomeFeatureEnabled", false, (value) => {
 ## Caching Policies
 The ConfigCat SDK supports 3 different caching policies to acquire the setting values from ConfigCat. After latest setting values are downloaded, they are stored in the internal cache then all requests are served from there. Read more about Caching Policies and how to use them at [ConfigCat Docs](https://docs.configcat.com/docs/sdk-reference/js/).
 
----
+## Support
+If you need help how to use this SDK feel free to to contact the ConfigCat Staff on https://configcat.com. We're happy to help.
+
+## Contributing
+Contributions are welcome.
 
 ## License
 [MIT](https://raw.githubusercontent.com/ConfigCat/js-sdk/master/LICENSE)
