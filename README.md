@@ -10,7 +10,7 @@ https://configcat.com
 
 ## Getting Started
 
-**1. Install and import package:**
+### 1. Install and import package:
 
 *via NPM [package](https://npmjs.com/package/configcat-js):*
 ```PowerShell
@@ -25,16 +25,16 @@ import * as configcat from "configcat-js";
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/configcat-js@1.1.12/dist/configcat.min.js"></script>
 ```
 
-**2. <a href="https://configcat.com/Account/Login" target="_blank">Log in to ConfigCat Management Console</a> and go to your *Project* to get your *API Key*:**
+### 2. <a href="https://configcat.com/Account/Login" target="_blank">Log in to ConfigCat Management Console</a> and go to your *Project* to get your *API Key*:
 
 ![API-KEY](https://raw.githubusercontent.com/ConfigCat/js-sdk/master/media/readme01.png  "API-KEY")
 
-**3. Create a *ConfigCat* client instance:**
+### 3. Create a *ConfigCat* client instance:
 ```js
 var configCatClient = configcat.createClient("#YOUR-API-KEY#");
 ```
 
-**4. Get your setting value:**
+### 4. Get your setting value:
 ```js
 configCatClient.getValue("isMyAwesomeFeatureEnabled", false, (value) => {
     if(value) {
@@ -66,9 +66,7 @@ configCatClient.getValue("isMyAwesomeFeatureEnabled", false, (value) => {
   - [Pure HTML + JS](https://github.com/configcat/js-sdk/tree/master/samples/html)
 
 ## Caching Policies
-The ConfigCat SDK supports three different caching policies to acquire the configuration values from ConfigCat. When the client downloads the latest configuration value, puts it into the internal cache and then serves all requests from the cache. With the following caching policies you can customize the caching to suit your needs.
-
-Read more in the [ConfigCat Docs](https://docs.configcat.com/docs/sdk-reference/js/).
+The ConfigCat SDK supports 3 different caching policies to acquire the setting values from ConfigCat. After latest setting values are downloaded, they are stored in the internal cache then all requests are served from there. Read more about Caching Policies and how to use them at [ConfigCat Docs](https://docs.configcat.com/docs/sdk-reference/js/).
 
 ---
 
