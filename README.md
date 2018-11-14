@@ -65,8 +65,8 @@ configCatClient.getValue("isMyAwesomeFeatureEnabled", false, (value) => {
   - [React](https://github.com/configcat/js-sdk/tree/master/samples/react-sample)
   - [Pure HTML + JS](https://github.com/configcat/js-sdk/tree/master/samples/html)
 
-## Caching Policies
-The ConfigCat SDK supports 3 different caching policies to acquire the setting values from ConfigCat. After latest setting values are downloaded, they are stored in the internal cache then all requests are served from there. Read more about Caching Policies and how to use them at [ConfigCat Docs](https://docs.configcat.com/docs/sdk-reference/js/).
+## Polling Modes
+The ConfigCat SDK supports 3 different polling mechanisms to acquire the setting values from ConfigCat. After latest setting values are downloaded, they are stored in the internal cache then all requests are served from there. Read more about Polling Modes and how to use them at [ConfigCat Docs](https://docs.configcat.com/docs/sdk-reference/js/).
 
 ## Support
 If you need help how to use this SDK feel free to to contact the ConfigCat Staff on https://configcat.com. We're happy to help.
