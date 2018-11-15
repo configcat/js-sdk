@@ -2,10 +2,10 @@
 
 ConfigCat SDK for JavaScript provides easy integration between ConfigCat service and frontend applications.
 
-ConfigCat is a feature flag, feature toggle, and configuration management service. That lets you launch new features and change your software configuration remotely without actually (re)deploying code.
+ConfigCat is a feature flag, feature toggle, and configuration management service. That lets you launch new features and change your software configuration remotely without actually (re)deploying code. ConfigCat even helps you do controlled roll-outs like canary releases and blue-green deployments.
 https://configcat.com  
 
-[![Build Status](https://travis-ci.com/configcat/js-sdk.svg?branch=master)](https://travis-ci.com/configcat/js-sdk) [![codecov](https://codecov.io/gh/configcat/js-sdk/branch/master/graph/badge.svg)](https://codecov.io/gh/configcat/js-sdk) [![Known Vulnerabilities](https://snyk.io/test/github/configcat/js-sdk/badge.svg?targetFile=package.json)](https://snyk.io/test/github/configcat/js-sdk?targetFile=package.json) ![License](https://img.shields.io/github/license/configcat/js-sdk.svg) [![](https://data.jsdelivr.com/v1/package/npm/configcat-js/badge)](https://www.jsdelivr.com/package/npm/configcat-js) \
+[![Build Status](https://travis-ci.com/configcat/js-sdk.svg?branch=master)](https://travis-ci.com/configcat/js-sdk) [![codecov](https://codecov.io/gh/configcat/js-sdk/branch/master/graph/badge.svg)](https://codecov.io/gh/configcat/js-sdk) [![Known Vulnerabilities](https://snyk.io/test/github/configcat/js-sdk/badge.svg?targetFile=package.json)](https://snyk.io/test/github/configcat/js-sdk?targetFile=package.json) ![License](https://img.shields.io/github/license/configcat/js-sdk.svg) [![](https://data.jsdelivr.com/v1/package/npm/configcat-js/badge)](https://www.jsdelivr.com/package/npm/configcat-js)
 [![NPM](https://nodei.co/npm/configcat-js.png)](https://nodei.co/npm/configcat-js/)
 
 ## Getting Started
@@ -22,7 +22,7 @@ import * as configcat from "configcat-js";
 
 *via CDN:*
 ```html
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/configcat-js@1.1.12/dist/configcat.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/configcat-js@1.1.13/dist/configcat.min.js"></script>
 ```
 
 ### 2. <a href="https://configcat.com/Account/Login" target="_blank">Log in to ConfigCat Management Console</a> and go to your *Project* to get your *API Key*:
