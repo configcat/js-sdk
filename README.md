@@ -33,6 +33,7 @@ import * as configcat from "configcat-js";
 ```js
 var configCatClient = configcat.createClient("#YOUR-API-KEY#");
 ```
+> We strongly recommend using the *ConfigCat Client* as a Singleton object in your application.
 
 ### 4. Get your setting value:
 ```js
