@@ -22,7 +22,7 @@ import * as configcat from "configcat-js";
 
 *via CDN:*
 ```html
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/configcat-js@1.1.13/dist/configcat.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/configcat-js@1.1.14/dist/configcat.min.js"></script>
 ```
 
 ### 2. <a href="https://configcat.com/Account/Login" target="_blank">Log in to ConfigCat Management Console</a> and go to your *Project* to get your *API Key*:
