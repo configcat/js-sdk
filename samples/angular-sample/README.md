@@ -1,6 +1,6 @@
 # ConfigCat Angular Sample App
 
-To run the sanple project you need [Angular CLI](https://cli.angular.io/) installed
+To run the sample project you need [Angular CLI](https://cli.angular.io/) installed
 ```
 npm install -g @angular/cli
 ```
