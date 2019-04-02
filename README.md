@@ -1,9 +1,9 @@
 # ConfigCat SDK for JavaScript frontend applications
+https://configcat.com
 
-ConfigCat SDK for JavaScript provides easy integration between ConfigCat service and frontend applications.
+ConfigCat SDK for JavaScript provides easy integration for your application to ConfigCat.
 
-ConfigCat is a feature flag, feature toggle, and configuration management service. That lets you launch new features and change your software configuration remotely without actually (re)deploying code. ConfigCat even helps you do controlled roll-outs like canary releases and blue-green deployments.
-https://configcat.com  
+ConfigCat is a feature flag and configuration management service that lets you separate releases from deployments. You can turn your features ON/OFF using <a href="http://app.configcat.com" target="_blank">ConfigCat Management Console</a> even after they are deployed. ConfigCat lets you target specific groups of users based on region, email or any other custom user attribute.
 
 [![Build Status](https://travis-ci.com/configcat/js-sdk.svg?branch=master)](https://travis-ci.com/configcat/js-sdk) 
 [![codecov](https://codecov.io/gh/configcat/js-sdk/branch/master/graph/badge.svg)](https://codecov.io/gh/configcat/js-sdk) 
@@ -29,9 +29,8 @@ import * as configcat from "configcat-js";
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/configcat-js@1.1.14/dist/configcat.min.js"></script>
 ```
 
-### 2. <a href="https://configcat.com/Account/Login" target="_blank">Log in to ConfigCat Management Console</a> and go to your *Project* to get your *API Key*:
-
-![API-KEY](https://raw.githubusercontent.com/ConfigCat/js-sdk/master/media/readme01.png  "API-KEY")
+### 2. Go to <a href="https://app.configcat.com/connect" target="_blank">Connect your application</a> tab to get your *API Key*:
+![API-KEY](https://raw.githubusercontent.com/ConfigCat/python-sdk/master/media/readme01.png  "API-KEY")
 
 ### 3. Create a *ConfigCat* client instance:
 ```js
@@ -80,5 +79,6 @@ If you need help how to use this SDK feel free to to contact the ConfigCat Staff
 Contributions are welcome.
 
 ## About ConfigCat
+- [Official ConfigCat SDK's for other platforms](https://github.com/configcat)
 - [Documentation](https://docs.configcat.com)
 - [Blog](https://blog.configcat.com)
