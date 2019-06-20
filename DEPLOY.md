@@ -19,6 +19,6 @@ Increase version number by using `npm version patch | minor | major`
     ```PowerShell
     git push origin <new version>
     ```
-    *Example: npm push origin v1.1.15*
+    *Example: git push origin v1.1.17*
 
     You can follow the build status here -> https://travis-ci.com/configcat/js-sdk

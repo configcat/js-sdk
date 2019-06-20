@@ -26,14 +26,15 @@
     "author": "ConfigCat",
     "license": "MIT",
     "dependencies": {
-        "configcat-common": "1.1.16"
+        "configcat-common": "1.1.16",
+        "npm": "^6.9.0"
     },
     "devDependencies": {
         "@types/chai": "^4.1.7",
         "@types/mocha": "^5.2.5",
         "@types/node": "^10.12.5",
         "chai": "^4.2.0",
-        "karma": "^3.1.1",
+        "karma": "^3.1.4",
         "karma-chai": "^0.1.0",
         "karma-chrome-launcher": "^2.2.0",
         "karma-cli": "^1.0.1",
