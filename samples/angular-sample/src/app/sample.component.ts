@@ -27,6 +27,7 @@ export class SampleComponent implements OnInit {
 
     checkProofOfConcept() {
         const userObject = new User('#SOME-USER-ID#', this.userEmail);
+        // Read more about the User Object: https://docs.configcat.com/docs/sdk-reference/js/#user-object
         this.configCatClient.getValue('isPOCFeatureEnabled', false, (value) => {
             this.isPOCEnabled = value;
           },

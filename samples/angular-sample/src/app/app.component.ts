@@ -11,7 +11,8 @@ export class AppComponent {
   title = 'angular-sample';
 
   constructor() {
-    this.configCatClient = configcat.createClient('PKDVCLf-Hq-h-kCzMp-L7Q/HhOWfwVtZ0mb30i9wi17GQ');
+    this.configCatClient = configcat.createClientWithAutoPoll('PKDVCLf-Hq-h-kCzMp-L7Q/HhOWfwVtZ0mb30i9wi17GQ', { pollIntervalSeconds: 2 });
+      // You can instantiate the client with different polling modes. See the Docs: https://docs.configcat.com/docs/sdk-reference/js/#polling-modes
   }
 
   public configCatClient: IConfigCatClient;
