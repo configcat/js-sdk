@@ -30,7 +30,7 @@ describe("Integration - ConfigCatClient", () => {
   it("GetValue - ManualPoll - With 'stringDefaultCat' ShouldReturnCat", (done) => {
 
     const defaultValue: string = "NOT_CAT";
-    clientManualPoll.forceRefresh(function(){
+    clientManualPoll.forceRefresh(function () {
 
       clientManualPoll.getValue("stringDefaultCat", defaultValue, actual => {
 
@@ -100,8 +100,8 @@ describe("Integration - ConfigCatClient", () => {
       assert.equal(actual, "Horse");
 
       done();
-    }, 
-    new User("nacho@gmail.com"));
+    },
+      new User("nacho@gmail.com"));
   });
 
   it("GetValue - ManualPoll - With 'RolloutEvaluate' ShouldReturnDefaultValue", (done) => {
@@ -112,8 +112,8 @@ describe("Integration - ConfigCatClient", () => {
         assert.equal(actual, "Horse");
 
         done();
-      }, 
-      new User("nacho@gmail.com"));
+      },
+        new User("nacho@gmail.com"));
     });
   });
 
@@ -124,15 +124,15 @@ describe("Integration - ConfigCatClient", () => {
       assert.equal(actual, "Horse");
 
       done();
-    }, 
-    new User("nacho@gmail.com"));
+    },
+      new User("nacho@gmail.com"));
   });
 
-  
+
   it("GetValue - AutoPoll - With wrong apikey - Returns NOT_CAT", (done) => {
-    
+
     const defaultValue: string = "NOT_CAT";
-    let client: IConfigCatClient = configcatClient.createClientWithAutoPoll("WRONG_API_KEY", {requestTimeoutMs: 500});
+    let client: IConfigCatClient = configcatClient.createClientWithAutoPoll("WRONG_API_KEY", { requestTimeoutMs: 500 });
 
     client.getValue("stringDefaultCat", defaultValue, actual => {
 
@@ -143,15 +143,15 @@ describe("Integration - ConfigCatClient", () => {
   });
 
   it("GetValue - ManualPoll - With wrong apikey - Returns NOT_CAT", (done) => {
-    
+
     const defaultValue: string = "NOT_CAT";
-    let client: IConfigCatClient = configcatClient.createClientWithManualPoll("WRONG_API_KEY", {requestTimeoutMs: 500});
+    let client: IConfigCatClient = configcatClient.createClientWithManualPoll("WRONG_API_KEY", { requestTimeoutMs: 500 });
 
     client.getValue("stringDefaultCat", defaultValue, actual => {
 
       assert.strictEqual(actual, defaultValue);
 
-      client.forceRefresh(function(){
+      client.forceRefresh(function () {
         client.getValue("stringDefaultCat", defaultValue, actual => {
 
           assert.strictEqual(actual, defaultValue);
@@ -162,13 +162,54 @@ describe("Integration - ConfigCatClient", () => {
   });
 
   it("GetValue - LazyLoad - With wrong apikey - Returns NOT_CAT", (done) => {
-    
+
     const defaultValue: string = "NOT_CAT";
-    let client: IConfigCatClient = configcatClient.createClientWithLazyLoad("WRONG_API_KEY", {requestTimeoutMs: 500});
+    let client: IConfigCatClient = configcatClient.createClientWithLazyLoad("WRONG_API_KEY", { requestTimeoutMs: 500 });
 
     client.getValue("stringDefaultCat", defaultValue, actual => {
-      
+
       assert.strictEqual(actual, defaultValue);
+      done();
+    });
+  });
+
+  it("GetAllKeys - works without config", (done) => {
+
+    let client: IConfigCatClient = configcatClient.createClientWithManualPoll("WRONG_API_KEY", { requestTimeoutMs: 500 });
+
+    client.getAllKeys(keys => {
+
+      assert.equal(keys.length, 0);
+      done();
+    });
+  });
+
+
+  it("GetAllKeys - works", (done) => {
+
+    clientAutoPoll.getAllKeys(keys => {
+
+      assert.equal(keys.length, 16);
+      const keysObject = {};
+      keys.forEach(value => keysObject[value] = {});
+      assert.containsAllKeys(keysObject, [
+        'stringDefaultCat',
+        'stringIsInDogDefaultCat',
+        'stringIsNotInDogDefaultCat',
+        'stringContainsDogDefaultCat',
+        'stringNotContainsDogDefaultCat',
+        'string25Cat25Dog25Falcon25Horse',
+        'string75Cat0Dog25Falcon0Horse',
+        'string25Cat25Dog25Falcon25HorseAdvancedRules',
+        'boolDefaultTrue',
+        'boolDefaultFalse',
+        'bool30TrueAdvancedRules',
+        'integer25One25Two25Three25FourAdvancedRules',
+        'integerDefaultOne',
+        'doubleDefaultPi',
+        'double25Pi25E25Gr25Zero',
+        'keySampleText'
+      ]);
       done();
     });
   });
