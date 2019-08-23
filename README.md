@@ -16,6 +16,9 @@ ConfigCat is a <a href="https://configcat.com" target="_blank">hosted feature fl
 
 ## Getting Started
 
+> For SSR (Server-Side Rendering) Universal applications use [configcat-node](https://github.com/configcat/node-sdk) SDK.
+
+
 ### 1. Install and import package:
 
 *via NPM [package](https://npmjs.com/package/configcat-js):*
@@ -84,3 +87,9 @@ Contributions are welcome.
 - [Official ConfigCat SDK's for other platforms](https://github.com/configcat)
 - [Documentation](https://docs.configcat.com)
 - [Blog](https://blog.configcat.com)
+
+## Troubleshooting
+
+`XMLHttpRequest module not defined/found`:
+
+Since the `configcat-js` SDK needs to download the feature flag and setting values from ConfigCat's servers via a HTTP GET request. The SDK uses `XMLHttpRequest` a built in object in all browsers. This way the package size is smaller instead of using a 3rd party library. The error above can appear in cases when the `configcat-js` SDK is used within a SSR (Server-Side Rendering) Universal application. In these cases we recommend using [configcat-node](https://github.com/configcat/node-sdk) SDK.
