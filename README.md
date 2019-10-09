@@ -31,7 +31,7 @@ import * as configcat from "configcat-js";
 
 *via CDN:*
 ```html
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/configcat-js@1.1.14/dist/configcat.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/configcat-js@latest/dist/configcat.min.js"></script>
 ```
 
 ### 2. Go to <a href="https://app.configcat.com/connect" target="_blank">Connect your application</a> tab to get your *API Key*:
