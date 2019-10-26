@@ -12,19 +12,17 @@ class Demo extends Component {
     this.state = { userEmail: 'configcat@example.com' }
   }
 
-  checkAwesome() {
-    this.client.getValue('isAwesomeFeatureEnabled', false, (value) => {
-      this.setState(() => ({ isAwesomeEnabled: value }))
-    })
+  async checkAwesome() {
+    const value = await this.client.getValueAsync('isAwesomeFeatureEnabled', false)
+    this.setState(() => ({ isAwesomeEnabled: value }))
+    
   }
 
-  checkProofOfConcept() {
+  async checkProofOfConcept() {
     const userObject = { identifier: '#SOME-USER-ID#', email: this.state.userEmail };
     // Read more about the User Object: https://configcat.com/docs/advanced/user-object
-    this.client.getValue('isPOCFeatureEnabled', false, (value) => {
-      this.setState({ isPOCEnabled: value })
-    },
-    userObject)
+    const value = await this.client.getValueAsync('isPOCFeatureEnabled', false, userObject)
+    this.setState({ isPOCEnabled: value })
   }
 
   handleInputChange(event) {
