@@ -20,7 +20,7 @@ class Demo extends Component {
 
   checkProofOfConcept() {
     const userObject = { identifier: '#SOME-USER-ID#', email: this.state.userEmail };
-    // Read more about the User Object: https://docs.configcat.com/docs/sdk-reference/js/#user-object
+    // Read more about the User Object: https://configcat.com/docs/advanced/user-object
     this.client.getValue('isPOCFeatureEnabled', false, (value) => {
       this.setState({ isPOCEnabled: value })
     },
