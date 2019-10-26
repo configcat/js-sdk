@@ -44,6 +44,18 @@ var configCatClient = configcat.createClient("#YOUR-API-KEY#");
 > We strongly recommend using the *ConfigCat Client* as a Singleton object in your application.
 
 ### 4. Get your setting value:
+The Promise (async/await) way:
+```js
+    configCatClient.getValueAsync("isMyAwesomeFeatureEnabled", false)
+    .then((value) => {
+        if(value) {
+            do_the_new_thing();
+        } else {
+            do_the_old_thing();
+        }
+    });
+```
+or the Callback way:
 ```js
 configCatClient.getValue("isMyAwesomeFeatureEnabled", false, (value) => {
     if(value) {
