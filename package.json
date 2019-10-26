@@ -29,11 +29,11 @@
         "configcat-common": "^1.1.24"
     },
     "devDependencies": {
-        "@types/chai": "^4.2.0",
+        "@types/chai": "^4.2.4",
         "@types/mocha": "^5.2.5",
-        "@types/node": "^10.12.5",
+        "@types/node": "^10.17.0",
         "chai": "^4.2.0",
-        "karma": "^4.2.0",
+        "karma": "^4.4.1",
         "karma-chai": "^0.1.0",
         "karma-chrome-launcher": "^2.2.0",
         "karma-cli": "^1.0.1",
@@ -42,10 +42,10 @@
         "karma-typescript": "^4.0.0",
         "mocha": "^5.2.0",
         "ts-loader": "^5.3.0",
-        "typescript": "^3.5.3",
-        "webpack": "^4.25.1",
+        "typescript": "^3.6.4",
+        "webpack": "^4.41.2",
         "webpack-auto-inject-version": "^1.2.2",
-        "webpack-cli": "^3.1.2"
+        "webpack-cli": "^3.3.9"
     },
     "repository": {
         "type": "git",
