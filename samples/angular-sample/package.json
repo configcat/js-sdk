@@ -19,7 +19,7 @@
     "@angular/platform-browser": "~8.2.12",
     "@angular/platform-browser-dynamic": "~8.2.12",
     "@angular/router": "~8.2.12",
-    "configcat-js": "^1.1.23",
+    "configcat-js": "^1.1.24",
     "core-js": "^3.3.4",
     "rxjs": "~6.5.3",
     "zone.js": "~0.9.1"

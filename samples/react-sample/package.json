@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "configcat-js": "^1.1.23",
+    "configcat-js": "^1.1.24",
     "eslint": "^6.6.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
