@@ -339,10 +339,10 @@ describe("Integration - ConfigCatClient", () => {
     const defaultValue: string = "NOT_CAT";
 
     clientAutoPoll.getVariationId("stringDefaultCat", defaultValue, actual => {
-      assert.strictEqual(actual, "stringDefaultCat-cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882");
+      assert.strictEqual(actual, "stringDefaultCat_cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882");
 
       clientAutoPoll.getVariationId("boolDefaultTrue", defaultValue, actual => {
-        assert.strictEqual(actual, "boolDefaultTrue-true");
+        assert.strictEqual(actual, "boolDefaultTrue_true");
         done();
       });
     });
@@ -353,32 +353,32 @@ describe("Integration - ConfigCatClient", () => {
     const defaultValue: string = "NOT_CAT";
 
     let actual = await clientAutoPoll.getVariationIdAsync("stringDefaultCat", defaultValue);
-    assert.strictEqual(actual, "stringDefaultCat-cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882");
+    assert.strictEqual(actual, "stringDefaultCat_cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882");
 
     actual = await clientAutoPoll.getVariationIdAsync("boolDefaultTrue", defaultValue);
-    assert.strictEqual(actual, "boolDefaultTrue-true");
+    assert.strictEqual(actual, "boolDefaultTrue_true");
   });
 
   it("Auto poll - getVariationIds() works", async () => {
 
     let actual = await clientAutoPoll.getAllVariationIds(actual => {
       assert.equal(actual.length, 16);
-      assert.strictEqual(actual[0], 'stringDefaultCat-cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
-      assert.strictEqual(actual[1], 'stringIsInDogDefaultCat-cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
-      assert.strictEqual(actual[2], 'stringIsNotInDogDefaultCat-cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
-      assert.strictEqual(actual[3], 'stringContainsDogDefaultCat-cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
-      assert.strictEqual(actual[4], 'stringNotContainsDogDefaultCat-cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
-      assert.strictEqual(actual[5], 'string25Cat25Dog25Falcon25Horse-baaa18844b8db958c57edddf824f4a8b5cd9e298');
-      assert.strictEqual(actual[6], 'string75Cat0Dog25Falcon0Horse-baaa18844b8db958c57edddf824f4a8b5cd9e298');
-      assert.strictEqual(actual[7], 'string25Cat25Dog25Falcon25HorseAdvancedRules-baaa18844b8db958c57edddf824f4a8b5cd9e298');
-      assert.strictEqual(actual[8], 'boolDefaultTrue-true');
-      assert.strictEqual(actual[9], 'boolDefaultFalse-false');
-      assert.strictEqual(actual[10], 'bool30TrueAdvancedRules-true');
-      assert.strictEqual(actual[11], 'integer25One25Two25Three25FourAdvancedRules-37ad889a1a0b1d6edcd4f0ae078e2889fe6cfd77');
-      assert.strictEqual(actual[12], 'integerDefaultOne-356a192b7913b04c54574d18c28d46e6395428ab');
-      assert.strictEqual(actual[13], 'doubleDefaultPi-b172eb28cfa25290f165d15f79f558d926d85d11');
-      assert.strictEqual(actual[14], 'double25Pi25E25Gr25Zero-37ad889a1a0b1d6edcd4f0ae078e2889fe6cfd77');
-      assert.strictEqual(actual[15], 'keySampleText-cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
+      assert.strictEqual(actual[0], 'stringDefaultCat_cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
+      assert.strictEqual(actual[1], 'stringIsInDogDefaultCat_cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
+      assert.strictEqual(actual[2], 'stringIsNotInDogDefaultCat_cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
+      assert.strictEqual(actual[3], 'stringContainsDogDefaultCat_cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
+      assert.strictEqual(actual[4], 'stringNotContainsDogDefaultCat_cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
+      assert.strictEqual(actual[5], 'string25Cat25Dog25Falcon25Horse_baaa18844b8db958c57edddf824f4a8b5cd9e298');
+      assert.strictEqual(actual[6], 'string75Cat0Dog25Falcon0Horse_baaa18844b8db958c57edddf824f4a8b5cd9e298');
+      assert.strictEqual(actual[7], 'string25Cat25Dog25Falcon25HorseAdvancedRules_baaa18844b8db958c57edddf824f4a8b5cd9e298');
+      assert.strictEqual(actual[8], 'boolDefaultTrue_true');
+      assert.strictEqual(actual[9], 'boolDefaultFalse_false');
+      assert.strictEqual(actual[10], 'bool30TrueAdvancedRules_true');
+      assert.strictEqual(actual[11], 'integer25One25Two25Three25FourAdvancedRules_-1');
+      assert.strictEqual(actual[12], 'integerDefaultOne_1');
+      assert.strictEqual(actual[13], 'doubleDefaultPi_3.1415');
+      assert.strictEqual(actual[14], 'double25Pi25E25Gr25Zero_-1');
+      assert.strictEqual(actual[15], 'keySampleText_cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
     });
   });
 
@@ -386,21 +386,21 @@ describe("Integration - ConfigCatClient", () => {
 
     let actual = await clientAutoPoll.getAllVariationIdsAsync();
     assert.equal(actual.length, 16);
-    assert.strictEqual(actual[0], 'stringDefaultCat-cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
-    assert.strictEqual(actual[1], 'stringIsInDogDefaultCat-cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
-    assert.strictEqual(actual[2], 'stringIsNotInDogDefaultCat-cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
-    assert.strictEqual(actual[3], 'stringContainsDogDefaultCat-cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
-    assert.strictEqual(actual[4], 'stringNotContainsDogDefaultCat-cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
-    assert.strictEqual(actual[5], 'string25Cat25Dog25Falcon25Horse-baaa18844b8db958c57edddf824f4a8b5cd9e298');
-    assert.strictEqual(actual[6], 'string75Cat0Dog25Falcon0Horse-baaa18844b8db958c57edddf824f4a8b5cd9e298');
-    assert.strictEqual(actual[7], 'string25Cat25Dog25Falcon25HorseAdvancedRules-baaa18844b8db958c57edddf824f4a8b5cd9e298');
-    assert.strictEqual(actual[8], 'boolDefaultTrue-true');
-    assert.strictEqual(actual[9], 'boolDefaultFalse-false');
-    assert.strictEqual(actual[10], 'bool30TrueAdvancedRules-true');
-    assert.strictEqual(actual[11], 'integer25One25Two25Three25FourAdvancedRules-37ad889a1a0b1d6edcd4f0ae078e2889fe6cfd77');
-    assert.strictEqual(actual[12], 'integerDefaultOne-356a192b7913b04c54574d18c28d46e6395428ab');
-    assert.strictEqual(actual[13], 'doubleDefaultPi-b172eb28cfa25290f165d15f79f558d926d85d11');
-    assert.strictEqual(actual[14], 'double25Pi25E25Gr25Zero-37ad889a1a0b1d6edcd4f0ae078e2889fe6cfd77');
-    assert.strictEqual(actual[15], 'keySampleText-cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
+    assert.strictEqual(actual[0], 'stringDefaultCat_cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
+    assert.strictEqual(actual[1], 'stringIsInDogDefaultCat_cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
+    assert.strictEqual(actual[2], 'stringIsNotInDogDefaultCat_cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
+    assert.strictEqual(actual[3], 'stringContainsDogDefaultCat_cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
+    assert.strictEqual(actual[4], 'stringNotContainsDogDefaultCat_cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
+    assert.strictEqual(actual[5], 'string25Cat25Dog25Falcon25Horse_baaa18844b8db958c57edddf824f4a8b5cd9e298');
+    assert.strictEqual(actual[6], 'string75Cat0Dog25Falcon0Horse_baaa18844b8db958c57edddf824f4a8b5cd9e298');
+    assert.strictEqual(actual[7], 'string25Cat25Dog25Falcon25HorseAdvancedRules_baaa18844b8db958c57edddf824f4a8b5cd9e298');
+    assert.strictEqual(actual[8], 'boolDefaultTrue_true');
+    assert.strictEqual(actual[9], 'boolDefaultFalse_false');
+    assert.strictEqual(actual[10], 'bool30TrueAdvancedRules_true');
+    assert.strictEqual(actual[11], 'integer25One25Two25Three25FourAdvancedRules_-1');
+    assert.strictEqual(actual[12], 'integerDefaultOne_1');
+    assert.strictEqual(actual[13], 'doubleDefaultPi_3.1415');
+    assert.strictEqual(actual[14], 'double25Pi25E25Gr25Zero_-1');
+    assert.strictEqual(actual[15], 'keySampleText_cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
   });
 });
