@@ -333,4 +333,74 @@ describe("Integration - ConfigCatClient", () => {
       'keySampleText'
     ]);
   });
+
+  it("Auto poll - getVariationId() works", (done) => {
+
+    const defaultValue: string = "NOT_CAT";
+
+    clientAutoPoll.getVariationId("stringDefaultCat", defaultValue, actual => {
+      assert.strictEqual(actual, "stringDefaultCat_cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882");
+
+      clientAutoPoll.getVariationId("boolDefaultTrue", defaultValue, actual => {
+        assert.strictEqual(actual, "boolDefaultTrue_true");
+        done();
+      });
+    });
+  });
+
+  it("Auto poll - getVariationId() works", async () => {
+
+    const defaultValue: string = "NOT_CAT";
+
+    let actual = await clientAutoPoll.getVariationIdAsync("stringDefaultCat", defaultValue);
+    assert.strictEqual(actual, "stringDefaultCat_cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882");
+
+    actual = await clientAutoPoll.getVariationIdAsync("boolDefaultTrue", defaultValue);
+    assert.strictEqual(actual, "boolDefaultTrue_true");
+  });
+
+  it("Auto poll - getVariationIds() works", async () => {
+
+    let actual = await clientAutoPoll.getAllVariationIds(actual => {
+      assert.equal(actual.length, 16);
+      assert.strictEqual(actual[0], 'stringDefaultCat_cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
+      assert.strictEqual(actual[1], 'stringIsInDogDefaultCat_cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
+      assert.strictEqual(actual[2], 'stringIsNotInDogDefaultCat_cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
+      assert.strictEqual(actual[3], 'stringContainsDogDefaultCat_cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
+      assert.strictEqual(actual[4], 'stringNotContainsDogDefaultCat_cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
+      assert.strictEqual(actual[5], 'string25Cat25Dog25Falcon25Horse_baaa18844b8db958c57edddf824f4a8b5cd9e298');
+      assert.strictEqual(actual[6], 'string75Cat0Dog25Falcon0Horse_baaa18844b8db958c57edddf824f4a8b5cd9e298');
+      assert.strictEqual(actual[7], 'string25Cat25Dog25Falcon25HorseAdvancedRules_baaa18844b8db958c57edddf824f4a8b5cd9e298');
+      assert.strictEqual(actual[8], 'boolDefaultTrue_true');
+      assert.strictEqual(actual[9], 'boolDefaultFalse_false');
+      assert.strictEqual(actual[10], 'bool30TrueAdvancedRules_true');
+      assert.strictEqual(actual[11], 'integer25One25Two25Three25FourAdvancedRules_-1');
+      assert.strictEqual(actual[12], 'integerDefaultOne_1');
+      assert.strictEqual(actual[13], 'doubleDefaultPi_3.1415');
+      assert.strictEqual(actual[14], 'double25Pi25E25Gr25Zero_-1');
+      assert.strictEqual(actual[15], 'keySampleText_cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
+    });
+  });
+
+  it("Auto poll - getVariationIdsAsync() works", async () => {
+
+    let actual = await clientAutoPoll.getAllVariationIdsAsync();
+    assert.equal(actual.length, 16);
+    assert.strictEqual(actual[0], 'stringDefaultCat_cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
+    assert.strictEqual(actual[1], 'stringIsInDogDefaultCat_cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
+    assert.strictEqual(actual[2], 'stringIsNotInDogDefaultCat_cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
+    assert.strictEqual(actual[3], 'stringContainsDogDefaultCat_cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
+    assert.strictEqual(actual[4], 'stringNotContainsDogDefaultCat_cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
+    assert.strictEqual(actual[5], 'string25Cat25Dog25Falcon25Horse_baaa18844b8db958c57edddf824f4a8b5cd9e298');
+    assert.strictEqual(actual[6], 'string75Cat0Dog25Falcon0Horse_baaa18844b8db958c57edddf824f4a8b5cd9e298');
+    assert.strictEqual(actual[7], 'string25Cat25Dog25Falcon25HorseAdvancedRules_baaa18844b8db958c57edddf824f4a8b5cd9e298');
+    assert.strictEqual(actual[8], 'boolDefaultTrue_true');
+    assert.strictEqual(actual[9], 'boolDefaultFalse_false');
+    assert.strictEqual(actual[10], 'bool30TrueAdvancedRules_true');
+    assert.strictEqual(actual[11], 'integer25One25Two25Three25FourAdvancedRules_-1');
+    assert.strictEqual(actual[12], 'integerDefaultOne_1');
+    assert.strictEqual(actual[13], 'doubleDefaultPi_3.1415');
+    assert.strictEqual(actual[14], 'double25Pi25E25Gr25Zero_-1');
+    assert.strictEqual(actual[15], 'keySampleText_cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
+  });
 });
