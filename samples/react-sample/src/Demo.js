@@ -42,8 +42,8 @@ class Demo extends Component {
         <button onClick={this.checkProofOfConcept}>Check POC feature with Email</button>
         <p>Value returned from ConfigCat: <b>{this.state.isPOCEnabled !== undefined ? this.state.isPOCEnabled.toString() : ''}</b></p>
         <br />
-        <h2>ConfigCat Management Console</h2>
-        <p>A screenshot to see how the ConfigCat Management Console looks like for this Sample Project.</p>
+        <h2>ConfigCat Dashboard</h2>
+        <p>A screenshot to see how the ConfigCat Dashboard looks like for this Sample Project.</p>
         <img alt="screenshot" src="mgmt_console.png" />
       </div>
     )
