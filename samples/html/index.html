@@ -1,28 +1,40 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/configcat-js@latest/dist/configcat.min.js"></script>
 
-    <script type="text/javascript">
-      var configCatClient = configcat.createClientWithAutoPoll('PKDVCLf-Hq-h-kCzMp-L7Q/HhOWfwVtZ0mb30i9wi17GQ', { pollIntervalSeconds: 2 }); 
-      // You can instantiate the client with different polling modes. See the Docs: https://docs.configcat.com/docs/sdk-reference/js/#polling-modes
+<head>
+  <meta charset="utf-8">
 
-      configCatClient.getValue("isAwesomeFeatureEnabled", false, function(value) {
-        console.log("isAwesomeFeatureEnabled: " + value);
-      });
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/configcat-js@latest/dist/configcat.min.js"></script>
 
-      var userObject = { identifier: "#SOME-USER-ID#", email: "configcat@example.com" };
-      // Read more about the User Object: https://docs.configcat.com/docs/sdk-reference/js/#user-object
-      configCatClient.getValue("isPOCFeatureEnabled", false, function(value) {
-          console.log("isPOCFeatureEnabled: " + value);
-        }, 
-        userObject
-      );
-    </script>
-  </head>
-  <body>
-    Open Console (F12) to see the results!
-  </body>
+  <script type="text/javascript">
+    var logger = configcat.createConsoleLogger(
+    3); // Setting log level to 3 (= Info) to show detailed feature flag evaluation
+
+    var configCatClient = configcat.createClientWithAutoPoll('PKDVCLf-Hq-h-kCzMp-L7Q/HhOWfwVtZ0mb30i9wi17GQ', {
+      pollIntervalSeconds: 2,
+      logger: logger
+    });
+    // You can instantiate the client with different polling modes. See the Docs: https://docs.configcat.com/docs/sdk-reference/js/#polling-modes
+
+    configCatClient.getValue("isAwesomeFeatureEnabled", false, function (value) {
+      console.log("isAwesomeFeatureEnabled: " + value);
+    });
+
+    var userObject = {
+      identifier: "#SOME-USER-ID#",
+      email: "configcat@example.com"
+    };
+    // Read more about the User Object: https://docs.configcat.com/docs/sdk-reference/js/#user-object
+    configCatClient.getValue("isPOCFeatureEnabled", false, function (value) {
+        console.log("isPOCFeatureEnabled: " + value);
+      },
+      userObject
+    );
+  </script>
+</head>
+
+<body>
+  Open Console (F12) to see the results!
+</body>
+
 </html>

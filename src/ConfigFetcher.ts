@@ -1,8 +1,7 @@
-import { IConfigFetcher, IConfigCatLogger } from "configcat-common";
+import { IConfigFetcher } from "configcat-common";
 import { ProjectConfig } from "configcat-common/lib/ProjectConfig";
 import { OptionsBase } from "configcat-common/lib/ConfigCatClientOptions";
 
-declare const Promise: any;
 
 export class HttpConfigFetcher implements IConfigFetcher {
 
@@ -20,7 +19,7 @@ export class HttpConfigFetcher implements IConfigFetcher {
                 } else if (httpRequest.status === 304) {
                     callback(new ProjectConfig(new Date().getTime(), JSON.stringify(lastProjectConfig.ConfigJSON), etag));
                 } else {
-                    options.logger.log("ConfigCat HTTPRequest error: " + httpRequest.statusText);
+                    options.logger.error("ConfigCat HTTPRequest error: " + httpRequest.statusText);
                     callback(lastProjectConfig);
                 }
             }

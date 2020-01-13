@@ -2,6 +2,7 @@ import * as configcatcommon from "configcat-common";
 import { HttpConfigFetcher } from "./ConfigFetcher";
 import { IConfigCatClient } from "configcat-common/lib/ConfigCatClient";
 import { LocalStorageCache } from "./Cache";
+import { LogLevel } from "configcat-common/lib/index";
 
 /** Create an instance of ConfigCatClient and setup Auto polling with default options.*/
 export function createClient(apiKey: string): IConfigCatClient {
@@ -26,7 +27,7 @@ export function createClientWithAutoPoll(apiKey: string, options?: IJSAutoPollOp
  */
 export function createClientWithManualPoll(apiKey: string, options?: IJSManualPollOptions): IConfigCatClient {
 
-    return configcatcommon.createClientWithManualPoll(apiKey, { configFetcher: new HttpConfigFetcher(), cache: new LocalStorageCache() }, options)
+    return configcatcommon.createClientWithManualPoll(apiKey, { configFetcher: new HttpConfigFetcher(), cache: new LocalStorageCache() }, options);
 }
 
 /**
@@ -37,6 +38,10 @@ export function createClientWithManualPoll(apiKey: string, options?: IJSManualPo
 export function createClientWithLazyLoad(apiKey: string, options?: IJSLazyLoadingOptions): IConfigCatClient {
 
     return configcatcommon.createClientWithLazyLoad(apiKey, { configFetcher: new HttpConfigFetcher(), cache: new LocalStorageCache() }, options);
+}
+
+export function createConsoleLogger(logLevel: LogLevel): configcatcommon.IConfigCatLogger {
+    return configcatcommon.createConsoleLogger(logLevel);
 }
 
 export interface IJSAutoPollOptions extends configcatcommon.IAutoPollOptions {

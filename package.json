@@ -26,7 +26,7 @@
     "author": "ConfigCat",
     "license": "MIT",
     "dependencies": {
-        "configcat-common": "^2.0.2"
+        "configcat-common": "^2.0.3"
     },
     "devDependencies": {
         "@types/chai": "^4.2.4",
