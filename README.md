@@ -34,7 +34,7 @@ import * as configcat from "configcat-js";
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/configcat-js@latest/dist/configcat.min.js"></script>
 ```
 
-### 2. Go to <a href="https://app.configcat.com/connect" target="_blank">Connect your application</a> tab to get your *API Key*:
+### 2. Go to the <a href="https://app.configcat.com/apikey" target="_blank">Dashboard</a> to get your *API Key*:
 ![API-KEY](https://raw.githubusercontent.com/ConfigCat/js-sdk/master/media/readme01.png  "API-KEY")
 
 ### 3. Create a *ConfigCat* client instance:
