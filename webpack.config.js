@@ -1,6 +1,10 @@
+
 module.exports = {
   mode: "production",
-  entry: "./src/index.ts",
+  entry: [
+    "core-js/features/promise",
+    "./src/index.ts"
+  ],
   output: {
     filename: "configcat.js",
     library: "configcat"
