@@ -4,5 +4,5 @@ npm i configcat-common@latest
 npm test
 git add .
 git commit -m "updating configcat-common"
-git push origin $(npm version major)
+git push origin $(npm version minor)
 git push
