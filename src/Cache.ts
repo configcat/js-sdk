@@ -37,6 +37,6 @@ export class LocalStorageCache implements ICache {
     }
 
     private getLocalStorageKey(apiKey: string): string{
-        return "ConfigCat_v3" + apiKey;
+        return "ConfigCat_v4" + apiKey;
     }
 }
