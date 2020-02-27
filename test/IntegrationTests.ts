@@ -336,13 +336,13 @@ describe("Integration - ConfigCatClient", () => {
 
   it("Auto poll - getVariationId() works", (done) => {
 
-    const defaultValue: string = "NOT_CAT";
+    const defaultVariationId: string = "NOT_CAT";
 
-    clientAutoPoll.getVariationId("stringDefaultCat", defaultValue, actual => {
-      assert.strictEqual(actual, "stringDefaultCat_cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882");
+    clientAutoPoll.getVariationId("stringDefaultCat", defaultVariationId, actual => {
+      assert.strictEqual(actual, "7a0be518");
 
-      clientAutoPoll.getVariationId("boolDefaultTrue", defaultValue, actual => {
-        assert.strictEqual(actual, "boolDefaultTrue_true");
+      clientAutoPoll.getVariationId("boolDefaultTrue", defaultVariationId, actual => {
+        assert.strictEqual(actual, "09513143");
         done();
       });
     });
@@ -350,35 +350,35 @@ describe("Integration - ConfigCatClient", () => {
 
   it("Auto poll - getVariationId() works", async () => {
 
-    const defaultValue: string = "NOT_CAT";
+    const defaultVariationId: string = "NOT_CAT";
 
-    let actual = await clientAutoPoll.getVariationIdAsync("stringDefaultCat", defaultValue);
-    assert.strictEqual(actual, "stringDefaultCat_cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882");
+    let actual = await clientAutoPoll.getVariationIdAsync("stringDefaultCat", defaultVariationId);
+    assert.strictEqual(actual, "7a0be518");
 
-    actual = await clientAutoPoll.getVariationIdAsync("boolDefaultTrue", defaultValue);
-    assert.strictEqual(actual, "boolDefaultTrue_true");
+    actual = await clientAutoPoll.getVariationIdAsync("boolDefaultTrue", defaultVariationId);
+    assert.strictEqual(actual, "09513143");
   });
 
   it("Auto poll - getVariationIds() works", async () => {
 
     let actual = await clientAutoPoll.getAllVariationIds(actual => {
       assert.equal(actual.length, 16);
-      assert.strictEqual(actual[0], 'stringDefaultCat_cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
-      assert.strictEqual(actual[1], 'stringIsInDogDefaultCat_cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
-      assert.strictEqual(actual[2], 'stringIsNotInDogDefaultCat_cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
-      assert.strictEqual(actual[3], 'stringContainsDogDefaultCat_cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
-      assert.strictEqual(actual[4], 'stringNotContainsDogDefaultCat_cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
-      assert.strictEqual(actual[5], 'string25Cat25Dog25Falcon25Horse_baaa18844b8db958c57edddf824f4a8b5cd9e298');
-      assert.strictEqual(actual[6], 'string75Cat0Dog25Falcon0Horse_baaa18844b8db958c57edddf824f4a8b5cd9e298');
-      assert.strictEqual(actual[7], 'string25Cat25Dog25Falcon25HorseAdvancedRules_baaa18844b8db958c57edddf824f4a8b5cd9e298');
-      assert.strictEqual(actual[8], 'boolDefaultTrue_true');
-      assert.strictEqual(actual[9], 'boolDefaultFalse_false');
-      assert.strictEqual(actual[10], 'bool30TrueAdvancedRules_true');
-      assert.strictEqual(actual[11], 'integer25One25Two25Three25FourAdvancedRules_-1');
-      assert.strictEqual(actual[12], 'integerDefaultOne_1');
-      assert.strictEqual(actual[13], 'doubleDefaultPi_3.1415');
-      assert.strictEqual(actual[14], 'double25Pi25E25Gr25Zero_-1');
-      assert.strictEqual(actual[15], 'keySampleText_cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
+      assert.strictEqual(actual[0], '7a0be518');
+      assert.strictEqual(actual[1], '83372510');
+      assert.strictEqual(actual[2], '2459598d');
+      assert.strictEqual(actual[3], 'ce564c3a');
+      assert.strictEqual(actual[4], '44ab483a');
+      assert.strictEqual(actual[5], '2588a3e6');
+      assert.strictEqual(actual[6], 'aa65b5ce');
+      assert.strictEqual(actual[7], '8250ef5a');
+      assert.strictEqual(actual[8], '09513143');
+      assert.strictEqual(actual[9], '489a16d2');
+      assert.strictEqual(actual[10], '607147d5');
+      assert.strictEqual(actual[11], 'ce3c4f5a');
+      assert.strictEqual(actual[12], 'faadbf54');
+      assert.strictEqual(actual[13], '5af8acc7');
+      assert.strictEqual(actual[14], '9503a1de');
+      assert.strictEqual(actual[15], '69ef126c');
     });
   });
 
@@ -386,21 +386,21 @@ describe("Integration - ConfigCatClient", () => {
 
     let actual = await clientAutoPoll.getAllVariationIdsAsync();
     assert.equal(actual.length, 16);
-    assert.strictEqual(actual[0], 'stringDefaultCat_cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
-    assert.strictEqual(actual[1], 'stringIsInDogDefaultCat_cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
-    assert.strictEqual(actual[2], 'stringIsNotInDogDefaultCat_cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
-    assert.strictEqual(actual[3], 'stringContainsDogDefaultCat_cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
-    assert.strictEqual(actual[4], 'stringNotContainsDogDefaultCat_cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
-    assert.strictEqual(actual[5], 'string25Cat25Dog25Falcon25Horse_baaa18844b8db958c57edddf824f4a8b5cd9e298');
-    assert.strictEqual(actual[6], 'string75Cat0Dog25Falcon0Horse_baaa18844b8db958c57edddf824f4a8b5cd9e298');
-    assert.strictEqual(actual[7], 'string25Cat25Dog25Falcon25HorseAdvancedRules_baaa18844b8db958c57edddf824f4a8b5cd9e298');
-    assert.strictEqual(actual[8], 'boolDefaultTrue_true');
-    assert.strictEqual(actual[9], 'boolDefaultFalse_false');
-    assert.strictEqual(actual[10], 'bool30TrueAdvancedRules_true');
-    assert.strictEqual(actual[11], 'integer25One25Two25Three25FourAdvancedRules_-1');
-    assert.strictEqual(actual[12], 'integerDefaultOne_1');
-    assert.strictEqual(actual[13], 'doubleDefaultPi_3.1415');
-    assert.strictEqual(actual[14], 'double25Pi25E25Gr25Zero_-1');
-    assert.strictEqual(actual[15], 'keySampleText_cebe54c7626cb1cefaca5f7f5ea6c96b4a7a2882');
+    assert.strictEqual(actual[0], '7a0be518');
+    assert.strictEqual(actual[1], '83372510');
+    assert.strictEqual(actual[2], '2459598d');
+    assert.strictEqual(actual[3], 'ce564c3a');
+    assert.strictEqual(actual[4], '44ab483a');
+    assert.strictEqual(actual[5], '2588a3e6');
+    assert.strictEqual(actual[6], 'aa65b5ce');
+    assert.strictEqual(actual[7], '8250ef5a');
+    assert.strictEqual(actual[8], '09513143');
+    assert.strictEqual(actual[9], '489a16d2');
+    assert.strictEqual(actual[10], '607147d5');
+    assert.strictEqual(actual[11], 'ce3c4f5a');
+    assert.strictEqual(actual[12], 'faadbf54');
+    assert.strictEqual(actual[13], '5af8acc7');
+    assert.strictEqual(actual[14], '9503a1de');
+    assert.strictEqual(actual[15], '69ef126c');
   });
 });
