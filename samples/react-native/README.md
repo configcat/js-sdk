@@ -1,4 +1,4 @@
-#  ConfigCat feature flags sample app for React Native
+#  ConfigCat Feature Flags sample app for React Native
 
 1. Have <a href="https://docs.expo.io/versions/latest/workflow/expo-cli/" target="_blank">Expo CLI</a>
    ```bash
