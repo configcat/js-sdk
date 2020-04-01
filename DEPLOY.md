@@ -1,6 +1,6 @@
 # How to deploy
 
-## Via shell script
+## Updating `configcat-common` only
 
 1. Run `./deploy.sh`
 
@@ -13,10 +13,10 @@
 
 or
 
-## Manually
+## Steps to deploy manually
 
 2. Run tests
-   ```PowerShell
+   ```bash
     npm test
     ```
 
@@ -24,13 +24,13 @@ or
 Increase version number by using `npm version patch | minor | major`
 
     *Example: increasing patch version* 
-    ```PowerShell
+    ```bash
     npm version patch
     ```
 1. Push tag to remote
     
     If you tag the commit, TravisCI automatically publishes the package to NPM. 
-    ```PowerShell
+    ```bash
     git push origin <new version>
     ```
     *Example: git push origin v1.1.17*
