@@ -19,17 +19,17 @@ export class HttpConfigFetcher implements IConfigFetcher {
                 } else if (httpRequest.status === 304) {
                     callback(new ProjectConfig(new Date().getTime(), JSON.stringify(lastProjectConfig.ConfigJSON), etag));
                 } else {
-                    options.logger.error("ConfigCat HTTPRequest error: " + httpRequest.statusText);
+                    options.logger.error(`Failed to download feature flags & settings from ConfigCat. ${httpRequest.status} - ${httpRequest.statusText}`);
                     callback(lastProjectConfig);
                 }
             }
         };
 
-        httpRequest.open( "GET", options.getUrl(), true );
+        httpRequest.open("GET", options.getUrl(), true);
         httpRequest.timeout = options.requestTimeoutMs;
         httpRequest.setRequestHeader("X-ConfigCat-UserAgent", "ConfigCat-JS/" + options.clientVersion);
-        httpRequest.setRequestHeader("If-None-Match", lastProjectConfig ? lastProjectConfig.HttpETag : null);
-        httpRequest.send( null );
+        httpRequest.setRequestHeader("If-None-Match", (lastProjectConfig && lastProjectConfig.HttpETag) ? lastProjectConfig.HttpETag : null);
+        httpRequest.send(null);
     }
 }
 
