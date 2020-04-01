@@ -25,6 +25,7 @@
     ],
     "author": "ConfigCat",
     "license": "MIT",
+    "homepage": "https://configcat.com",
     "dependencies": {
         "configcat-common": "^2.4.2"
     },
