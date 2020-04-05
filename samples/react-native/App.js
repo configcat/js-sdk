@@ -4,7 +4,12 @@ import * as ConfigCat from 'configcat-js';
 
 export default function App() {
 
-  const configcatClient = ConfigCat.createClientWithAutoPoll("7ZTVCKnUJprikI6Rwlj0RA/eJ8H21HZA06fDJrnzWyvGA", { pollIntervalSeconds: 2 });
+  const logger = ConfigCat.createConsoleLogger(3);
+  const configcatClient = ConfigCat.createClientWithAutoPoll("zVPVCO5_LS9VnDcpIDE84g/zVPVCBScEzDn-VNq0dnYog", {
+    pollIntervalSeconds: 2,
+    logger: logger,
+    configChanged: function() { console.log("Your config has been changed!"); }
+  });
 
   return (
     <View style={styles.container}>
