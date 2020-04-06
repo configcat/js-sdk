@@ -7,7 +7,7 @@ describe("ConfigCatClient index (main)", () => {
 
     it("createClient ShouldCreateInstance", () => {
 
-        var client: IConfigCatClient = configcatClient.createClient("APIKEY");
+        var client: IConfigCatClient = configcatClient.createClient("sdkKey");
 
         assert.isDefined(client);
     });
