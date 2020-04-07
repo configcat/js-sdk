@@ -5,39 +5,39 @@ import { LocalStorageCache } from "./Cache";
 import { LogLevel } from "configcat-common/lib/index";
 
 /** Create an instance of ConfigCatClient and setup Auto polling with default options.*/
-export function createClient(apiKey: string): IConfigCatClient {
+export function createClient(sdkkey: string): IConfigCatClient {
 
-    return this.createClientWithAutoPoll(apiKey);
+    return this.createClientWithAutoPoll(sdkkey);
 }
 
 /**
  * Create an instance of ConfigCatClient and setup Auto polling.
- * @param {string} apiKey - ApiKey to access your configuration.
+ * @param {string} sdkkey - SDK Key to access your configuration.
  * @param options - Options for Auto polling
  */
-export function createClientWithAutoPoll(apiKey: string, options?: IJSAutoPollOptions): IConfigCatClient {
+export function createClientWithAutoPoll(sdkKey: string, options?: IJSAutoPollOptions): IConfigCatClient {
 
-    return configcatcommon.createClientWithAutoPoll(apiKey, { configFetcher: new HttpConfigFetcher(), cache: new LocalStorageCache() }, options);
+    return configcatcommon.createClientWithAutoPoll(sdkKey, { configFetcher: new HttpConfigFetcher(), cache: new LocalStorageCache() }, options);
 }
 
 /**
  * Create an instance of ConfigCatClient and setup Manual polling.
- * @param {string} apiKey - ApiKey to access your configuration.
+ * @param {string} sdkKey - SDK Key to access your configuration.
  * @param options - Options for Manual polling
  */
-export function createClientWithManualPoll(apiKey: string, options?: IJSManualPollOptions): IConfigCatClient {
+export function createClientWithManualPoll(sdkKey: string, options?: IJSManualPollOptions): IConfigCatClient {
 
-    return configcatcommon.createClientWithManualPoll(apiKey, { configFetcher: new HttpConfigFetcher(), cache: new LocalStorageCache() }, options);
+    return configcatcommon.createClientWithManualPoll(sdkKey, { configFetcher: new HttpConfigFetcher(), cache: new LocalStorageCache() }, options);
 }
 
 /**
  * Create an instance of ConfigCatClient and setup Lazy loading.
- * @param {string} apiKey - ApiKey to access your configuration.
+ * @param {string} sdkKey - SDK Key to access your configuration.
  * @param options - Options for Lazy loading
  */
-export function createClientWithLazyLoad(apiKey: string, options?: IJSLazyLoadingOptions): IConfigCatClient {
+export function createClientWithLazyLoad(sdkKey: string, options?: IJSLazyLoadingOptions): IConfigCatClient {
 
-    return configcatcommon.createClientWithLazyLoad(apiKey, { configFetcher: new HttpConfigFetcher(), cache: new LocalStorageCache() }, options);
+    return configcatcommon.createClientWithLazyLoad(sdkKey, { configFetcher: new HttpConfigFetcher(), cache: new LocalStorageCache() }, options);
 }
 
 export function createConsoleLogger(logLevel: LogLevel): configcatcommon.IConfigCatLogger {

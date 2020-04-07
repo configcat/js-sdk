@@ -6,13 +6,13 @@ import { User } from "configcat-common/lib/RolloutEvaluator";
 
 describe("Integration - ConfigCatClient", () => {
 
-  let apiKey: string = "PKDVCLf-Hq-h-kCzMp-L7Q/psuH7BGHoUmdONrzzUOY7A";
+  let sdkKey: string = "PKDVCLf-Hq-h-kCzMp-L7Q/psuH7BGHoUmdONrzzUOY7A";
 
-  let clientAutoPoll: IConfigCatClient = configcatClient.createClientWithAutoPoll(apiKey);
+  let clientAutoPoll: IConfigCatClient = configcatClient.createClientWithAutoPoll(sdkKey);
 
-  let clientManualPoll: IConfigCatClient = configcatClient.createClientWithManualPoll(apiKey);
+  let clientManualPoll: IConfigCatClient = configcatClient.createClientWithManualPoll(sdkKey);
 
-  let clientLazyLoad: IConfigCatClient = configcatClient.createClientWithLazyLoad(apiKey);
+  let clientLazyLoad: IConfigCatClient = configcatClient.createClientWithLazyLoad(sdkKey);
 
   it("Auto poll - getValue() with key: 'stringDefaultCat' should return 'Cat'", (done) => {
 
@@ -185,10 +185,10 @@ describe("Integration - ConfigCatClient", () => {
     assert.equal(actual, "Horse");
   });
 
-  it("Auto poll with wrong API key - getValue() should return default value", (done) => {
+  it("Auto poll with wrong SDK Key - getValue() should return default value", (done) => {
 
     const defaultValue: string = "NOT_CAT";
-    let client: IConfigCatClient = configcatClient.createClientWithAutoPoll("WRONG_API_KEY", { requestTimeoutMs: 500 });
+    let client: IConfigCatClient = configcatClient.createClientWithAutoPoll("WRONG_SDK_KEY", { requestTimeoutMs: 500 });
 
     client.getValue("stringDefaultCat", defaultValue, actual => {
 
@@ -198,19 +198,19 @@ describe("Integration - ConfigCatClient", () => {
     });
   });
 
-  it("Auto poll with wrong API key - getValueAsync() should return default value", async () => {
+  it("Auto poll with wrong SDK Key - getValueAsync() should return default value", async () => {
 
     const defaultValue: string = "NOT_CAT";
-    let client: IConfigCatClient = configcatClient.createClientWithAutoPoll("WRONG_API_KEY", { requestTimeoutMs: 500 });
+    let client: IConfigCatClient = configcatClient.createClientWithAutoPoll("WRONG_SDK_KEY", { requestTimeoutMs: 500 });
 
     const actual = await client.getValueAsync("stringDefaultCat", defaultValue);
     assert.strictEqual(actual, defaultValue);
   });
 
-  it("Manual poll with wrong API key - getValue() should return default value", (done) => {
+  it("Manual poll with wrong SDK Key - getValue() should return default value", (done) => {
 
     const defaultValue: string = "NOT_CAT";
-    let client: IConfigCatClient = configcatClient.createClientWithManualPoll("WRONG_API_KEY", { requestTimeoutMs: 500 });
+    let client: IConfigCatClient = configcatClient.createClientWithManualPoll("WRONG_SDK_KEY", { requestTimeoutMs: 500 });
 
     client.getValue("stringDefaultCat", defaultValue, actual => {
 
@@ -226,10 +226,10 @@ describe("Integration - ConfigCatClient", () => {
     });
   });
 
-  it("Manual poll with wrong API key - getValueAsync() should return default value", async () => {
+  it("Manual poll with wrong SDK Key - getValueAsync() should return default value", async () => {
 
     const defaultValue: string = "NOT_CAT";
-    let client: IConfigCatClient = configcatClient.createClientWithManualPoll("WRONG_API_KEY", { requestTimeoutMs: 500 });
+    let client: IConfigCatClient = configcatClient.createClientWithManualPoll("WRONG_SDK_KEY", { requestTimeoutMs: 500 });
 
     const actual = await client.getValueAsync("stringDefaultCat", defaultValue);
     assert.strictEqual(actual, defaultValue);
@@ -238,10 +238,10 @@ describe("Integration - ConfigCatClient", () => {
     assert.strictEqual(actual2, defaultValue);
   });
 
-  it("Lazy load with wrong API key - getValue() should return default value", (done) => {
+  it("Lazy load with wrong SDK Key - getValue() should return default value", (done) => {
 
     const defaultValue: string = "NOT_CAT";
-    let client: IConfigCatClient = configcatClient.createClientWithLazyLoad("WRONG_API_KEY", { requestTimeoutMs: 500 });
+    let client: IConfigCatClient = configcatClient.createClientWithLazyLoad("WRONG_SDK_KEY", { requestTimeoutMs: 500 });
 
     client.getValue("stringDefaultCat", defaultValue, actual => {
 
@@ -250,18 +250,18 @@ describe("Integration - ConfigCatClient", () => {
     });
   });
 
-  it("Lazy load with wrong API key - getValueAsync() should return default value", async () => {
+  it("Lazy load with wrong SDK Key - getValueAsync() should return default value", async () => {
 
     const defaultValue: string = "NOT_CAT";
-    let client: IConfigCatClient = configcatClient.createClientWithLazyLoad("WRONG_API_KEY", { requestTimeoutMs: 500 });
+    let client: IConfigCatClient = configcatClient.createClientWithLazyLoad("WRONG_SDK_KEY", { requestTimeoutMs: 500 });
 
     const actual = await client.getValueAsync("stringDefaultCat", defaultValue);
     assert.strictEqual(actual, defaultValue);
   });
 
-  it("getAllKeys() should not crash with wrong API key", (done) => {
+  it("getAllKeys() should not crash with wrong SDK Key", (done) => {
 
-    let client: IConfigCatClient = configcatClient.createClientWithManualPoll("WRONG_API_KEY", { requestTimeoutMs: 500 });
+    let client: IConfigCatClient = configcatClient.createClientWithManualPoll("WRONG_SDK_KEY", { requestTimeoutMs: 500 });
 
     client.getAllKeys(keys => {
 
@@ -270,9 +270,9 @@ describe("Integration - ConfigCatClient", () => {
     });
   });
 
-  it("getAllKeysAsync() should not crash with wrong API key", async () => {
+  it("getAllKeysAsync() should not crash with wrong SDK Key", async () => {
 
-    let client: IConfigCatClient = configcatClient.createClientWithManualPoll("WRONG_API_KEY", { requestTimeoutMs: 500 });
+    let client: IConfigCatClient = configcatClient.createClientWithManualPoll("WRONG_SDK_KEY", { requestTimeoutMs: 500 });
 
     const keys = await client.getAllKeysAsync();
     assert.equal(keys.length, 0);

@@ -7,27 +7,27 @@ describe("ConfigCatClient index (main)", () => {
 
     it("createClient ShouldCreateInstance", () => {
 
-        var client: IConfigCatClient = configcatClient.createClient("APIKEY");
+        var client: IConfigCatClient = configcatClient.createClient("sdkKey");
 
         assert.isDefined(client);
     });
 
     it("createClientWithAutoPoll ShouldCreateInstance", () => {
 
-        var client: IConfigCatClient = configcatClient.createClientWithAutoPoll("APIKEY", { "pollIntervalSeconds": 15 });
+        var client: IConfigCatClient = configcatClient.createClientWithAutoPoll("SDKKEY", { "pollIntervalSeconds": 15 });
         assert.isDefined(client);
     });
 
     it("createClientWithLazyLoad ShouldCreateInstance", () => {
 
-        var client: IConfigCatClient = configcatClient.createClientWithLazyLoad("APIKEY", { "cacheTimeToLiveSeconds": 15 });
+        var client: IConfigCatClient = configcatClient.createClientWithLazyLoad("SDKKEY", { "cacheTimeToLiveSeconds": 15 });
 
         assert.isDefined(client);
     });
 
     it("createClientWithManualPoll ShouldCreateInstance", () => {
 
-        var client: IConfigCatClient = configcatClient.createClientWithManualPoll("APIKEY");
+        var client: IConfigCatClient = configcatClient.createClientWithManualPoll("SDKKEY");
 
         assert.isDefined(client);
     });
