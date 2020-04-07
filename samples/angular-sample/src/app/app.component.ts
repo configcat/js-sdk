@@ -21,7 +21,7 @@ export class AppComponent {
         logger: logger
       });
     // You can instantiate the client with different polling modes.
-    // See the Docs: https://docs.configcat.com/docs/sdk-reference/js/#polling-modes
+    // See the Docs: https://configcat.com/docs/sdk-reference/js/#polling-modes
   }
 
   public configCatClient: IConfigCatClient;
