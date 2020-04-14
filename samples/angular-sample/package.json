@@ -19,7 +19,7 @@
     "@angular/platform-browser": "~9.1.0",
     "@angular/platform-browser-dynamic": "~9.1.0",
     "@angular/router": "~9.1.0",
-    "configcat-js": "^4.0.0",
+    "configcat-js": "^4.0.1",
     "core-js": "^3.6.4",
     "rxjs": "~6.5.3",
     "tslib": "^1.10.0",
