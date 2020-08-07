@@ -1,19 +1,15 @@
-import { IConfigFetcher } from "configcat-common";
-import { ProjectConfig } from "configcat-common/lib/ProjectConfig";
-import { OptionsBase } from "configcat-common/lib/ConfigCatClientOptions";
-
+import { IConfigFetcher, ProjectConfig, OptionsBase } from "configcat-common/lib/esm";
 
 export class HttpConfigFetcher implements IConfigFetcher {
 
-    constructor() {
-    }
+    constructor() {}
 
     fetchLogic(options: OptionsBase, lastProjectConfig: ProjectConfig, callback: (newProjectConfig: ProjectConfig) => void): void {
 
-        const httpRequest = new XMLHttpRequest();
+        const httpRequest: XMLHttpRequest = new XMLHttpRequest();
         httpRequest.onreadystatechange = () => {
-            if (httpRequest.readyState == 4) {
-                const etag = httpRequest.getResponseHeader("ETag");
+            if (httpRequest.readyState === 4) {
+                const etag: string = httpRequest.getResponseHeader("ETag");
                 if (httpRequest.status === 200) {
                     callback(new ProjectConfig(new Date().getTime(), httpRequest.responseText, etag));
                 } else if (httpRequest.status === 304) {

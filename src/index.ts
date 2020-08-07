@@ -1,8 +1,7 @@
-import * as configcatcommon from "configcat-common";
+import * as configcatcommon from "configcat-common/lib/esm";
 import { HttpConfigFetcher } from "./ConfigFetcher";
-import { IConfigCatClient } from "configcat-common/lib/ConfigCatClient";
+import { IConfigCatClient, LogLevel } from "configcat-common/lib/esm";
 import { LocalStorageCache } from "./Cache";
-import { LogLevel } from "configcat-common/lib/index";
 
 /** Create an instance of ConfigCatClient and setup Auto polling with default options.*/
 export function createClient(sdkkey: string): IConfigCatClient {
@@ -17,7 +16,10 @@ export function createClient(sdkkey: string): IConfigCatClient {
  */
 export function createClientWithAutoPoll(sdkKey: string, options?: IJSAutoPollOptions): IConfigCatClient {
 
-    return configcatcommon.createClientWithAutoPoll(sdkKey, { configFetcher: new HttpConfigFetcher(), cache: new LocalStorageCache() }, options);
+    return configcatcommon.createClientWithAutoPoll(
+        sdkKey,
+        { configFetcher: new HttpConfigFetcher(), cache: new LocalStorageCache() },
+        options);
 }
 
 /**

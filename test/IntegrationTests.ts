@@ -1,8 +1,8 @@
 import { assert } from "chai";
 import "mocha";
-import { IConfigCatClient, } from "configcat-common/lib/ConfigCatClient";
+import { IConfigCatClient } from "configcat-common/lib/esm/ConfigCatClient";
 import * as configcatClient from "../src/index";
-import { User } from "configcat-common/lib/RolloutEvaluator";
+import { User } from "configcat-common/lib/esm/RolloutEvaluator";
 
 describe("Integration - ConfigCatClient", () => {
 

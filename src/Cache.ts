@@ -1,5 +1,4 @@
-import { ICache } from "configcat-common";
-import { ProjectConfig } from "configcat-common/lib/ProjectConfig";
+import { ICache, ProjectConfig } from "configcat-common/lib/esm";
 
 export class LocalStorageCache implements ICache {
     cache:  { [sdkkey: string] : ProjectConfig; } = {};
@@ -15,15 +14,15 @@ export class LocalStorageCache implements ICache {
     }
 
     Get(sdkkey: string): ProjectConfig {
-        let config = this.cache[sdkkey];
+        let config: any = this.cache[sdkkey];
         if (config) {
             return config;
         }
 
         try {
-            let configString = localStorage.getItem(this.getLocalStorageKey(sdkkey));
+            let configString: string = localStorage.getItem(this.getLocalStorageKey(sdkkey));
             if (configString) {
-                let config = JSON.parse(atob(configString));
+                let config: any = JSON.parse(atob(configString));
                 if (config) {
                     this.cache[sdkkey] = config;
                     return config;
