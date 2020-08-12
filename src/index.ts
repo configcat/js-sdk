@@ -1,12 +1,13 @@
-import * as configcatcommon from "configcat-common";
+import * as configcatcommon from "configcat-common/lib/esm";
 import { HttpConfigFetcher } from "./ConfigFetcher";
-import { IConfigCatClient } from "configcat-common/lib/ConfigCatClient";
+import { IConfigCatClient, LogLevel } from "configcat-common/lib/esm";
 import { LocalStorageCache } from "./Cache";
-import { LogLevel } from "configcat-common/lib/index";
 
-/** Create an instance of ConfigCatClient and setup Auto polling with default options.*/
+/**
+ * Create an instance of ConfigCatClient and setup Auto polling with default options.
+ * @param {string} sdkkey - SDK Key to access your configuration.
+ */
 export function createClient(sdkkey: string): IConfigCatClient {
-
     return this.createClientWithAutoPoll(sdkkey);
 }
 
@@ -16,8 +17,11 @@ export function createClient(sdkkey: string): IConfigCatClient {
  * @param options - Options for Auto polling
  */
 export function createClientWithAutoPoll(sdkKey: string, options?: IJSAutoPollOptions): IConfigCatClient {
-
-    return configcatcommon.createClientWithAutoPoll(sdkKey, { configFetcher: new HttpConfigFetcher(), cache: new LocalStorageCache() }, options);
+    return configcatcommon.createClientWithAutoPoll(
+        sdkKey,
+        { configFetcher: new HttpConfigFetcher(), cache: new LocalStorageCache() },
+        options,
+    );
 }
 
 /**
@@ -26,8 +30,14 @@ export function createClientWithAutoPoll(sdkKey: string, options?: IJSAutoPollOp
  * @param options - Options for Manual polling
  */
 export function createClientWithManualPoll(sdkKey: string, options?: IJSManualPollOptions): IConfigCatClient {
-
-    return configcatcommon.createClientWithManualPoll(sdkKey, { configFetcher: new HttpConfigFetcher(), cache: new LocalStorageCache() }, options);
+    return configcatcommon.createClientWithManualPoll(
+        sdkKey,
+        {
+            configFetcher: new HttpConfigFetcher(),
+            cache: new LocalStorageCache(),
+        },
+        options,
+    );
 }
 
 /**
@@ -36,19 +46,19 @@ export function createClientWithManualPoll(sdkKey: string, options?: IJSManualPo
  * @param options - Options for Lazy loading
  */
 export function createClientWithLazyLoad(sdkKey: string, options?: IJSLazyLoadingOptions): IConfigCatClient {
-
-    return configcatcommon.createClientWithLazyLoad(sdkKey, { configFetcher: new HttpConfigFetcher(), cache: new LocalStorageCache() }, options);
+    return configcatcommon.createClientWithLazyLoad(
+        sdkKey,
+        { configFetcher: new HttpConfigFetcher(), cache: new LocalStorageCache() },
+        options,
+    );
 }
 
 export function createConsoleLogger(logLevel: LogLevel): configcatcommon.IConfigCatLogger {
     return configcatcommon.createConsoleLogger(logLevel);
 }
 
-export interface IJSAutoPollOptions extends configcatcommon.IAutoPollOptions {
-}
+export type IJSAutoPollOptions = configcatcommon.IAutoPollOptions;
 
-export interface IJSLazyLoadingOptions extends configcatcommon.ILazyLoadingOptions {
-}
+export type IJSLazyLoadingOptions = configcatcommon.ILazyLoadingOptions;
 
-export interface IJSManualPollOptions extends configcatcommon.IManualPollOptions {
-}
+export type IJSManualPollOptions = configcatcommon.IManualPollOptions;

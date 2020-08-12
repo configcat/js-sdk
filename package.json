@@ -4,11 +4,14 @@
     "description": "ConfigCat is a configuration as a service that lets you manage your features and configurations without actually deploying new code.",
     "main": "lib/index.js",
     "types": "lib/index.d.ts",
+    "module": "lib/esm/index.js",
     "scripts": {
         "test": "karma start",
-        "build": "tsc",
+        "build": "tsc -p tsconfig.cjs.json && tsc -p tsconfig.esm.json",
         "buildPure": "webpack",
-        "prepare": "npm run build"
+        "prepare": "npm run build",
+        "lint": "eslint . --ext .ts",
+        "lint-fix": "eslint . --ext .ts --fix"
     },
     "keywords": [
         "configcat",
@@ -27,27 +30,34 @@
     "license": "MIT",
     "homepage": "https://configcat.com",
     "dependencies": {
-        "configcat-common": "^2.5.1"
+        "configcat-common": "^3.0.1",
+        "eslint-config-prettier": "^6.11.0",
+        "eslint-plugin-prettier": "^3.1.4",
+        "prettier": "^2.0.5"
     },
     "devDependencies": {
-        "@types/chai": "^4.2.4",
+        "@types/chai": "^4.2.12",
         "@types/mocha": "^5.2.5",
-        "@types/node": "^10.17.0",
+        "@types/node": "^10.17.28",
+        "@typescript-eslint/eslint-plugin": "^3.8.0",
+        "@typescript-eslint/parser": "^3.8.0",
         "chai": "^4.2.0",
-        "karma": "^4.4.1",
+        "core-js": "^3.6.4",
+        "eslint": "^7.6.0",
+        "karma": "^5.1.0",
         "karma-chai": "^0.1.0",
-        "karma-chrome-launcher": "^2.2.0",
-        "karma-cli": "^1.0.1",
-        "karma-coverage": "^1.1.2",
-        "karma-mocha": "^1.3.0",
-        "karma-typescript": "^4.0.0",
+        "karma-chrome-launcher": "^3.1.0",
+        "karma-cli": "^2.0.0",
+        "karma-coverage": "^2.0.3",
+        "karma-mocha": "^2.0.1",
+        "karma-typescript": "^5.0.3",
+        "karma-typescript-es6-transform": "^5.0.3",
         "mocha": "^5.2.0",
         "ts-loader": "^5.3.0",
-        "typescript": "^3.6.4",
-        "webpack": "^4.41.2",
+        "typescript": "^3.9.7",
+        "webpack": "^4.44.0",
         "webpack-auto-inject-version": "^1.2.2",
-        "webpack-cli": "^3.3.9",
-        "core-js": "^3.6.4"
+        "webpack-cli": "^3.3.12"
     },
     "repository": {
         "type": "git",

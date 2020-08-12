@@ -1,11 +1,10 @@
-module.exports = function(config) {
+module.exports = function(config) {   
     config.set({
-
         frameworks: ["mocha", "chai", "karma-typescript"],
 
         files: [
-            'src/**/*.ts',
-            'test/**/*.ts'
+            "src/**/*.ts",
+            "test/**/*.ts"
         ],
 
         preprocessors: {
@@ -15,10 +14,10 @@ module.exports = function(config) {
 
         coverageReporter: {
             // specify a common output directory
-            dir: 'coverage',
+            dir: "coverage",
             reporters: [
-              { type: 'lcov', subdir: 'report-lcov' },
-              { type: 'lcovonly', subdir: '.', file: 'report-lcovonly.txt' },
+              { type: "lcov", subdir: "report-lcov" },
+              { type: "lcovonly", subdir: ".", file: "report-lcovonly.txt" },
             ]
           },
 
@@ -26,7 +25,15 @@ module.exports = function(config) {
 
         browsers: ["ChromeHeadless"],
 
-        singleRun: true
-
+        singleRun: true,
+        
+        karmaTypescriptConfig: {
+            tsconfig: "./tsconfig.karma.json",            
+            bundlerOptions: {
+                transforms: [
+                    require("karma-typescript-es6-transform")()
+                ]
+            }
+        }        
     });
 };
