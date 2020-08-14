@@ -1,4 +1,4 @@
-import { IConfigFetcher, ProjectConfig, OptionsBase } from "configcat-common/lib/esm";
+import { IConfigFetcher, ProjectConfig, OptionsBase } from "configcat-common";
 
 export class HttpConfigFetcher implements IConfigFetcher {
     fetchLogic(

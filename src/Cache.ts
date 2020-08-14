@@ -1,4 +1,4 @@
-import { ICache, ProjectConfig } from "configcat-common/lib/esm";
+import { ICache, ProjectConfig } from "configcat-common";
 
 export class LocalStorageCache implements ICache {
     cache: { [sdkkey: string]: ProjectConfig } = {};
