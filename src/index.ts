@@ -8,7 +8,7 @@ import { LocalStorageCache } from "./Cache";
  * @param {string} sdkkey - SDK Key to access your configuration.
  */
 export function createClient(sdkkey: string): IConfigCatClient {
-    return this.createClientWithAutoPoll(sdkkey);
+    return createClientWithAutoPoll(sdkkey);
 }
 
 /**
@@ -62,3 +62,5 @@ export type IJSAutoPollOptions = configcatcommon.IAutoPollOptions;
 export type IJSLazyLoadingOptions = configcatcommon.ILazyLoadingOptions;
 
 export type IJSManualPollOptions = configcatcommon.IManualPollOptions;
+
+export default createClient;
