@@ -30,10 +30,7 @@
     "license": "MIT",
     "homepage": "https://configcat.com",
     "dependencies": {
-        "configcat-common": "^3.0.2",
-        "eslint-config-prettier": "^6.11.0",
-        "eslint-plugin-prettier": "^3.1.4",
-        "prettier": "^2.0.5"
+        "configcat-common": "^3.0.2"        
     },
     "devDependencies": {
         "@types/chai": "^4.2.12",
@@ -57,7 +54,10 @@
         "typescript": "^3.9.7",
         "webpack": "^4.44.0",
         "webpack-auto-inject-version": "^1.2.2",
-        "webpack-cli": "^3.3.12"
+        "webpack-cli": "^3.3.12",
+        "eslint-config-prettier": "^6.11.0",
+        "eslint-plugin-prettier": "^3.1.4",
+        "prettier": "^2.0.5"
     },
     "repository": {
         "type": "git",
