@@ -21,7 +21,7 @@
     "@angular/router": "~9.1.0",
     "configcat-js": "^4.0.4",
     "core-js": "^3.6.4",
-    "rxjs": "~6.5.3",
+    "rxjs": "~6.6.2",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },
