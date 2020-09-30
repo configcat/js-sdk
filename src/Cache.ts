@@ -1,30 +1,30 @@
 import { ICache, ProjectConfig } from "configcat-common";
 
 export class LocalStorageCache implements ICache {
-    cache: { [sdkkey: string]: ProjectConfig } = {};
+    cache: { [key: string]: ProjectConfig } = {};
 
-    Set(sdkkey: string, config: ProjectConfig): void {
-        this.cache[sdkkey] = config;
+    set(key: string, config: ProjectConfig): void {
+        this.cache[key] = config;
 
         try {
-            localStorage.setItem(this.getLocalStorageKey(sdkkey), btoa(JSON.stringify(config)));
+            localStorage.setItem(key, btoa(JSON.stringify(config)));
         } catch (ex) {
             // local storage is unavailable
         }
     }
 
-    Get(sdkkey: string): ProjectConfig {
-        const config: ProjectConfig = this.cache[sdkkey];
+    get(key: string): ProjectConfig {
+        const config: ProjectConfig = this.cache[key];
         if (config) {
             return config;
         }
 
         try {
-            const configString: string = localStorage.getItem(this.getLocalStorageKey(sdkkey));
+            const configString: string = localStorage.getItem(key);
             if (configString) {
                 const config: ProjectConfig = JSON.parse(atob(configString));
                 if (config) {
-                    this.cache[sdkkey] = config;
+                    this.cache[key] = config;
                     return config;
                 }
             }
@@ -33,9 +33,5 @@ export class LocalStorageCache implements ICache {
         }
 
         return null;
-    }
-
-    private getLocalStorageKey(sdkkey: string): string {
-        return "ConfigCat_v4" + sdkkey;
     }
 }
