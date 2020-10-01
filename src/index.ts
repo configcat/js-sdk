@@ -63,4 +63,6 @@ export type IJSLazyLoadingOptions = configcatcommon.ILazyLoadingOptions;
 
 export type IJSManualPollOptions = configcatcommon.IManualPollOptions;
 
+export type DataGovernance = configcatcommon.DataGovernance;
+
 export default createClient;
