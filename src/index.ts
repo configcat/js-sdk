@@ -6,9 +6,10 @@ import { LocalStorageCache } from "./Cache";
 /**
  * Create an instance of ConfigCatClient and setup Auto polling with default options.
  * @param {string} sdkkey - SDK Key to access your configuration.
+ * @param options - Options for Auto polling
  */
-export function createClient(sdkkey: string): IConfigCatClient {
-    return createClientWithAutoPoll(sdkkey);
+export function createClient(sdkkey: string, options?: IJSAutoPollOptions): IConfigCatClient {
+    return createClientWithAutoPoll(sdkkey, options);
 }
 
 /**
@@ -62,5 +63,7 @@ export type IJSAutoPollOptions = configcatcommon.IAutoPollOptions;
 export type IJSLazyLoadingOptions = configcatcommon.ILazyLoadingOptions;
 
 export type IJSManualPollOptions = configcatcommon.IManualPollOptions;
+
+export type DataGovernance = configcatcommon.DataGovernance;
 
 export default createClient;
