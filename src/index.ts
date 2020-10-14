@@ -64,6 +64,11 @@ export type IJSLazyLoadingOptions = configcatcommon.ILazyLoadingOptions;
 
 export type IJSManualPollOptions = configcatcommon.IManualPollOptions;
 
-export type DataGovernance = configcatcommon.DataGovernance;
+export enum DataGovernance {
+    /** Select this if your feature flags are published to all global CDN nodes. */
+    Global = configcatcommon.DataGovernance.Global,
+    /** Select this if your feature flags are published to CDN nodes only in the EU. */
+    EuOnly = configcatcommon.DataGovernance.EuOnly
+}
 
 export default createClient;
