@@ -15,6 +15,7 @@ ConfigCat is a <a href="https://configcat.com" target="_blank">hosted feature fl
 [![Build Status](https://travis-ci.com/configcat/js-sdk.svg?branch=master)](https://travis-ci.com/configcat/js-sdk) 
 [![codecov](https://codecov.io/gh/configcat/js-sdk/branch/master/graph/badge.svg)](https://codecov.io/gh/configcat/js-sdk) 
 [![Known Vulnerabilities](https://snyk.io/test/github/configcat/js-sdk/badge.svg?targetFile=package.json)](https://snyk.io/test/github/configcat/js-sdk?targetFile=package.json) 
+[![Tree Shaking](https://badgen.net/bundlephobia/tree-shaking/configcat-js)](https://bundlephobia.com/result?p=configcat-js) 
 ![License](https://img.shields.io/github/license/configcat/js-sdk.svg) 
 [![](https://data.jsdelivr.com/v1/package/npm/configcat-js/badge)](https://www.jsdelivr.com/package/npm/configcat-js)
 [![NPM](https://nodei.co/npm/configcat-js.png)](https://nodei.co/npm/configcat-js/)

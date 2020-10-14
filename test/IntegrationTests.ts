@@ -188,6 +188,7 @@ describe("Integration - ConfigCatClient", () => {
         const defaultValue = "NOT_CAT";
         const client: IConfigCatClient = configcatClient.createClientWithAutoPoll("WRONG_SDK_KEY", {
             requestTimeoutMs: 500,
+            maxInitWaitTimeSeconds: 1
         });
 
         client.getValue("stringDefaultCat", defaultValue, (actual) => {
@@ -201,6 +202,7 @@ describe("Integration - ConfigCatClient", () => {
         const defaultValue = "NOT_CAT";
         const client: IConfigCatClient = configcatClient.createClientWithAutoPoll("WRONG_SDK_KEY", {
             requestTimeoutMs: 500,
+            maxInitWaitTimeSeconds: 1
         });
 
         const actual = await client.getValueAsync("stringDefaultCat", defaultValue);
