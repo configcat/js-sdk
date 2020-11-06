@@ -30,7 +30,7 @@
     "license": "MIT",
     "homepage": "https://configcat.com",
     "dependencies": {
-        "configcat-common": "^4.2.1"
+        "configcat-common": "^4.3.1"
     },
     "devDependencies": {
         "@types/chai": "^4.2.12",
