@@ -1,0 +1,8 @@
+<div class="wrapper">
+    <div *ngIf="!isGreenButtonEnabled">
+        <button class="btn btn-lg btn-secondary" (click)="buttonClicked()">Button</button>
+    </div>
+    <div *ngIf="isGreenButtonEnabled">
+        <button class="btn btn-lg btn-success" (click)="buttonClicked()">Click Me</button>
+    </div>
+</div>
