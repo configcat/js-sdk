@@ -26,25 +26,25 @@ export class AppComponent {
   }
 
   ngOnInit() { 
+    // Init Amplitude with the proper API_KEY
     amplitude.getInstance().init('57c2946d37872e0781c675f584bdcd7b');
-    this.getAllKeyValuesAsync().then((keyValues) => {
-      console.log(keyValues);
-      for (const [key,value] of Object.entries(keyValues)) {
-        amplitude.getInstance().identify(new amplitude.Identify().set(key, value));
-      }
+
+    // Use the same user identification in ConfigCat and Amplitude
+    const userObject = new User(amplitude.getInstance().options.deviceId);
+
+    // Get all feature flags (key-value pairs) from ConfigCat
+    this.configCatClient.getAllValuesAsync(userObject).then((values) => {
+
+      // Create an Identify object storing all feature flag settings
+      const identify = new amplitude.Identify();
+      values.forEach(i => { identify.set(i.settingKey, i.settingValue); });
+
+      // Send the Identify to Amplitude
+      amplitude.getInstance().identify(identify);
+
+      // Send 'visited' Event to Amplitude to track the page visit 
       amplitude.getInstance().logEvent('visited', {'title': this.title});
     });
-  }
-
-  async getAllKeyValuesAsync() {
-    const keys = await this.configCatClient.getAllKeysAsync();
-    const keyValues: Record<string, unknown> = {};
-    for (const key of keys) {
-      await this.configCatClient.getValueAsync(key, false).then((value) => {
-        keyValues[key] = value;
-      });
-    }
-    return keyValues;
   }
 
   public configCatClient: IConfigCatClient;

@@ -21,7 +21,7 @@
     "@angular/router": "~10.1.5",
     "amplitude-js": "^5.9.0",
     "bootstrap": "^4.5.3",
-    "configcat-js": "^5.3.1",
+    "configcat-js": "^5.4.0",
     "core-js": "^3.6.4",
     "jquery": "^3.5.1",
     "rxjs": "~6.6.3",

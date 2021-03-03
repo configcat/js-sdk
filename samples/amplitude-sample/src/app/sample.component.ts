@@ -16,7 +16,9 @@ export class SampleComponent implements OnInit {
     @Input() configCatClient: IConfigCatClient;
 
     ngOnInit() {
+        // Use the same user identification in ConfigCat and Amplitude
         const userObject = new User(amplitude.getInstance().options.deviceId);
+        
         this.configCatClient.getValue("greenButtonEnabled", false, value => {
             this.isGreenButtonEnabled = value;
         }, userObject);
