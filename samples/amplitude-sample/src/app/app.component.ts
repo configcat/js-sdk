@@ -29,8 +29,15 @@ export class AppComponent {
     // Init Amplitude with the proper API_KEY
     amplitude.getInstance().init('57c2946d37872e0781c675f584bdcd7b');
 
-    // Use the same user identification in ConfigCat and Amplitude
+    // We don't have registered users but unknown visitors.
+    // We create a ConfigCat user object based on the Amplitude deviceId
+    // to use the same user in ConfigCat and Amplitude and track the same user segments.
+    // See the Docs: https://configcat.com/docs/advanced/user-object
     const userObject = new User(amplitude.getInstance().options.deviceId);
+
+    // We will get all feature flag key-value pairs to define the segment of the user.
+    // We can use Amplitude's Identify API to store these data and set the user's segment.
+    // In Amplitude for every user, we will have all of the feature flags with the proper value stored as user properties.
 
     // Get all feature flags (key-value pairs) from ConfigCat
     this.configCatClient.getAllValuesAsync(userObject).then((values) => {

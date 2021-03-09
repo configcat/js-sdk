@@ -1,4 +1,4 @@
-# ConfigCat Angular Sample App
+# ConfigCat + Amplitude A/B Testing Angular Sample App
 
 To run the sample project you need [Angular CLI](https://cli.angular.io/) installed
 ```
