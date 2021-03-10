@@ -31,7 +31,7 @@ export class SampleComponent implements OnInit {
         // We use the same event for the two cases (green button enabled or disabled).
         // The greenButtonEnabled flag is already tracked as a user property.
         // For example, in Amplitude we can easily check the visitors whose
-        // flag `greenButtonEnabled` is set and have an uploaded button_clicked event.
+        // flag greenButtonEnabled is set and have an uploaded button_clicked event.
         amplitude.getInstance().logEvent('button_clicked');
         alert('The click event has been sent to Amplitude.');
     }
