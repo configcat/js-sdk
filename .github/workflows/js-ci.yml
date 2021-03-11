@@ -34,6 +34,14 @@ jobs:
         
       - name: Upload coverage report
         run: codecov
+
+      - name: 📦Pack
+        run: npm pack
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: npm-package
+          path: configcat-js*.tgz
         
   publish:
     needs: test
@@ -49,8 +57,13 @@ jobs:
           
       - name: Install dependencies
         run: npm install
+
+      - name: Build
+        run: |
+          npm run build
+          npm run buildPure
         
-      - name: Publish
+      - name: 🚀Publish
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_API_KEY }}
