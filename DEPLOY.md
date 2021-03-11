@@ -29,13 +29,13 @@ Increase version number by using `npm version patch | minor | major`
     ```
 1. Push tag to remote
     
-    If you tag the commit, TravisCI automatically publishes the package to NPM. 
+    If you tag the commit, a GitHub action automatically publishes the package to NPM. 
     ```bash
     git push origin <new version>
     ```
     *Example: git push origin v1.1.17*
 
-    You can follow the build status here -> https://travis-ci.com/configcat/js-sdk
+    You can follow the build status here -> https://github.com/configcat/js-sdk/actions/workflows/js-ci.yml
 
 1. Make sure new package is available via NPM: https://www.npmjs.com/package/configcat-js
 

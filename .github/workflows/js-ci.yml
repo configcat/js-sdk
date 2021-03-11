@@ -25,10 +25,12 @@ jobs:
           npm install
           
       - name: Build
-        run: npm run build
+        run: |
+          npm run build
+          npm run buildPure
         
       - name: Coverage
-        run: npm run coverage
+        run: npm run test
         
       - name: Upload coverage report
         run: codecov
