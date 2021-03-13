@@ -10,8 +10,6 @@ import amplitude from 'amplitude-js';
 })
 
 export class SampleComponent implements OnInit {
-    constructor() { }
-
     public isGreenButtonEnabled: boolean = undefined;
     @Input() configCatClient: IConfigCatClient;
 

@@ -1,24 +1,28 @@
 <div class="container" style="text-align:center; max-width:850px">
   <h1>
-    <b>Welcome to ConfigCat + Amplitude A/B Testing Sample app!</b>
+    <strong>Welcome to ConfigCat + Amplitude A/B Testing Sample app!</strong>
   </h1>
   <h4>
     
   </h4>
   <p>
-    We would like to show a method of how to A/B testing with ConfigCat and Amplitude. This sample belongs to a <a href="https://configcat.com/blog" target="_blank">blog post</a>
-    about A/B testing and how to evaluate the result of the test in Amplitude.
+    We would like to show a method of how to A/B testing with ConfigCat and Amplitude.
+    <a href="https://configcat.com/blog" target="_blank" rel="noopener">Here</a> is a detailed article.
   </p>
   <p>
-    Let's assume we have a webshop (written in <a href="https://angular.io" target="_blank">Angular</a>). 
-    We would like to make our <b>Add To Cart</b> button on our product card more eye-catching to get visitors to click on it more times and encourage them to buy more products on our site.
-    We’d like to test two product card variants. A card with a gray button and another one with a green button on it.
+    Let's assume we have a webshop (written in <a href="https://angular.io" target="_blank" rel="noopener">Angular</a>). 
+    We would like to make our <strong>Add To Cart</strong> button on our product card more eye-catching to get visitors to click on it more times and encourage them to buy more products on our site.
+    We’d like to test two product card variants: a card with a gray button and another one with a green button on it.
   </p>
   <p>
-    This sample shows a version of them and sends tracking data to Amplitude to analyze visitor behavior.
+    This sample shows a version of the product cards and sends tracking data to Amplitude to analyze visitor behavior.<br/>
+    In <strong>app.component.ts</strong> you can init Amplitude with your API_KEY to be able to review tracking data.
   </p>
   <p>
-    This is your version:
+    We show the gray button for 50% of the visitors and the green button for the other 50%.
+    We have generated a visitor id for you. This your product card version based on your visitor id.
+    Please click on the <strong>Add To Cart</strong> button. 
+    The tracking data of the click event will be sent to Amplitude where you can analyze the A/B testing result as described in the <a href="https://configcat.com/blog" target="_blank" rel="noopener">article</a>.
   </p>
   <app-sample [configCatClient]=configCatClient></app-sample>
 </div>

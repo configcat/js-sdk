@@ -26,7 +26,7 @@ export class AppComponent {
   }
 
   ngOnInit() { 
-    // Init Amplitude with the proper API_KEY
+    // Init Amplitude with your API_KEY to be able to review tracking data
     amplitude.getInstance().init('57c2946d37872e0781c675f584bdcd7b');
 
     // We don't have registered users but unknown visitors.
