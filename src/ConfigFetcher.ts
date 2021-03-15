@@ -35,5 +35,3 @@ export class HttpConfigFetcher implements IConfigFetcher {
         httpRequest.send(null);
     }
 }
-
-export default IConfigFetcher;
