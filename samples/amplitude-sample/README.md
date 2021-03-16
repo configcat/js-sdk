@@ -1,7 +1,7 @@
-# ConfigCat + Amplitude A/B Testing Angular Sample App
+# ConfigCat + Amplitude A/B Testing Sample App in Angular
 
-We would like to show a method of how to A/B testing with ConfigCat and Amplitude.
-[Here](https://configcat.com/blog) is a detailed article.
+The purpose of this sample is to demonstrate how to execute an A/B testing scenario
+using ConfigCat and Amplitude hand in hand. [Here](https://configcat.com/blog) is the original blogpost with more details.
 
 To run the sample project you need [Angular CLI](https://cli.angular.io/) installed
 ```
