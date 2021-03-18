@@ -23,3 +23,4 @@ webpack.config.js
 .prettierrc
 deploy.sh
 update-samples.sh
+.github/

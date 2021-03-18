@@ -1,0 +1,71 @@
+name: JS CI
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  push:
+    branches: [ master ]
+    tags: [ 'v[0-9]+.[0-9]+.[0-9]+' ]
+  pull_request:
+    branches: [ master ]
+    
+  workflow_dispatch:
+  
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14
+        
+      - name: Install dependencies
+        run: |
+          npm install codecov -g
+          npm install
+          
+      - name: Build
+        run: |
+          npm run build
+          npm run buildPure
+        
+      - name: Coverage
+        run: npm run test
+        
+      - name: Upload coverage report
+        run: codecov
+
+      - name: 📦Pack
+        run: npm pack
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: npm-package
+          path: configcat-js*.tgz
+        
+  publish:
+    needs: test
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags')
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14
+          registry-url: 'https://registry.npmjs.org'
+          
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: |
+          npm run build
+          npm run buildPure
+        
+      - name: 🚀Publish
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_API_KEY }}
