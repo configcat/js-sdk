@@ -3,11 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "configcat-js": "^5.4.1",
-    "eslint": "^6.6.0",
+    "configcat-js": "^5.4.3",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "^3.4.3"
+    "react-scripts": "^4.0.3"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -7,7 +7,10 @@ class App extends Component {
 
   constructor(props) {
     super(props)
-    this.client = configcat.createClientWithAutoPoll("PKDVCLf-Hq-h-kCzMp-L7Q/HhOWfwVtZ0mb30i9wi17GQ", { pollIntervalSeconds: 2 });
+    this.client = configcat.createClientWithAutoPoll("PKDVCLf-Hq-h-kCzMp-L7Q/HhOWfwVtZ0mb30i9wi17GQ", { 
+      pollIntervalSeconds: 2, 
+      logger: configcat.createConsoleLogger(3) // Setting log level to 3 (Info)
+    });
       // You can instantiate the client with different polling modes. See the Docs: https://configcat.com/docs/sdk-reference/js/#polling-modes
   }
   
