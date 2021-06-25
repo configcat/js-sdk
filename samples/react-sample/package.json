@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "configcat-js": "^5.4.3",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
+    "configcat-js": "^5.5.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-scripts": "^4.0.3"
   },
   "scripts": {
