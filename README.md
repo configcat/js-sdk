@@ -39,7 +39,7 @@ import * as configcat from "configcat-js";
 ```
 
 ### 2. Go to the <a href="https://app.configcat.com/sdkkey" target="_blank">Dashboard</a> to get your *SDK Key*:
-![SDK-KEY](https://raw.githubusercontent.com/ConfigCat/js-sdk/master/media/readme01.png  "SDK-KEY")
+![SDK-KEY](https://raw.githubusercontent.com/ConfigCat/js-sdk/master/media/readme02-2.png  "SDK-KEY")
 
 ### 3. Create a *ConfigCat* client instance:
 ```js
