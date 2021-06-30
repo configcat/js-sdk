@@ -1,0 +1,16 @@
+@import "bootstrap";
+
+.btn:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.button-gray {
+    @extend .btn;
+    @extend .btn-secondary;
+}
+
+.button-green {
+    @extend .btn;
+    @extend .btn-success;
+}
