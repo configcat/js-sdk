@@ -38,8 +38,8 @@ import * as configcat from "configcat-js";
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/configcat-js@latest/dist/configcat.min.js"></script>
 ```
 
-### 2. Go to the <a href="https://app.configcat.com/sdkkey" target="_blank">Dashboard</a> to get your *SDK Key*:
-![SDK-KEY](https://raw.githubusercontent.com/ConfigCat/js-sdk/master/media/readme02-2.png  "SDK-KEY")
+### 2. Go to the <a href="https://app.configcat.com/sdkkey" target="_blank">ConfigCat Dashboard</a> to get your *SDK Key*:
+![SDK-KEY](https://raw.githubusercontent.com/ConfigCat/js-sdk/master/media/readme02-3.png  "SDK-KEY")
 
 ### 3. Create a *ConfigCat* client instance:
 ```js
