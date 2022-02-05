@@ -11,8 +11,8 @@ export class AppComponent {
   title = 'angular-sample';
 
   constructor() {
+    // Setting log level to 3 (= Info) to show detailed feature flag evaluation
     const logger = configcat.createConsoleLogger(LogLevel.Info);
-    // Setting log level to Info to show detailed feature flag evaluation in the console.
 
     this.configCatClient = configcat.createClientWithAutoPoll('PKDVCLf-Hq-h-kCzMp-L7Q/HhOWfwVtZ0mb30i9wi17GQ',
       {
