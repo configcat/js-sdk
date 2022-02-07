@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 import * as ConfigCat from 'configcat-js';
 
 export default function App() {
-
+  // Setting log level to 3 (= Info) to show detailed feature flag evaluation
   const logger = ConfigCat.createConsoleLogger(3);
   const configcatClient = ConfigCat.createClientWithAutoPoll("zVPVCO5_LS9VnDcpIDE84g/zVPVCBScEzDn-VNq0dnYog", {
     pollIntervalSeconds: 2,
