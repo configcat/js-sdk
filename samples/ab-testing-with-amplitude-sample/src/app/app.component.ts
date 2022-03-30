@@ -35,7 +35,7 @@ export class AppComponent {
     // ConfigCat userObject (https://configcat.com/docs/advanced/user-object) with a unique identifier is necessary to download and evaluate feature flag values.
     // There are no logged in users in the sample application to take a user ID from. 
     // Instead I'm taking the DeviceID from Amplitude as a unique identifier: https://developers.amplitude.com/docs/identify-api
-    const userObject = new User(amplitude.getInstance().options.deviceId);
+    const userObject = new User(amplitude.getInstance().options.deviceId || '');
     console.log(amplitude.getInstance().options.deviceId);
 
     // Getting all the evaluated feature flag keys and values from ConfigCat for the given userObject.

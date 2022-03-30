@@ -11,11 +11,11 @@ import amplitude from 'amplitude-js';
 
 export class CardComponent implements OnInit {
     public isGreenButtonEnabled: boolean = false;
-    @Input() configCatClient: IConfigCatClient;
+    @Input() configCatClient!: IConfigCatClient;
 
     ngOnInit() {
         // Using the device ID as a unique identifier for feature flag evaluation.
-        const userObject = new User(amplitude.getInstance().options.deviceId);
+        const userObject = new User(amplitude.getInstance().options.deviceId || '');
 
         // Getting the feature flag value that decides if the green or the gray button to show.
         this.configCatClient.getValue('greenButtonEnabled', false, value => {
