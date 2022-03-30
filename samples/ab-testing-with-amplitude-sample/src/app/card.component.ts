@@ -27,6 +27,6 @@ export class CardComponent implements OnInit {
         // Sending the button click event to Amplitude.
         // The greenButtonEnabled flag is already tracked as a user property in Amplitude (see app.component.ts).
         amplitude.getInstance().logEvent('button_clicked');
-        alert('The click event has been sent to Amplitude.');
+        alert('Click event sent to Amplitude.');
     }
 }
