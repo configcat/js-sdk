@@ -30,10 +30,11 @@ export class AppComponent {
     // Initialize Amplitude with your API_KEY to upload tracking data. API_KEY: https://help.amplitude.com/hc/en-us/articles/360058073772#view-and-edit-your-project-information
     amplitude.getInstance().init('57c2946d37872e0781c675f584bdcd7b');
 
-    // ConfigCat user object (https://configcat.com/docs/advanced/user-object) with a unique identifier is necessary to download and evaluate feature flag values.
-    // There are no logged in users in the sample application to take the user ID from. 
-    // Instead I'm taking the DeviceID from Amplitude as a unique identifier: https://developers.amplitude.com/docs/identify-api
+    // The following steps are necessary for creating a funnel diagram in Amplitude to visualize how many times A or B version of the card was loaded and clicked.
 
+    // ConfigCat userObject (https://configcat.com/docs/advanced/user-object) with a unique identifier is necessary to download and evaluate feature flag values.
+    // There are no logged in users in the sample application to take a user ID from. 
+    // Instead I'm taking the DeviceID from Amplitude as a unique identifier: https://developers.amplitude.com/docs/identify-api
     const userObject = new User(amplitude.getInstance().options.deviceId);
 
     // Getting all the evaluated feature flag keys and values from ConfigCat for the given userObject.
@@ -43,10 +44,9 @@ export class AppComponent {
       const identity = new amplitude.Identify();
 
       // Setting the evaluated feature flag keys and values on the identity object.
-      // We will need these evaluated feature flag values for every user when creating the funnel diagram in Amplitude.
       values.forEach(i => { identity.set(i.settingKey, i.settingValue); });
 
-      // Sending the new identity object back to Amplitude
+      // Uploading the identity object together with the evaluated feature flag values to Amplitude.
       amplitude.getInstance().identify(identity);
 
       // Send 'visited' Event to Amplitude to track the page visit 
