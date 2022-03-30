@@ -49,7 +49,7 @@ export class AppComponent {
       // Uploading the identity object together with the evaluated feature flag values to Amplitude.
       amplitude.getInstance().identify(identity);
 
-      // Send 'visited' Event to Amplitude to track the page visit 
+      // Sending the 'visited' event to Amplitude to track the page visit as the first step in the funnel. 
       amplitude.getInstance().logEvent('visited', { 'title': this.title });
     });
   }

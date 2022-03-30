@@ -4,12 +4,12 @@ import { User } from 'configcat-common/lib/RolloutEvaluator';
 import amplitude from 'amplitude-js';
 
 @Component({
-    selector: 'app-sample',
-    templateUrl: 'sample.component.html',
-    styleUrls: ['./sample.component.scss']
+    selector: 'app-card',
+    templateUrl: 'card.component.html',
+    styleUrls: ['./card.component.scss']
 })
 
-export class SampleComponent implements OnInit {
+export class CardComponent implements OnInit {
     public isGreenButtonEnabled: boolean = undefined;
     @Input() configCatClient: IConfigCatClient;
 
