@@ -18,6 +18,9 @@
     "@angular/platform-browser": "~13.2.0",
     "@angular/platform-browser-dynamic": "~13.2.0",
     "@angular/router": "~13.2.0",
+    "amplitude-js": "^8.16.1",
+    "bootstrap": "^5.1.3",
+    "configcat-js": "^5.7.2",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
