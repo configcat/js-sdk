@@ -28,7 +28,7 @@ export class AppComponent {
 
   ngOnInit() {
     // Initialize Amplitude with your API_KEY to upload tracking data. API_KEY: https://help.amplitude.com/hc/en-us/articles/360058073772#view-and-edit-your-project-information
-    amplitude.getInstance().init('YOUR_AMPLITUDE_API_KEY');
+    amplitude.getInstance().init('57c2946d37872e0781c675f584bdcd7b');
 
     // The following steps are necessary for creating a funnel diagram in Amplitude to visualize how many times A or B version of the card was loaded and clicked.
 
