@@ -1,0 +1,26 @@
+<div class="container">
+  <h1>
+    ConfigCat A/B Testing Sample App with Amplitude tracking
+  </h1>
+  <p>
+    The purpose of this sample is to demonstrate how to implement an A/B testing scenario
+    using ConfigCat. And how to visualize the A/B test results as a funnel using Amplitude.
+    <a href="https://configcat.com/blog" target="_blank" rel="noopener">Here is the original blog post</a> with more details.
+  </p>
+  <h2>
+    Here is the basic concept:
+  </h2>
+  <ul>
+    <li>A "visited" event is sent to Amplitude when the app loads.</li>
+    <li>Visitors are split into two groups.</li>
+    <li>50% of the visitors will see a card with a <strong>gray button</strong> and the other 50% will see another card with a <strong>green button</strong> on
+      it.</li>
+    <li>A "click" event is sent to Amplitude when the visitor clicks the button.</li>
+    <li>A funnel can be set up in Amplitude to visualize how many visitors clicked which version of the button.</li>
+  </ul>
+  <h2>The card</h2>
+  <p>
+    This is the card version generated for your visitor group.
+  </p>
+  <app-card [configCatClient]=configCatClient></app-card>
+</div>
