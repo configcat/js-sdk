@@ -14,22 +14,18 @@ export class CardComponent implements OnInit {
     @Input() configCatClient: IConfigCatClient;
 
     ngOnInit() {
-        // We don't have registered users but unknown visitors.
-        // We create a ConfigCat user object based on the Amplitude deviceId
-        // to use the same user in ConfigCat and Amplitude and track the same user segments.
-        // See the Docs: https://configcat.com/docs/advanced/user-object
+        // Using the device ID as a unique identifier for feature flag evaluation.
         const userObject = new User(amplitude.getInstance().options.deviceId);
 
+        // Getting the feature flag value that decides if the green or the gray button to show.
         this.configCatClient.getValue('greenButtonEnabled', false, value => {
             this.isGreenButtonEnabled = value;
         }, userObject);
     }
 
     buttonClicked() {
-        // We use the same event for the two cases (green button enabled or disabled).
-        // The greenButtonEnabled flag is already tracked as a user property.
-        // For example, in Amplitude we can easily check the visitors whose
-        // flag greenButtonEnabled is set and have an uploaded button_clicked event.
+        // Sending the button click event to Amplitude.
+        // The greenButtonEnabled flag is already tracked as a user property in Amplitude (see app.component.ts).
         amplitude.getInstance().logEvent('button_clicked');
         alert('The click event has been sent to Amplitude.');
     }

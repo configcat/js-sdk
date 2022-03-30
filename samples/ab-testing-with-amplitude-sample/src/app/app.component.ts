@@ -36,6 +36,7 @@ export class AppComponent {
     // There are no logged in users in the sample application to take a user ID from. 
     // Instead I'm taking the DeviceID from Amplitude as a unique identifier: https://developers.amplitude.com/docs/identify-api
     const userObject = new User(amplitude.getInstance().options.deviceId);
+    console.log(amplitude.getInstance().options.deviceId);
 
     // Getting all the evaluated feature flag keys and values from ConfigCat for the given userObject.
     this.configCatClient.getAllValuesAsync(userObject).then((values) => {
