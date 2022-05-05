@@ -1,6 +1,6 @@
 {
     "name": "configcat-js",
-    "version": "5.7.3",
+    "version": "5.7.4",
     "description": "ConfigCat is a configuration as a service that lets you manage your features and configurations without actually deploying new code.",
     "main": "lib/index.js",
     "types": "lib/index.d.ts",
