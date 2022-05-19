@@ -93,6 +93,6 @@ export const OverrideBehaviour = {
      * defined both in the fetched and the local-override source then the fetched version will take precedence.
      */
     RemoteOverLocal: configcatcommon.OverrideBehaviour.RemoteOverLocal,
-}
+};
 
 export default createClient;
