@@ -2,6 +2,7 @@ import { assert } from "chai";
 import "mocha";
 import * as configcatClient from "../src/index";
 import { IConfigCatClient } from "configcat-common/lib/esm/ConfigCatClient";
+import { FlagOverrides } from "configcat-common";
 
 describe("ConfigCatClient index (main)", () => {
     it("createClient ShouldCreateInstance", () => {
@@ -29,5 +30,11 @@ describe("ConfigCatClient index (main)", () => {
         const client: IConfigCatClient = configcatClient.createClientWithManualPoll("SDKKEY");
 
         assert.isDefined(client);
+    });
+
+    it("createFlagOverridesFromMap ShouldCreateFlagOverrides", () => {
+        const overrides: FlagOverrides = configcatClient.createFlagOverridesFromMap({ test: true }, configcatClient.OverrideBehaviour.LocalOnly);
+
+        assert.isDefined(overrides);
     });
 });
