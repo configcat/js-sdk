@@ -13,6 +13,10 @@ describe("Integration - ConfigCatClient", () => {
 
     const clientLazyLoad: IConfigCatClient = configcatClient.createClientWithLazyLoad(sdkKey);
 
+    const clientOverride: IConfigCatClient = configcatClient.createClientWithAutoPoll(sdkKey, {
+        flagOverrides: configcatClient.createFlagOverridesFromMap({ stringDefaultCat: "NOT_CAT" }, configcatClient.OverrideBehaviour.LocalOnly)
+    });
+
     it("Auto poll - getValue() with key: 'stringDefaultCat' should return 'Cat'", (done) => {
         const defaultValue = "NOT_CAT";
 
@@ -456,5 +460,12 @@ describe("Integration - ConfigCatClient", () => {
         assert.equal(settingKeys.doubleDefaultPi, 3.1415);
         assert.equal(settingKeys.double25Pi25E25Gr25Zero, -1);
         assert.equal(settingKeys.keySampleText, "Cat");
+    });
+
+    it("Override - local only", async () => {
+        const defaultValue = "DEFAULT_CAT";
+
+        let actual: string = await clientOverride.getValueAsync("stringDefaultCat", defaultValue);
+        assert.strictEqual(actual, "NOT_CAT");
     });
 });
