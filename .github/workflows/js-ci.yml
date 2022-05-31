@@ -38,7 +38,7 @@ jobs:
           npm run buildPure
 
       - name: Coverage
-        run: npm run test
+        run: CHROME_BIN=$(which chrome) npm run test
 
       - name: Upload coverage report
         run: codecov
@@ -87,7 +87,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        chrome: ["722278"]
+        chrome: ["612434", "722278"]
     name: Chromium ${{ matrix.chrome }} test
     steps:
       - uses: actions/checkout@v2
