@@ -71,7 +71,6 @@ jobs:
 
       - name: Install dependencies
         run: |
-          npm install codecov -g
           npm install
 
       - name: Build
@@ -103,7 +102,6 @@ jobs:
 
       - name: Install dependencies
         run: |
-          npm install codecov -g
           npm install
 
       - name: Build
@@ -134,7 +132,6 @@ jobs:
 
       - name: Install dependencies
         run: |
-          npm install codecov -g
           npm install
 
       - name: Build
