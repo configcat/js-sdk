@@ -25,7 +25,7 @@ export class HttpConfigFetcher implements IConfigFetcher {
 
         httpRequest.open("GET", options.getUrl(), true);
         httpRequest.timeout = options.requestTimeoutMs;
-        httpRequest.setRequestHeader("X-ConfigCat-UserAgent", "ConfigCat-JS/" + options.clientVersion);
+        httpRequest.setRequestHeader("X-ConfigCat-UserAgent", options.clientVersion);
         httpRequest.setRequestHeader("Cache-Control", "no-cache"); // any locally cached version isn't trusted without the server's say-so
         if (lastEtag) {
             httpRequest.setRequestHeader("If-None-Match", lastEtag);
