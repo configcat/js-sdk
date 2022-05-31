@@ -2,6 +2,7 @@ import * as configcatcommon from "configcat-common";
 import { HttpConfigFetcher } from "./ConfigFetcher";
 import { IConfigCatClient, LogLevel } from "configcat-common";
 import { LocalStorageCache } from "./Cache";
+import CONFIGCAT_SDK_VERSION from "./Version";
 
 /**
  * Create an instance of ConfigCatClient and setup Auto polling with default options.
@@ -20,7 +21,12 @@ export function createClient(sdkkey: string, options?: IJSAutoPollOptions): ICon
 export function createClientWithAutoPoll(sdkKey: string, options?: IJSAutoPollOptions): IConfigCatClient {
     return configcatcommon.createClientWithAutoPoll(
         sdkKey,
-        { configFetcher: new HttpConfigFetcher(), cache: new LocalStorageCache() },
+        {
+            configFetcher: new HttpConfigFetcher(),
+            cache: new LocalStorageCache(),
+            sdkType: "ConfigCat-JS",
+            sdkVersion: CONFIGCAT_SDK_VERSION
+        },
         options,
     );
 }
@@ -36,6 +42,8 @@ export function createClientWithManualPoll(sdkKey: string, options?: IJSManualPo
         {
             configFetcher: new HttpConfigFetcher(),
             cache: new LocalStorageCache(),
+            sdkType: "ConfigCat-JS",
+            sdkVersion: CONFIGCAT_SDK_VERSION
         },
         options,
     );
@@ -49,7 +57,12 @@ export function createClientWithManualPoll(sdkKey: string, options?: IJSManualPo
 export function createClientWithLazyLoad(sdkKey: string, options?: IJSLazyLoadingOptions): IConfigCatClient {
     return configcatcommon.createClientWithLazyLoad(
         sdkKey,
-        { configFetcher: new HttpConfigFetcher(), cache: new LocalStorageCache() },
+        {
+            configFetcher: new HttpConfigFetcher(),
+            cache: new LocalStorageCache(),
+            sdkType: "ConfigCat-JS",
+            sdkVersion: CONFIGCAT_SDK_VERSION
+        },
         options,
     );
 }
