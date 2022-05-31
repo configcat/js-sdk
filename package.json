@@ -7,6 +7,7 @@
     "module": "lib/esm/index.js",
     "scripts": {
         "test": "karma start",
+        "test-firefox": "karma start karma-firefox.conf.js",
         "build": "tsc -p tsconfig.cjs.json && tsc -p tsconfig.esm.json && gulp tsc",
         "buildPure": "webpack && gulp webpack",
         "prepare": "npm run build",
@@ -51,7 +52,9 @@
         "karma-chrome-launcher": "^3.1.0",
         "karma-cli": "^2.0.0",
         "karma-coverage": "^2.0.3",
+        "karma-firefox-launcher": "^2.1.2",
         "karma-mocha": "^2.0.1",
+        "karma-safari-launcher": "^1.0.0",
         "karma-typescript": "^5.0.3",
         "karma-typescript-es6-transform": "^5.0.3",
         "mocha": "^8.1.3",
