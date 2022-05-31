@@ -87,7 +87,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        chrome: ["612434", "722278"]
+        chrome: ["520847", "612434", "722278"]
     name: Chromium ${{ matrix.chrome }} test
     steps:
       - uses: actions/checkout@v2
