@@ -80,7 +80,7 @@ jobs:
           npm run buildPure
 
       - name: Test
-        run: npm run test-firefox
+        run: npm run test-chrome
 
   test-firefox:
     runs-on: ubuntu-latest
