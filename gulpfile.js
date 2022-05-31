@@ -20,11 +20,11 @@ function updateVersion_dist(){
 }
 
 function updateVersion_esm(){
-    return updateVersion(OUT_ESM, 'version.js');
+    return updateVersion(OUT_ESM, 'Version.js');
 }
 
 function updateVersion_legacy(){
-    return updateVersion(OUT_LEGACY, 'version.js');
+    return updateVersion(OUT_LEGACY, 'Version.js');
 }
 
 exports.tsc = gulp.series(    
