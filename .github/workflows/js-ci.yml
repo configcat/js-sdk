@@ -55,7 +55,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        chrome: ["722278", "beta", "stable"]
+        chrome: ["beta", "stable"]
     name: Chrome ${{ matrix.chrome }} test
     steps:
       - uses: actions/checkout@v2
@@ -81,6 +81,38 @@ jobs:
 
       - name: Test
         run: npm run test-chrome
+
+
+  test-chromium:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        chrome: ["722278"]
+    name: Chromium ${{ matrix.chrome }} test
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Setup chrome
+        uses: browser-actions/setup-chrome@latest
+        with:
+          chrome-version: ${{ matrix.chrome }}
+
+      - name: Install dependencies
+        run: |
+          npm install codecov -g
+          npm install
+
+      - name: Build
+        run: |
+          npm run build
+          npm run buildPure
+
+      - name: Test
+        run: npm run test-chromium
 
   test-firefox:
     runs-on: ubuntu-latest
