@@ -80,7 +80,7 @@ jobs:
           npm run buildPure
 
       - name: Test
-        run: npm run test-chrome
+        run: CHROME_BIN=$(which chrome) npm run test-chrome
 
 
   test-chromium:
@@ -112,7 +112,7 @@ jobs:
           npm run buildPure
 
       - name: Test
-        run: npm run test-chromium
+        run: CHROMIUM_BIN=$(which chrome) npm run test-chromium
 
   test-firefox:
     runs-on: ubuntu-latest
