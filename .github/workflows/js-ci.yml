@@ -55,7 +55,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        chrome: ["84.0", "beta", "stable"]
+        chrome: ["722278", "beta", "stable"]
     name: Chrome ${{ matrix.chrome }} test
     steps:
       - uses: actions/checkout@v2
