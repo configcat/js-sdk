@@ -2,38 +2,44 @@ name: JS CI
 
 on:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: "0 0 * * *"
   push:
-    branches: [ master ]
-    tags: [ 'v[0-9]+.[0-9]+.[0-9]+' ]
+    branches: [master]
+    tags: ["v[0-9]+.[0-9]+.[0-9]+"]
   pull_request:
-    branches: [ master ]
-    
+    branches: [master]
+
   workflow_dispatch:
-  
+
 jobs:
   test:
     runs-on: ubuntu-latest
+    name: Test on latest Chrome and report coverage
     steps:
       - uses: actions/checkout@v2
 
       - uses: actions/setup-node@v2
         with:
           node-version: 14
-        
+
+      - name: Setup chrome
+        uses: browser-actions/setup-chrome@latest
+        with:
+          chrome-version: latest
+
       - name: Install dependencies
         run: |
           npm install codecov -g
           npm install
-          
+
       - name: Build
         run: |
           npm run build
           npm run buildPure
-        
+
       - name: Coverage
         run: npm run test
-        
+
       - name: Upload coverage report
         run: codecov
 
@@ -45,11 +51,42 @@ jobs:
           name: npm-package
           path: configcat-js*.tgz
 
+  test-chrome:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        chrome: ["84.0", "beta", "stable"]
+    name: Chrome ${{ matrix.firefox }} test
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Setup chrome
+        uses: browser-actions/setup-chrome@latest
+        with:
+          firefox-version: ${{ matrix.chrome }}
+
+      - name: Install dependencies
+        run: |
+          npm install codecov -g
+          npm install
+
+      - name: Build
+        run: |
+          npm run build
+          npm run buildPure
+
+      - name: Test
+        run: npm run test-firefox
+
   test-firefox:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        firefox: [ '84.0', 'latest-beta', 'latest' ]
+        firefox: ["84.0", "latest-beta", "latest"]
     name: Firefox ${{ matrix.firefox }} test
     steps:
       - uses: actions/checkout@v2
@@ -57,7 +94,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 14
-      
+
       - name: Setup firefox
         uses: browser-actions/setup-firefox@latest
         with:
@@ -67,12 +104,12 @@ jobs:
         run: |
           npm install codecov -g
           npm install
-          
+
       - name: Build
         run: |
           npm run build
           npm run buildPure
-        
+
       - name: Test
         run: npm run test-firefox
 
@@ -86,8 +123,8 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 14
-          registry-url: 'https://registry.npmjs.org'
-          
+          registry-url: "https://registry.npmjs.org"
+
       - name: Install dependencies
         run: npm install
 
@@ -95,7 +132,7 @@ jobs:
         run: |
           npm run build
           npm run buildPure
-        
+
       - name: 🚀Publish
         run: npm publish
         env:
