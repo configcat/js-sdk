@@ -8,8 +8,9 @@
     "scripts": {
         "test": "karma start karma-chrome-coverage.conf.js",
         "test-firefox": "karma start karma-firefox.conf.js",
-        "test-chrome": "karma start karma-chrome-simple.conf.js",
-        "test-chromium": "karma start karma-chromium-simple.conf.js",
+        "test-chrome": "karma start karma-chrome.conf.js",
+        "test-chromium": "karma start karma-chromium.conf.js",
+        "test-safari": "karma start karma-safari.conf.js",
         "build": "tsc -p tsconfig.cjs.json && tsc -p tsconfig.esm.json && gulp tsc",
         "buildPure": "webpack && gulp webpack",
         "prepare": "npm run build",
