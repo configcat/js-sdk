@@ -1,12 +1,15 @@
 {
     "name": "configcat-js",
-    "version": "5.9.0",
+    "version": "5.10.0",
     "description": "ConfigCat is a configuration as a service that lets you manage your features and configurations without actually deploying new code.",
     "main": "lib/index.js",
     "types": "lib/index.d.ts",
     "module": "lib/esm/index.js",
     "scripts": {
-        "test": "karma start",
+        "test": "karma start karma-chrome-coverage.conf.js",
+        "test-firefox": "karma start karma-firefox.conf.js",
+        "test-chrome": "karma start karma-chrome.conf.js",
+        "test-chromium": "karma start karma-chromium.conf.js",
         "build": "tsc -p tsconfig.cjs.json && tsc -p tsconfig.esm.json && gulp tsc",
         "buildPure": "webpack && gulp webpack",
         "prepare": "npm run build",
@@ -30,7 +33,7 @@
     "license": "MIT",
     "homepage": "https://configcat.com",
     "dependencies": {
-        "configcat-common": "^5.2.0"
+        "configcat-common": "^5.3.0"
     },
     "devDependencies": {
         "@types/chai": "^4.2.12",
@@ -51,7 +54,9 @@
         "karma-chrome-launcher": "^3.1.0",
         "karma-cli": "^2.0.0",
         "karma-coverage": "^2.0.3",
+        "karma-firefox-launcher": "^2.1.2",
         "karma-mocha": "^2.0.1",
+        "karma-safari-launcher": "^1.0.0",
         "karma-typescript": "^5.0.3",
         "karma-typescript-es6-transform": "^5.0.3",
         "mocha": "^8.1.3",

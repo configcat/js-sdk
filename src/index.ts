@@ -4,6 +4,7 @@ import { IConfigCatClient, LogLevel } from "configcat-common";
 import { LocalStorageCache } from "./Cache";
 import CONFIGCAT_SDK_VERSION from "./Version";
 
+
 /**
  * Create an instance of ConfigCatClient and setup Auto polling with default options.
  * @param {string} sdkkey - SDK Key to access your configuration.
