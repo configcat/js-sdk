@@ -14,7 +14,7 @@ module.exports = function(config) {
 
         reporters: ["progress"],
 
-        browsers: ["SafariHeadless"],
+        browsers: ["Safari"],
 
         singleRun: true,
         
