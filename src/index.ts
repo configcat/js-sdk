@@ -4,16 +4,6 @@ import { IConfigCatClient, LogLevel } from "configcat-common";
 import { LocalStorageCache } from "./Cache";
 import CONFIGCAT_SDK_VERSION from "./Version";
 
-if (!(Object as any).fromEntries) {
-	(Object as any).fromEntries = function (entries){
-		if (!entries || !entries[Symbol.iterator]) { throw new Error('Object.fromEntries() requires a single iterable argument'); }
-		let obj = {};
-		for (let [key, value] of entries) {
-			obj[key] = value;
-		}
-		return obj;
-	};
-}
 
 /**
  * Create an instance of ConfigCatClient and setup Auto polling with default options.
