@@ -25,3 +25,4 @@ deploy.sh
 update-samples.sh
 .github/
 gulpfile.js
+karma-*.conf.js
