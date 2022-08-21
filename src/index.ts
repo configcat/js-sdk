@@ -56,6 +56,7 @@ export function createClientWithManualPoll(sdkKey: string, options?: IJSManualPo
  * @param options - Options for Lazy loading
  */
 export function createClientWithLazyLoad(sdkKey: string, options?: IJSLazyLoadingOptions): IConfigCatClient {
+  console.log('CREATING CLIENT !!');
     return configcatcommon.createClientWithLazyLoad(
         sdkKey,
         {

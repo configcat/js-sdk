@@ -22,15 +22,28 @@ console.log('DEBUG :: options.requestTimeoutMs', options.requestTimeoutMs);
           }
         }));
       }
-
-        fetch(options.getUrl())
+/*
+{
+            console.log('DEBUG :: response headers', response.headers);
+            console.log('DEBUG :: response headers ETAG', response.headers.get('Etag'));
+            console.log('DEBUG :: interate headers');
+            for(let entry of (response.headers as any).entries()) {
+              console.log(entry);
+            }
+            return response.json()
+          }
+ */
+        fetch(options.getUrl(), {
+          method: 'GET'
+        })
           // .then(response => response.json())
           .then((response) => {
+            console.log('DEBUG :: response', response)
             console.log('DEBUG :: headers', response.headers);
             if (options.requestTimeoutMs) {
               chrome.alarms.clear(alarmName).then();
             }
-
+            console.log('DEBUG :: response headers ETAG 2', response.headers.get('Etag'));
               const etag: string = response.headers && response.headers["ETag"]; // todo :: check original
               if (response.status === 200) {
                   callback(FetchResult.success('Success', etag))
