@@ -5,12 +5,12 @@ export class LocalStorageCache implements ICache {
 
     set(key: string, config: ProjectConfig): void {
         this.cache[key] = config;
-
+        const obj = {};
+        obj[key] = btoa(JSON.stringify(config));
         try {
-            chrome.storage.local.set({key: btoa(JSON.stringify(config))})
-            // localStorage.setItem(key, btoa(JSON.stringify(config)));
+            chrome.storage.local.set(obj)
         } catch (ex) {
-            // local storage is unavailable
+            // chrome storage local is unavailable
         }
     }
 
@@ -31,10 +31,8 @@ export class LocalStorageCache implements ICache {
                     }
                 }
             });
-            // const configString: string = localStorage.getItem(key);
-
         } catch (ex) {
-            // local storage is unavailable or invalid cache value in localstorage
+            // chrome storage local is unavailable or invalid cache value.
         }
 
         return null;
