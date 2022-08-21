@@ -1,7 +1,7 @@
 {
-    "name": "configcat-js",
+    "name": "configcat-js-chromium",
     "version": "6.0.0",
-    "description": "ConfigCat is a configuration as a service that lets you manage your features and configurations without actually deploying new code.",
+    "description": "based on configcat-js 6.0.0. ConfigCat is a configuration as a service that lets you manage your features and configurations without actually deploying new code.",
     "main": "lib/index.js",
     "types": "lib/index.d.ts",
     "module": "lib/esm/index.js",
@@ -33,6 +33,7 @@
     "license": "MIT",
     "homepage": "https://configcat.com",
     "dependencies": {
+        "@types/chrome": "0.0.193",
         "configcat-common": "^6.0.0"
     },
     "devDependencies": {
