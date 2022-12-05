@@ -72,6 +72,11 @@
         "webpack-auto-inject-version": "^1.2.2",
         "webpack-cli": "^4.10.0"
     },
+    "overrides": {
+      "chokidar": "3.5.3",
+      "glob-parent": "5.1.2",
+      "loader-utils": "1.4.2"
+    },
     "repository": {
         "type": "git",
         "url": "https://github.com/configcat/js-sdk"
