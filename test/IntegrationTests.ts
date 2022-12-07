@@ -1,369 +1,290 @@
 import { assert } from "chai";
-import "mocha";
-import { IConfigCatClient, SettingKeyValue } from "configcat-common/lib/esm/ConfigCatClient";
+import { IConfigCatClient, IOptions, PollingMode, IEvaluationDetails, User, LogLevel, SettingKeyValue } from "configcat-common";
 import * as configcatClient from "../src/index";
-import { User } from "configcat-common/lib/esm/RolloutEvaluator";
+import { createConsoleLogger, OptionsForPollingMode } from "../src/index";
 
-describe("Integration - ConfigCatClient", () => {
-    const sdkKey = "PKDVCLf-Hq-h-kCzMp-L7Q/psuH7BGHoUmdONrzzUOY7A";
+type InitFunc = (callback: (...args: any[]) => void) => void;
 
-    const clientAutoPoll: IConfigCatClient = configcatClient.createClientWithAutoPoll(sdkKey);
+const sdkKey: string = "PKDVCLf-Hq-h-kCzMp-L7Q/psuH7BGHoUmdONrzzUOY7A";
 
-    const clientManualPoll: IConfigCatClient = configcatClient.createClientWithManualPoll(sdkKey);
+for (let sharedClient of [false, true]) {
+  let clientFactory: <TPollingMode extends PollingMode>(sdkKey: string, pollingMode: TPollingMode, options: OptionsForPollingMode<TPollingMode>) => IConfigCatClient;
+  if (sharedClient) {
+    clientFactory = configcatClient.getClient;
+  }
+  else {
+    clientFactory = (sdkKey, pollingMode, options) =>
+    pollingMode === PollingMode.AutoPoll ? configcatClient.createClientWithAutoPoll(sdkKey, options) :
+    pollingMode === PollingMode.ManualPoll ? configcatClient.createClientWithManualPoll(sdkKey, options) :
+    pollingMode === PollingMode.LazyLoad ? configcatClient.createClientWithLazyLoad(sdkKey, options) :
+    (() => { throw new Error("Invalid 'pollingMode' value"); })();
+  }
 
-    const clientLazyLoad: IConfigCatClient = configcatClient.createClientWithLazyLoad(sdkKey);
+  const clientMode = `${sharedClient ? "Shared" : "Normal"} client`;
 
-    const clientOverride: IConfigCatClient = configcatClient.createClientWithAutoPoll(sdkKey, {
-        flagOverrides: configcatClient.createFlagOverridesFromMap({ stringDefaultCat: "NOT_CAT" }, configcatClient.OverrideBehaviour.LocalOnly)
-    });
+  describe(`Integration tests - Normal use - ${clientMode}`, () => {
 
-    it("Auto poll - getValue() with key: 'stringDefaultCat' should return 'Cat'", (done) => {
-        const defaultValue = "NOT_CAT";
+    const options: IOptions = { logger: createConsoleLogger(LogLevel.Off) };
 
-        clientAutoPoll.getValue("stringDefaultCat", defaultValue, (actual) => {
+    for (let pollingMode of [PollingMode.AutoPoll, PollingMode.ManualPoll, PollingMode.LazyLoad]) {
+      const clientAndPollingMode = `${clientMode} with ${PollingMode[pollingMode]}`;
+
+      let client: IConfigCatClient;
+
+      beforeEach(function () {
+        client = clientFactory(sdkKey, pollingMode, options);
+      });
+
+      afterEach(function () {
+        client.dispose();
+      });
+
+      it(`${clientAndPollingMode} - getValue() with key: 'stringDefaultCat' should return 'Cat'`, (done) => {
+
+        const defaultValue: string = "NOT_CAT";
+
+        const init: InitFunc = pollingMode == PollingMode.ManualPoll ? callback => client.forceRefresh(callback) : callback => callback();
+
+        init(() => {
+          client.getValue("stringDefaultCat", defaultValue, actual => {
             assert.strictEqual(actual, "Cat");
             assert.notStrictEqual(actual, defaultValue);
             done();
+          });
         });
-    });
+      });
 
-    it("Auto poll - getValueAsync() with key: 'stringDefaultCat' should return 'Cat'", async () => {
-        const defaultValue = "NOT_CAT";
+      it(`${clientAndPollingMode} - getValueAsync() with key: 'stringDefaultCat' should return 'Cat'`, async () => {
 
-        const actual = await clientAutoPoll.getValueAsync("stringDefaultCat", defaultValue);
+        const defaultValue: string = "NOT_CAT";
+
+        if (pollingMode == PollingMode.ManualPoll) {
+          await client.forceRefreshAsync();
+        }
+
+        const actual: string = await client.getValueAsync("stringDefaultCat", defaultValue);
         assert.strictEqual(actual, "Cat");
         assert.notStrictEqual(actual, defaultValue);
-    });
+      });
 
-    it("Manual poll - getValue() with key: 'stringDefaultCat' should return 'Cat'", (done) => {
-        const defaultValue = "NOT_CAT";
-        clientManualPoll.forceRefresh(() => {
-            clientManualPoll.getValue("stringDefaultCat", defaultValue, (actual) => {
-                assert.strictEqual(actual, "Cat");
-                assert.notStrictEqual(actual, defaultValue);
-                done();
-            });
-        });
-    });
+      it(`${clientAndPollingMode} - getValue() with key: 'NotExistsKey' should return default value`, (done) => {
 
-    it("Manual poll - getValueAsync() with key: 'stringDefaultCat' should return 'Cat'", async () => {
-        const defaultValue = "NOT_CAT";
-        await clientManualPoll.forceRefreshAsync();
-        const actual = await clientManualPoll.getValueAsync("stringDefaultCat", defaultValue);
-        assert.strictEqual(actual, "Cat");
-        assert.notStrictEqual(actual, defaultValue);
-    });
+        const defaultValue: string = "NOT_CAT";
 
-    it("Lazy load - getValue() with  key: 'stringDefaultCat' should return 'Cat'", (done) => {
-        const defaultValue = "NOT_CAT";
+        const init: InitFunc = pollingMode == PollingMode.ManualPoll ? callback => client.forceRefresh(callback) : callback => callback();
 
-        clientLazyLoad.getValue("stringDefaultCat", defaultValue, (actual) => {
-            assert.strictEqual(actual, "Cat");
-            assert.notStrictEqual(actual, defaultValue);
-            done();
-        });
-    });
-
-    it("Lazy load - getValueAsync() with  key: 'stringDefaultCat' should return 'Cat'", async () => {
-        const defaultValue = "NOT_CAT";
-        const actual = await clientLazyLoad.getValueAsync("stringDefaultCat", defaultValue);
-        assert.strictEqual(actual, "Cat");
-        assert.notStrictEqual(actual, defaultValue);
-    });
-
-    it("Auto poll - getValue() with key: 'NotExistsKey' should return default value", (done) => {
-        const defaultValue = "NOT_CAT";
-
-        clientAutoPoll.getValue("NotExistsKey", defaultValue, (actual) => {
+        init(() => {
+          client.getValue("NotExistsKey", defaultValue, actual => {
             assert.equal(actual, defaultValue);
             done();
+          });
         });
-    });
+      });
 
-    it("Auto poll - getValueAsync() with key: 'NotExistsKey' should return default value", async () => {
-        const defaultValue = "NOT_CAT";
-        const actual = await clientAutoPoll.getValueAsync("NotExistsKey", defaultValue);
+      it(`${clientAndPollingMode} - getValueAsync() with key: 'NotExistsKey' should return default value`, async () => {
+
+        const defaultValue: string = "NOT_CAT";
+
+        if (pollingMode == PollingMode.ManualPoll) {
+          await client.forceRefreshAsync();
+        }
+
+        const actual: string = await client.getValueAsync("NotExistsKey", defaultValue);
         assert.equal(actual, defaultValue);
-    });
+      });
 
-    it("Manual poll - getValue() with  with key: 'NotExistsKey' should return default value", (done) => {
-        const defaultValue = "NOT_CAT";
+      it(`${clientAndPollingMode} - getValue() with key: 'RolloutEvaluate' should return default value`, (done) => {
 
-        clientManualPoll.forceRefresh(() => {
-            clientManualPoll.getValue("NotExistsKey", defaultValue, (actual) => {
-                assert.equal(actual, defaultValue);
-                done();
-            });
-        });
-    });
+        const init: InitFunc = pollingMode == PollingMode.ManualPoll ? callback => client.forceRefresh(callback) : callback => callback();
 
-    it("Manual poll - getValueAsync() with  with key: 'NotExistsKey' should return default value", async () => {
-        const defaultValue = "NOT_CAT";
-        await clientManualPoll.forceRefreshAsync();
-        const actual = await clientManualPoll.getValueAsync("NotExistsKey", defaultValue);
-        assert.equal(actual, defaultValue);
-    });
-
-    it("Lazy load - getValue() with  key: 'NotExistsKey' should return default value", (done) => {
-        const defaultValue = "NOT_CAT";
-
-        clientLazyLoad.getValue("NotExistsKey", defaultValue, (actual) => {
-            assert.equal(actual, defaultValue);
+        init(() => {
+          client.getValue("string25Cat25Dog25Falcon25Horse", "N/A", actual => {
+            assert.equal(actual, "Horse");
             done();
+          }, new User("nacho@gmail.com"));
         });
-    });
+      });
 
-    it("Lazy load - getValueAsync() with  key: 'NotExistsKey' should return default value", async () => {
-        const defaultValue = "NOT_CAT";
-        const actual = await clientManualPoll.getValueAsync("NotExistsKey", defaultValue);
-        assert.equal(actual, defaultValue);
-    });
+      it(`${clientAndPollingMode} - getValueAsync() with key: 'RolloutEvaluate' should return default value`, async () => {
+        if (pollingMode == PollingMode.ManualPoll) {
+          await client.forceRefreshAsync();
+        }
 
-    it("Auto poll - getValue() with key: 'RolloutEvaluate' should return default value", (done) => {
-        clientAutoPoll.getValue(
-            "string25Cat25Dog25Falcon25Horse",
-            "N/A",
-            (actual) => {
-                assert.equal(actual, "Horse");
-
-                done();
-            },
-            new User("nacho@gmail.com"),
-        );
-    });
-
-    it("Auto poll - getValueAsync() with key: 'RolloutEvaluate' should return default value", async () => {
-        const actual = await clientAutoPoll.getValueAsync(
-            "string25Cat25Dog25Falcon25Horse",
-            "N/A",
-            new User("nacho@gmail.com"),
-        );
+        const actual: string = await client.getValueAsync("string25Cat25Dog25Falcon25Horse", "N/A", new User("nacho@gmail.com"));
         assert.equal(actual, "Horse");
-    });
+      });
 
-    it("Manual poll - getValue() with key: 'RolloutEvaluate' should return default value", (done) => {
-        clientManualPoll.forceRefresh(() => {
-            clientManualPoll.getValue(
-                "string25Cat25Dog25Falcon25Horse",
-                "N/A",
-                (actual) => {
-                    assert.equal(actual, "Horse");
+      it(`${clientAndPollingMode} - getValueDetails() with key: 'stringDefaultCat' should return 'Cat'`, (done) => {
 
-                    done();
-                },
-                new User("nacho@gmail.com"),
-            );
-        });
-    });
+        const defaultValue: string = "NOT_CAT";
 
-    it("Manual poll - getValueAsync() with key: 'RolloutEvaluate' should return default value", async () => {
-        await clientManualPoll.forceRefreshAsync();
-        const actual = await clientManualPoll.getValueAsync(
-            "string25Cat25Dog25Falcon25Horse",
-            "N/A",
-            new User("nacho@gmail.com"),
-        );
-        assert.equal(actual, "Horse");
-    });
+        const init: InitFunc = pollingMode == PollingMode.ManualPoll ? callback => client.forceRefresh(callback) : callback => callback();
 
-    it("Lazy load - getValue() with key: 'RolloutEvaluate' should return default value", (done) => {
-        clientLazyLoad.getValue(
-            "string25Cat25Dog25Falcon25Horse",
-            "N/A",
-            (actual) => {
-                assert.equal(actual, "Horse");
-
-                done();
-            },
-            new User("nacho@gmail.com"),
-        );
-    });
-
-    it("Lazy load - getValueAsync() with key: 'RolloutEvaluate' should return default value", async () => {
-        const actual = await clientLazyLoad.getValueAsync(
-            "string25Cat25Dog25Falcon25Horse",
-            "N/A",
-            new User("nacho@gmail.com"),
-        );
-        assert.equal(actual, "Horse");
-    });
-
-    it("Auto poll with wrong SDK Key - getValue() should return default value", (done) => {
-        const defaultValue = "NOT_CAT";
-        const client: IConfigCatClient = configcatClient.createClientWithAutoPoll("WRONG_SDK_KEY", {
-            requestTimeoutMs: 500,
-            maxInitWaitTimeSeconds: 1
-        });
-
-        client.getValue("stringDefaultCat", defaultValue, (actual) => {
-            assert.strictEqual(actual, defaultValue);
-
+        init(() => {
+          client.getValueDetails("stringDefaultCat", defaultValue, actual => {
+            assert.strictEqual(actual.value, "Cat");
+            assert.isFalse(actual.isDefaultValue);
             done();
+          });
         });
-    });
+      });
 
-    it("Auto poll with wrong SDK Key - getValueAsync() should return default value", async () => {
-        const defaultValue = "NOT_CAT";
-        const client: IConfigCatClient = configcatClient.createClientWithAutoPoll("WRONG_SDK_KEY", {
-            requestTimeoutMs: 500,
-            maxInitWaitTimeSeconds: 1
-        });
+      it(`${clientAndPollingMode} - getValueDetailsAsync() with key: 'stringDefaultCat' should return 'Cat'`, async () => {
 
-        const actual = await client.getValueAsync("stringDefaultCat", defaultValue);
-        assert.strictEqual(actual, defaultValue);
-    });
+        const defaultValue: string = "NOT_CAT";
 
-    it("Manual poll with wrong SDK Key - getValue() should return default value", (done) => {
-        const defaultValue = "NOT_CAT";
-        const client: IConfigCatClient = configcatClient.createClientWithManualPoll("WRONG_SDK_KEY", {
-            requestTimeoutMs: 500,
-        });
+        if (pollingMode == PollingMode.ManualPoll) {
+          await client.forceRefreshAsync();
+        }
 
-        client.getValue("stringDefaultCat", defaultValue, (actual) => {
-            assert.strictEqual(actual, defaultValue);
+        const actual: IEvaluationDetails = await client.getValueDetailsAsync("stringDefaultCat", defaultValue);
+        assert.strictEqual(actual.value, "Cat");
+        assert.isFalse(actual.isDefaultValue);
+      });
 
-            client.forceRefresh(function () {
-                client.getValue("stringDefaultCat", defaultValue, (actual) => {
-                    assert.strictEqual(actual, defaultValue);
-                    done();
-                });
-            });
-        });
-    });
+      it(`${clientAndPollingMode} - getValueDetails() with key: 'NotExistsKey' should return default value`, (done) => {
 
-    it("Manual poll with wrong SDK Key - getValueAsync() should return default value", async () => {
-        const defaultValue = "NOT_CAT";
-        const client: IConfigCatClient = configcatClient.createClientWithManualPoll("WRONG_SDK_KEY", {
-            requestTimeoutMs: 500,
-        });
+        const defaultValue: string = "NOT_CAT";
 
-        const actual = await client.getValueAsync("stringDefaultCat", defaultValue);
-        assert.strictEqual(actual, defaultValue);
-        await client.forceRefreshAsync();
-        const actual2 = await client.getValueAsync("stringDefaultCat", defaultValue);
-        assert.strictEqual(actual2, defaultValue);
-    });
+        const init: InitFunc = pollingMode == PollingMode.ManualPoll ? callback => client.forceRefresh(callback) : callback => callback();
 
-    it("Lazy load with wrong SDK Key - getValue() should return default value", (done) => {
-        const defaultValue = "NOT_CAT";
-        const client: IConfigCatClient = configcatClient.createClientWithLazyLoad("WRONG_SDK_KEY", {
-            requestTimeoutMs: 500,
-        });
-
-        client.getValue("stringDefaultCat", defaultValue, (actual) => {
-            assert.strictEqual(actual, defaultValue);
+        init(() => {
+          client.getValueDetails("NotExistsKey", defaultValue, actual => {
+            assert.strictEqual(actual.value, defaultValue);
+            assert.isTrue(actual.isDefaultValue);
             done();
+          });
         });
-    });
+      });
 
-    it("Lazy load with wrong SDK Key - getValueAsync() should return default value", async () => {
-        const defaultValue = "NOT_CAT";
-        const client: IConfigCatClient = configcatClient.createClientWithLazyLoad("WRONG_SDK_KEY", {
-            requestTimeoutMs: 500,
-        });
+      it(`${clientAndPollingMode} - getValueDetailsAsync() with key: 'NotExistsKey' should return default value`, async () => {
 
-        const actual = await client.getValueAsync("stringDefaultCat", defaultValue);
-        assert.strictEqual(actual, defaultValue);
-    });
+        const defaultValue: string = "NOT_CAT";
 
-    it("getAllKeys() should not crash with wrong SDK Key", (done) => {
-        const client: IConfigCatClient = configcatClient.createClientWithManualPoll("WRONG_SDK_KEY", {
-            requestTimeoutMs: 500,
-        });
+        if (pollingMode == PollingMode.ManualPoll) {
+          await client.forceRefreshAsync();
+        }
 
-        client.getAllKeys((keys) => {
-            assert.equal(keys.length, 0);
+        const actual: IEvaluationDetails = await client.getValueDetailsAsync("NotExistsKey", defaultValue);
+        assert.strictEqual(actual.value, defaultValue);
+        assert.isTrue(actual.isDefaultValue);
+      });
+
+      it(`${clientAndPollingMode} - getValue() with key: 'RolloutEvaluate' should return default value`, (done) => {
+
+        const init: InitFunc = pollingMode == PollingMode.ManualPoll ? callback => client.forceRefresh(callback) : callback => callback();
+
+        init(() => {
+          client.getValue("string25Cat25Dog25Falcon25Horse", "N/A", actual => {
+            assert.equal(actual, "Horse");
             done();
+          }, new User("nacho@gmail.com"));
         });
-    });
+      });
 
-    it("getAllKeysAsync() should not crash with wrong SDK Key", async () => {
-        const client: IConfigCatClient = configcatClient.createClientWithManualPoll("WRONG_SDK_KEY", {
-            requestTimeoutMs: 500,
-        });
+      it(`${clientAndPollingMode} - getAllKeys() should return all keys`, (done) => {
 
-        const keys = await client.getAllKeysAsync();
-        assert.equal(keys.length, 0);
-    });
+        const init: InitFunc = pollingMode == PollingMode.ManualPoll ? callback => client.forceRefresh(callback) : callback => callback();
 
-    it("getAllKeys() should return all keys", (done) => {
-        clientAutoPoll.getAllKeys((keys) => {
+        init(() => {
+          client.getAllKeys(keys => {
+
             assert.equal(keys.length, 16);
-            const keysObject = {};
-            keys.forEach((value) => (keysObject[value] = {}));
+            const keysObject: any = {};
+            keys.forEach(value => keysObject[value] = {});
             assert.containsAllKeys(keysObject, [
-                "stringDefaultCat",
-                "stringIsInDogDefaultCat",
-                "stringIsNotInDogDefaultCat",
-                "stringContainsDogDefaultCat",
-                "stringNotContainsDogDefaultCat",
-                "string25Cat25Dog25Falcon25Horse",
-                "string75Cat0Dog25Falcon0Horse",
-                "string25Cat25Dog25Falcon25HorseAdvancedRules",
-                "boolDefaultTrue",
-                "boolDefaultFalse",
-                "bool30TrueAdvancedRules",
-                "integer25One25Two25Three25FourAdvancedRules",
-                "integerDefaultOne",
-                "doubleDefaultPi",
-                "double25Pi25E25Gr25Zero",
-                "keySampleText",
+              "stringDefaultCat",
+              "stringIsInDogDefaultCat",
+              "stringIsNotInDogDefaultCat",
+              "stringContainsDogDefaultCat",
+              "stringNotContainsDogDefaultCat",
+              "string25Cat25Dog25Falcon25Horse",
+              "string75Cat0Dog25Falcon0Horse",
+              "string25Cat25Dog25Falcon25HorseAdvancedRules",
+              "boolDefaultTrue",
+              "boolDefaultFalse",
+              "bool30TrueAdvancedRules",
+              "integer25One25Two25Three25FourAdvancedRules",
+              "integerDefaultOne",
+              "doubleDefaultPi",
+              "double25Pi25E25Gr25Zero",
+              "keySampleText"
             ]);
             done();
+          });
         });
-    });
+      });
 
-    it("getAllKeysAsync() should return all keys", async () => {
-        const keys = await clientAutoPoll.getAllKeysAsync();
+      it(`${clientAndPollingMode} - getAllKeysAsync() should return all keys`, async () => {
+
+        if (pollingMode == PollingMode.ManualPoll) {
+          await client.forceRefreshAsync();
+        }
+
+        const keys: string[] = await client.getAllKeysAsync();
 
         assert.equal(keys.length, 16);
-        const keysObject = {};
-        keys.forEach((value) => (keysObject[value] = {}));
+        const keysObject: any = {};
+        keys.forEach(value => keysObject[value] = {});
         assert.containsAllKeys(keysObject, [
-            "stringDefaultCat",
-            "stringIsInDogDefaultCat",
-            "stringIsNotInDogDefaultCat",
-            "stringContainsDogDefaultCat",
-            "stringNotContainsDogDefaultCat",
-            "string25Cat25Dog25Falcon25Horse",
-            "string75Cat0Dog25Falcon0Horse",
-            "string25Cat25Dog25Falcon25HorseAdvancedRules",
-            "boolDefaultTrue",
-            "boolDefaultFalse",
-            "bool30TrueAdvancedRules",
-            "integer25One25Two25Three25FourAdvancedRules",
-            "integerDefaultOne",
-            "doubleDefaultPi",
-            "double25Pi25E25Gr25Zero",
-            "keySampleText",
+          "stringDefaultCat",
+          "stringIsInDogDefaultCat",
+          "stringIsNotInDogDefaultCat",
+          "stringContainsDogDefaultCat",
+          "stringNotContainsDogDefaultCat",
+          "string25Cat25Dog25Falcon25Horse",
+          "string75Cat0Dog25Falcon0Horse",
+          "string25Cat25Dog25Falcon25HorseAdvancedRules",
+          "boolDefaultTrue",
+          "boolDefaultFalse",
+          "bool30TrueAdvancedRules",
+          "integer25One25Two25Three25FourAdvancedRules",
+          "integerDefaultOne",
+          "doubleDefaultPi",
+          "double25Pi25E25Gr25Zero",
+          "keySampleText"
         ]);
-    });
+      });
 
-    it("Auto poll - getVariationId() works", (done) => {
-        const defaultVariationId = "NOT_CAT";
+      it(`${clientAndPollingMode} - getVariationId() works`, (done) => {
 
-        clientAutoPoll.getVariationId("stringDefaultCat", defaultVariationId, (actual) => {
+        const defaultValue: string = "NOT_CAT";
+
+        const init: InitFunc = pollingMode == PollingMode.ManualPoll ? callback => client.forceRefresh(callback) : callback => callback();
+
+        init(() => {
+          client.getVariationId("stringDefaultCat", defaultValue, actual => {
             assert.strictEqual(actual, "7a0be518");
 
-            clientAutoPoll.getVariationId("boolDefaultTrue", defaultVariationId, (actual) => {
-                assert.strictEqual(actual, "09513143");
-                done();
+            client.getVariationId("boolDefaultTrue", defaultValue, actual => {
+              assert.strictEqual(actual, "09513143");
+              done();
             });
+          });
         });
-    });
+      });
 
-    it("Auto poll - getVariationIdAsync() works", async () => {
-        const defaultVariationId = "NOT_CAT";
+      it(`${clientAndPollingMode} - getVariationIdAsync() works`, async () => {
 
-        let actual: string = await clientAutoPoll.getVariationIdAsync("stringDefaultCat", defaultVariationId);
+        const defaultValue: string = "NOT_CAT";
+
+        if (pollingMode == PollingMode.ManualPoll) {
+          await client.forceRefreshAsync();
+        }
+
+        let actual: string = await client.getVariationIdAsync("stringDefaultCat", defaultValue);
         assert.strictEqual(actual, "7a0be518");
 
-        actual = await clientAutoPoll.getVariationIdAsync("boolDefaultTrue", defaultVariationId);
+        actual = await client.getVariationIdAsync("boolDefaultTrue", defaultValue);
         assert.strictEqual(actual, "09513143");
-    });
+      });
 
-    it("Auto poll - getAllVariationIds() works", async () => {
-        await clientAutoPoll.getAllVariationIds((actual) => {
+      it(`${clientAndPollingMode} - getAllVariationIds() works`, (done) => {
+
+        const init: InitFunc = pollingMode == PollingMode.ManualPoll ? callback => client.forceRefresh(callback) : callback => callback();
+
+        init(() => {
+          client.getAllVariationIds(actual => {
             assert.equal(actual.length, 16);
             assert.strictEqual(actual[0], "7a0be518");
             assert.strictEqual(actual[1], "83372510");
@@ -381,11 +302,19 @@ describe("Integration - ConfigCatClient", () => {
             assert.strictEqual(actual[13], "5af8acc7");
             assert.strictEqual(actual[14], "9503a1de");
             assert.strictEqual(actual[15], "69ef126c");
-        });
-    });
 
-    it("Auto poll - getAllVariationIdsAsync() works", async () => {
-        const actual: string[] = await clientAutoPoll.getAllVariationIdsAsync();
+            done();
+          });
+        });
+      });
+
+      it(`${clientAndPollingMode} - getAllVariationIdsAsync() works`, async () => {
+
+        if (pollingMode == PollingMode.ManualPoll) {
+          await client.forceRefreshAsync();
+        }
+
+        let actual: string[] = await client.getAllVariationIdsAsync();
         assert.equal(actual.length, 16);
         assert.strictEqual(actual[0], "7a0be518");
         assert.strictEqual(actual[1], "83372510");
@@ -403,12 +332,16 @@ describe("Integration - ConfigCatClient", () => {
         assert.strictEqual(actual[13], "5af8acc7");
         assert.strictEqual(actual[14], "9503a1de");
         assert.strictEqual(actual[15], "69ef126c");
-    });
+      });
 
-    it("getAllValues() should return all values", (done) => {
-        clientAutoPoll.getAllValues((sks) => {
+      it(`${clientAndPollingMode} - getAllValues() should return all values`, (done) => {
 
-            const settingKeys:any = {};
+        const init: InitFunc = pollingMode == PollingMode.ManualPoll ? callback => client.forceRefresh(callback) : callback => callback();
+
+        init(() => {
+          client.getAllValues((sks) => {
+
+            const settingKeys: any = {};
 
             sks.forEach((i) => (settingKeys[i.settingKey] = i.settingValue));
 
@@ -432,17 +365,89 @@ describe("Integration - ConfigCatClient", () => {
             assert.equal(settingKeys.keySampleText, "Cat");
 
             done();
+          });
         });
-    });
+      });
 
-    it("getAllValuesAsync() should return all values", async () => {
-        let sks:SettingKeyValue[] = await clientAutoPoll.getAllValuesAsync();
+      it(`${clientAndPollingMode} - getAllValuesAsync() should return all values`, async () => {
 
-        const settingKeys:any = {};
+        if (pollingMode == PollingMode.ManualPoll) {
+          await client.forceRefreshAsync();
+        }
 
+        let sks: SettingKeyValue[] = await client.getAllValuesAsync();
+        const settingKeys: any = {};
         sks.forEach((i) => (settingKeys[i.settingKey] = i.settingValue));
-
         assert.equal(sks.length, 16);
+        assert.equal(settingKeys.stringDefaultCat, "Cat");
+        assert.equal(settingKeys.stringIsInDogDefaultCat, "Cat");
+        assert.equal(settingKeys.stringIsNotInDogDefaultCat, "Cat");
+        assert.equal(settingKeys.stringContainsDogDefaultCat, "Cat");
+        assert.equal(settingKeys.stringNotContainsDogDefaultCat, "Cat");
+        assert.equal(settingKeys.string25Cat25Dog25Falcon25Horse, "Chicken");
+        assert.equal(settingKeys.string75Cat0Dog25Falcon0Horse, "Chicken");
+        assert.equal(settingKeys.string25Cat25Dog25Falcon25HorseAdvancedRules, "Chicken");
+        assert.equal(settingKeys.boolDefaultTrue, true);
+        assert.equal(settingKeys.boolDefaultFalse, false);
+        assert.equal(settingKeys.bool30TrueAdvancedRules, true);
+        assert.equal(settingKeys.integer25One25Two25Three25FourAdvancedRules, -1);
+        assert.equal(settingKeys.integerDefaultOne, 1);
+        assert.equal(settingKeys.doubleDefaultPi, 3.1415);
+        assert.equal(settingKeys.double25Pi25E25Gr25Zero, -1);
+        assert.equal(settingKeys.keySampleText, "Cat");
+      });
+
+      it(`${clientAndPollingMode} - getAllValueDetais() should return all values with details`, (done) => {
+
+        const init: InitFunc = pollingMode == PollingMode.ManualPoll ? callback => client.forceRefresh(callback) : callback => callback();
+
+        init(() => {
+          client.getAllValueDetails((eds) => {
+
+            const settingKeys: any = {};
+
+            assert.equal(eds.length, 16);
+            eds.forEach(ed => {
+              assert.isFalse(ed.isDefaultValue);
+              (settingKeys[ed.key] = ed.value);
+            });
+
+            assert.equal(settingKeys.stringDefaultCat, "Cat");
+            assert.equal(settingKeys.stringIsInDogDefaultCat, "Cat");
+            assert.equal(settingKeys.stringIsNotInDogDefaultCat, "Cat");
+            assert.equal(settingKeys.stringContainsDogDefaultCat, "Cat");
+            assert.equal(settingKeys.stringNotContainsDogDefaultCat, "Cat");
+            assert.equal(settingKeys.string25Cat25Dog25Falcon25Horse, "Chicken");
+            assert.equal(settingKeys.string75Cat0Dog25Falcon0Horse, "Chicken");
+            assert.equal(settingKeys.string25Cat25Dog25Falcon25HorseAdvancedRules, "Chicken");
+            assert.equal(settingKeys.boolDefaultTrue, true);
+            assert.equal(settingKeys.boolDefaultFalse, false);
+            assert.equal(settingKeys.bool30TrueAdvancedRules, true);
+            assert.equal(settingKeys.integer25One25Two25Three25FourAdvancedRules, -1);
+            assert.equal(settingKeys.integerDefaultOne, 1);
+            assert.equal(settingKeys.doubleDefaultPi, 3.1415);
+            assert.equal(settingKeys.double25Pi25E25Gr25Zero, -1);
+            assert.equal(settingKeys.keySampleText, "Cat");
+
+            done();
+          });
+        });
+      });
+
+      it(`${clientAndPollingMode} - getAllValueDetailsAsync() should return all values with details`, async () => {
+
+        if (pollingMode == PollingMode.ManualPoll) {
+          await client.forceRefreshAsync();
+        }
+
+        let eds: IEvaluationDetails[] = await client.getAllValueDetailsAsync();
+        const settingKeys: any = {};
+
+        assert.equal(eds.length, 16);
+        eds.forEach(ed => {
+          assert.isFalse(ed.isDefaultValue);
+          (settingKeys[ed.key] = ed.value);
+        });
 
         assert.equal(settingKeys.stringDefaultCat, "Cat");
         assert.equal(settingKeys.stringIsInDogDefaultCat, "Cat");
@@ -460,12 +465,136 @@ describe("Integration - ConfigCatClient", () => {
         assert.equal(settingKeys.doubleDefaultPi, 3.1415);
         assert.equal(settingKeys.double25Pi25E25Gr25Zero, -1);
         assert.equal(settingKeys.keySampleText, "Cat");
+      });
+    }
+  });
+
+  describe(`Integration tests - Wrong SDK key - ${clientMode}`, () => {
+
+    it(`${clientMode} - Auto poll with wrong SDK Key - getValue() should return default value`, (done) => {
+
+      const defaultValue: string = "NOT_CAT";
+      let client: IConfigCatClient = clientFactory("WRONG_SDK_KEY", PollingMode.AutoPoll,
+        { requestTimeoutMs: 500, maxInitWaitTimeSeconds: 1 });
+
+      client.getValue("stringDefaultCat", defaultValue, actual => {
+
+        assert.strictEqual(actual, defaultValue);
+
+        client.dispose();
+        done();
+      });
     });
 
-    it("Override - local only", async () => {
-        const defaultValue = "DEFAULT_CAT";
+    it(`${clientMode} - Auto poll with wrong SDK Key - getValueAsync() should return default value`, async () => {
 
-        let actual: string = await clientOverride.getValueAsync("stringDefaultCat", defaultValue);
-        assert.strictEqual(actual, "NOT_CAT");
+      const defaultValue: string = "NOT_CAT";
+      let client: IConfigCatClient = clientFactory("WRONG_SDK_KEY", PollingMode.AutoPoll,
+        { requestTimeoutMs: 500, maxInitWaitTimeSeconds: 1 });
+
+      const actual: string = await client.getValueAsync("stringDefaultCat", defaultValue);
+      assert.strictEqual(actual, defaultValue);
+
+      client.dispose();
     });
-});
+
+    it(`${clientMode} - Manual poll with wrong SDK Key - getValue() should return default value`, (done) => {
+
+      const defaultValue: string = "NOT_CAT";
+      let client: IConfigCatClient = clientFactory("WRONG_SDK_KEY", PollingMode.ManualPoll, { requestTimeoutMs: 500 });
+
+      client.getValue("stringDefaultCat", defaultValue, actual => {
+
+        assert.strictEqual(actual, defaultValue);
+
+        client.forceRefresh(() => {
+
+          client.getValue("stringDefaultCat", defaultValue, actual => {
+            assert.strictEqual(actual, defaultValue);
+
+            client.dispose();
+            done();
+          });
+        });
+      });
+    });
+
+    it(`${clientMode} - Manual poll with wrong SDK Key - getValueAsync() should return default value`, async () => {
+
+      const defaultValue: string = "NOT_CAT";
+      let client: IConfigCatClient = clientFactory("WRONG_SDK_KEY", PollingMode.ManualPoll, { requestTimeoutMs: 500 });
+
+      const actual: string = await client.getValueAsync("stringDefaultCat", defaultValue);
+      assert.strictEqual(actual, defaultValue);
+      await client.forceRefreshAsync();
+      const actual2: string = await client.getValueAsync("stringDefaultCat", defaultValue);
+      assert.strictEqual(actual2, defaultValue);
+
+      client.dispose();
+    });
+
+    it(`${clientMode} - Lazy load with wrong SDK Key - getValue() should return default value`, (done) => {
+
+      const defaultValue: string = "NOT_CAT";
+      let client: IConfigCatClient = clientFactory("WRONG_SDK_KEY", PollingMode.LazyLoad, { requestTimeoutMs: 500 });
+
+      client.getValue("stringDefaultCat", defaultValue, actual => {
+
+        assert.strictEqual(actual, defaultValue);
+
+        client.dispose();
+        done();
+      });
+    });
+
+    it(`${clientMode} - Lazy load with wrong SDK Key - getValueAsync() should return default value`, async () => {
+
+      const defaultValue: string = "NOT_CAT";
+      let client: IConfigCatClient = clientFactory("WRONG_SDK_KEY", PollingMode.LazyLoad, { requestTimeoutMs: 500 });
+
+      const actual: string = await client.getValueAsync("stringDefaultCat", defaultValue);
+      assert.strictEqual(actual, defaultValue);
+
+      client.dispose();
+    });
+
+    it(`${clientMode} - getAllKeys() should not crash with wrong SDK Key`, (done) => {
+
+      let client: IConfigCatClient = clientFactory("WRONG_SDK_KEY", PollingMode.ManualPoll, { requestTimeoutMs: 500 });
+
+      client.getAllKeys(keys => {
+
+        assert.equal(keys.length, 0);
+
+        client.dispose();
+        done();
+      });
+    });
+
+    it(`${clientMode} - getAllKeysAsync() should not crash with wrong SDK Key`, async () => {
+
+      let client: IConfigCatClient = clientFactory("WRONG_SDK_KEY", PollingMode.ManualPoll, { requestTimeoutMs: 500 });
+
+      const keys: string[] = await client.getAllKeysAsync();
+      assert.equal(keys.length, 0);
+
+      client.dispose();
+    });
+  });
+
+  describe(`Integration tests - Other cases - ${clientMode}`, () => {
+
+    it(`${clientMode} - Override - local only`, async () => {
+      const defaultValue = "DEFAULT_CAT";
+
+      const clientOverride: IConfigCatClient = clientFactory(sdkKey, PollingMode.AutoPoll, {
+        flagOverrides: configcatClient.createFlagOverridesFromMap({ stringDefaultCat: "NOT_CAT" }, configcatClient.OverrideBehaviour.LocalOnly),
+        logger: createConsoleLogger(LogLevel.Off)
+      });
+
+      let actual: string = await clientOverride.getValueAsync("stringDefaultCat", defaultValue);
+      assert.strictEqual(actual, "NOT_CAT");
+    });
+
+  });
+}
