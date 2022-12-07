@@ -20,7 +20,7 @@ module.exports = {
         use: [{
           loader: 'ts-loader',
           options: {
-            configFile: "tsconfig.build.cjs.json"
+            configFile: "tsconfig.build.esm.json"
           }}]
       }
     ]

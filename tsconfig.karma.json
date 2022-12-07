@@ -1,5 +1,12 @@
 {
-  "extends": "./tsconfig.build.cjs.json",
+  "extends": "./tsconfig.build.esm.json",
+  "compilerOptions": {
+    "sourceMap": true,
+    // Generating d.ts files needs to be disabled to not pollute the build output directory ("./lib").
+    "declaration": false,
+    "declarationMap": false,
+    "declarationDir": null
+  },
   "include": [
     "src/**/*.ts",
     "test/**/*.ts"
