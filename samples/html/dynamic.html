@@ -17,8 +17,8 @@
     <script>
         $(document).ready(function () {
             $('#start').click(function () {
-                var configCatClient = configcat.createClientWithAutoPoll(
-                    $('#sdkkey').val(), {
+                var configCatClient = configcat.getClient(
+                    $('#sdkkey').val(), configcat.PollingMode.AutoPoll, {
                         pollIntervalSeconds: 4,
                         configChanged: function () {
                             updateFeatureFlagValue();

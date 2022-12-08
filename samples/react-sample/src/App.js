@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import './App.css';
 import * as configcat from 'configcat-js';
+import { LogLevel, PollingMode } from 'configcat-js';
 import Demo from './Demo';
 
 class App extends Component {
 
   constructor(props) {
     super(props)
-    this.client = configcat.createClientWithAutoPoll("PKDVCLf-Hq-h-kCzMp-L7Q/HhOWfwVtZ0mb30i9wi17GQ", { 
+    // You can instantiate the client with different polling modes. See the Docs: https://configcat.com/docs/sdk-reference/js/#polling-modes
+    this.client = configcat.getClient("PKDVCLf-Hq-h-kCzMp-L7Q/HhOWfwVtZ0mb30i9wi17GQ", PollingMode.AutoPoll, { 
       pollIntervalSeconds: 2, 
-      logger: configcat.createConsoleLogger(3) // Setting log level to 3 (= Info) to show detailed feature flag evaluation
+      logger: configcat.createConsoleLogger(LogLevel.Info) // Setting log level to Info to show detailed feature flag evaluation
     });
-      // You can instantiate the client with different polling modes. See the Docs: https://configcat.com/docs/sdk-reference/js/#polling-modes
   }
   
   render() {

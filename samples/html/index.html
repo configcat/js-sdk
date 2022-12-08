@@ -7,11 +7,10 @@
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/configcat-js@latest/dist/configcat.min.js"></script>
 
   <script type="text/javascript">
-    // Setting log level to 3 (= Info) to show detailed feature flag evaluation
-    var logger = configcat.createConsoleLogger(
-    3);
+    // Setting log level to Info to show detailed feature flag evaluation
+    var logger = configcat.createConsoleLogger(configcat.LogLevel.Info);
 
-    var configCatClient = configcat.createClientWithAutoPoll('PKDVCLf-Hq-h-kCzMp-L7Q/HhOWfwVtZ0mb30i9wi17GQ', {
+    var configCatClient = configcat.getClient('PKDVCLf-Hq-h-kCzMp-L7Q/HhOWfwVtZ0mb30i9wi17GQ', configcat.PollingMode.AutoPoll, {
       pollIntervalSeconds: 2,
       logger: logger
     });
