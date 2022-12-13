@@ -10,7 +10,7 @@
         "test-firefox": "karma start karma-firefox.conf.js",
         "test-chrome": "karma start karma-chrome.conf.js",
         "test-chromium": "karma start karma-chromium.conf.js",
-        "build": "tsc -p tsconfig.cjs.json && tsc -p tsconfig.esm.json && gulp tsc",
+        "build": "tsc -p tsconfig.build.cjs.json && tsc -p tsconfig.build.esm.json && gulp tsc",
         "buildPure": "webpack && gulp webpack",
         "prepare": "npm run build",
         "lint": "eslint . --ext .ts",

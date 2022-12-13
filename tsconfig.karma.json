@@ -1,5 +1,5 @@
 {
-  "extends": "./tsconfig.cjs.json",
+  "extends": "./tsconfig.build.cjs.json",
   "include": [
     "src/**/*.ts",
     "test/**/*.ts"
