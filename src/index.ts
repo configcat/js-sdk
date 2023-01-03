@@ -143,7 +143,7 @@ export type { IConfigCatClient } from "configcat-common";
 
 export { SettingKeyValue } from "configcat-common";
 
-export type { IEvaluationDetails } from "configcat-common";
+export type { IEvaluationDetails, SettingTypeOf, SettingValue, VariationIdTypeOf, VariationIdValue } from "configcat-common";
 
 export { User } from "configcat-common";
 
