@@ -69,8 +69,6 @@ describe("HTTP tests", () => {
     });
     
     it("Unexpected status code", async () => {
-      const errorMessage = "Something went wrong";
-
       const server = mockxmlhttprequest.newServer({
         get: [url => url.startsWith(baseUrl), { status: 502, statusText: "Bad Gateway" }],
       });
@@ -99,8 +97,6 @@ describe("HTTP tests", () => {
     });
 
     it("Unexpected error", async () => {
-      const errorMessage = "Something went wrong";
-
       const server = mockxmlhttprequest.newServer({
         get: [url => url.startsWith(baseUrl), "error"],
       });

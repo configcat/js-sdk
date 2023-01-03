@@ -6,7 +6,7 @@ describe("ConfigCatClient index (main)", () => {
     for (let pollingMode of [PollingMode.AutoPoll, PollingMode.LazyLoad, PollingMode.ManualPoll]) {
         it(`getClient() should createInstance with ${PollingMode[pollingMode]}`, () => {
 
-            var client: IConfigCatClient = configcatClient.getClient("SDKKEY", pollingMode);
+            const client: IConfigCatClient = configcatClient.getClient("SDKKEY", pollingMode);
 
             assert.isDefined(client);
 
