@@ -37,12 +37,14 @@
         "tslib": "^2.4.1"
     },
     "devDependencies": {
+        "@babel/preset-env": "^7.20.2",
         "@ephesoft/webpack.istanbul.loader": "^2.2.0",
         "@types/chai": "^4.3.3",
         "@types/mocha": "^10.0.0",
         "@types/node": "^18.8.1",
         "@typescript-eslint/eslint-plugin": "^5.33.0",
         "@typescript-eslint/parser": "^5.33.0",
+        "babel-loader": "^9.1.0",
         "chai": "^4.3.6",
         "core-js": "^3.24.1",
         "eslint": "^8.21.0",

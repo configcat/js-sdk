@@ -38,6 +38,22 @@ module.exports = new function (options) {
               configFile: "tsconfig.karma.json"
             }
           }]
+        },
+        // Some test dependencies may use modern ES features which are not supported
+        // by all the targets defined in our CI workflow.
+        // So these dependencies must be downleveled to not break the checks.
+        // (@babel/preset-env transpiles to ES5 by default.)
+        {
+          test: /\.m?js$/,
+          include: [
+            path.resolve("node_modules/mock-xmlhttprequest")
+          ],
+          use: [{
+            loader: "babel-loader",
+            options: {
+              "presets": ["@babel/preset-env"]
+            }
+          }]
         }
       ]
     }
