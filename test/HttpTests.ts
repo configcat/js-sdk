@@ -16,7 +16,7 @@ describe("HTTP tests", () => {
       });
 
       try {
-        server.install();
+        server.install(window);
 
         const logger = new FakeLogger();
 
@@ -46,7 +46,7 @@ describe("HTTP tests", () => {
       });
 
       try {
-        server.install();
+        server.install(window);
 
         const logger = new FakeLogger();
 
@@ -74,7 +74,7 @@ describe("HTTP tests", () => {
       });
 
       try {
-        server.install();
+        server.install(window);
 
         const logger = new FakeLogger();
 
@@ -102,7 +102,7 @@ describe("HTTP tests", () => {
       });
 
       try {
-        server.install();
+        server.install(window);
 
         const logger = new FakeLogger();
 
