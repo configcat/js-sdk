@@ -43,31 +43,31 @@ import * as configcat from "configcat-js";
 
 ### 3. Create a *ConfigCat* client instance:
 ```js
-var configCatClient = configcat.createClient("#YOUR-SDK-KEY#");
+const configCatClient = configcat.getClient("#YOUR-SDK-KEY#");
 ```
 > We strongly recommend using the *ConfigCat Client* as a Singleton object in your application.
 
 ### 4. Get your setting value:
-The Promise (async/await) way:
+The async/await way:
 ```js
-configCatClient.getValueAsync("isMyAwesomeFeatureEnabled", false)
-.then((value) => {
-    if(value) {
-        do_the_new_thing();
-    } else {
-        do_the_old_thing();
-    }
-});
+const value = await configCatClient.getValueAsync('isMyAwesomeFeatureEnabled', false);
+
+if (value) {
+  do_the_new_thing();
+} else {
+  do_the_old_thing();
+}
 ```
-or the Callback way:
+or the Promise way:
 ```js
-configCatClient.getValue("isMyAwesomeFeatureEnabled", false, (value) => {
-    if(value) {
-        do_the_new_thing();
+configCatClient.getValueAsync('isMyAwesomeFeatureEnabled', false)
+  .then((value) => {
+    if (value) {
+      do_the_new_thing();
     } else {
-        do_the_old_thing();
+      do_the_old_thing();
     }
-});
+  });
 ```
 
 ## Getting user specific setting values with Targeting
@@ -75,15 +75,14 @@ Using this feature, you will be able to get different setting values for differe
 
 Read more about [Targeting here](https://configcat.com/docs/advanced/targeting/).
 ```js
-const userObject = { identifier : "#USER-IDENTIFIER#" };
-configCatClient.getValueAsync("isMyAwesomeFeatureEnabled", false, userObject)
-.then((value) => {
-    if(value) {
-        do_the_new_thing();
-    } else {
-        do_the_old_thing();
-    }
-});
+const userObject = new configcat.User("#USER-IDENTIFIER#");
+const value = await configCatClient.getValueAsync('isMyAwesomeFeatureEnabled', false, userObject);
+
+if (value) {
+  do_the_new_thing();
+} else {
+  do_the_old_thing();
+}
 ```
 
 ## Sample/Demo apps
