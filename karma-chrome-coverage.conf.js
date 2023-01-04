@@ -1,39 +1,38 @@
-module.exports = function(config) {   
+module.exports = function (config) {
     config.set({
-        frameworks: ["mocha", "chai", "karma-typescript"],
+        frameworks: ["mocha", "chai", "webpack"],
 
         files: [
-            "src/**/*.ts",
-            "test/**/*.ts"
+            "test/index.ts"
         ],
 
         preprocessors: {
-            "src/**/*.ts": ["karma-typescript"],
-            "test/**/*.ts": ["karma-typescript"]
+            "test/index.ts": ["webpack", "sourcemap"],
+        },
+
+        mime: {
+            "text/x-typescript": ["ts", "tsx"],
+        },
+
+        webpack: new require("./webpack.config.karma").constructor({ enableCoverage: true }),
+        webpackMiddleware: {
+            noInfo: true
         },
 
         coverageReporter: {
             // specify a common output directory
             dir: "coverage",
             reporters: [
-              { type: "lcov", subdir: "report-lcov" },
-              { type: "lcovonly", subdir: ".", file: "report-lcovonly.txt" },
+                { type: "text-summary" },
+                { type: "lcov", subdir: "report-lcov" },
+                { type: "lcovonly", subdir: ".", file: "report-lcovonly.txt" },
             ]
-          },
+        },
 
         reporters: ["progress", "coverage"],
 
         browsers: ["ChromeHeadless"],
 
-        singleRun: true,
-        
-        karmaTypescriptConfig: {
-            tsconfig: "./tsconfig.karma.json",            
-            bundlerOptions: {
-                transforms: [
-                    require("karma-typescript-es6-transform")()
-                ]
-            }
-        }        
+        singleRun: true
     });
 };

@@ -83,7 +83,7 @@ jobs:
 
 
   test-chromium:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     strategy:
       matrix:
         chrome: ["520847", "612434", "722278"]

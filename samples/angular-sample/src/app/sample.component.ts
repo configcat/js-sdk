@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { IConfigCatClient } from 'configcat-common/lib/ConfigCatClient';
-import { User } from 'configcat-common/lib/RolloutEvaluator';
+import { IConfigCatClient, User } from 'configcat-js';
 
 @Component({
     selector: 'app-sample',

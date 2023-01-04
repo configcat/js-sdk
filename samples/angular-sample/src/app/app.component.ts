@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import * as configcat from 'configcat-js';
-import { IConfigCatClient, LogLevel } from 'configcat-common';
+import { IConfigCatClient, LogLevel, PollingMode } from 'configcat-js';
 
 @Component({
   selector: 'app-root',
@@ -11,10 +11,10 @@ export class AppComponent {
   title = 'angular-sample';
 
   constructor() {
-    // Setting log level to 3 (= Info) to show detailed feature flag evaluation
+    // Setting log level to Info to show detailed feature flag evaluation
     const logger = configcat.createConsoleLogger(LogLevel.Info);
 
-    this.configCatClient = configcat.createClientWithAutoPoll('PKDVCLf-Hq-h-kCzMp-L7Q/HhOWfwVtZ0mb30i9wi17GQ',
+    this.configCatClient = configcat.getClient('PKDVCLf-Hq-h-kCzMp-L7Q/HhOWfwVtZ0mb30i9wi17GQ', PollingMode.AutoPoll,
       {
         pollIntervalSeconds: 2,
         logger
