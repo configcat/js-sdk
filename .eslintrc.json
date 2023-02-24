@@ -66,6 +66,7 @@
             "allowArgumentsExplicitlyTypedAsAny": true
           }
         ],
+        "@typescript-eslint/member-delimiter-style": "warn",
         "@typescript-eslint/no-inferrable-types": "warn",
         "@typescript-eslint/no-non-null-assertion": "off",
         "no-unused-vars": "off",
