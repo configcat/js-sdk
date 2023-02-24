@@ -3,7 +3,7 @@ import * as configcatClient from "../src/index";
 import { FlagOverrides, IConfigCatClient, PollingMode } from "configcat-common";
 
 describe("ConfigCatClient index (main)", () => {
-  for (let pollingMode of [PollingMode.AutoPoll, PollingMode.LazyLoad, PollingMode.ManualPoll]) {
+  for (const pollingMode of [PollingMode.AutoPoll, PollingMode.LazyLoad, PollingMode.ManualPoll]) {
     it(`getClient() should createInstance with ${PollingMode[pollingMode]}`, () => {
 
       const client: IConfigCatClient = configcatClient.getClient("SDKKEY", pollingMode);

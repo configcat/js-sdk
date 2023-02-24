@@ -4,3 +4,4 @@ dist/
 lib/
 media/
 node_modules/
+samples/angular-sample/src/polyfills.ts

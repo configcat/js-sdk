@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
-import * as ConfigCat from 'configcat-js';
-import { LogLevel, PollingMode } from 'configcat-js';
+import React, { useState } from "react";
+import { StyleSheet, Text, View, Button } from "react-native";
+import * as ConfigCat from "configcat-js";
+import { LogLevel, PollingMode } from "configcat-js";
 
 export default function App() {
   // Setting log level to Info to show detailed feature flag evaluation
@@ -43,9 +43,9 @@ function Demo(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 
   value: {
@@ -53,8 +53,8 @@ const styles = StyleSheet.create({
   },
 
   demo: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
   }
 });

@@ -21,7 +21,7 @@ module.exports = function(config) {
 
     reporters: ["progress"],
 
-    browsers: ['FirefoxHeadless'],
+    browsers: ["FirefoxHeadless"],
 
     singleRun: true
   });

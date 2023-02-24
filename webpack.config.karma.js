@@ -20,12 +20,12 @@ module.exports = new function(options) {
         ...(options.enableCoverage
           ? [{
             test: /\.ts$/,
-            include: [path.resolve('src')],
+            include: [path.resolve("src")],
             use: {
-              loader: '@ephesoft/webpack.istanbul.loader',
+              loader: "@ephesoft/webpack.istanbul.loader",
               options: { esModules: true },
             },
-            enforce: 'post'
+            enforce: "post"
           }]
           : []
         ),
@@ -33,7 +33,7 @@ module.exports = new function(options) {
         {
           test: /\.tsx?$/,
           use: [{
-            loader: 'ts-loader',
+            loader: "ts-loader",
             options: {
               configFile: "tsconfig.karma.json"
             }
