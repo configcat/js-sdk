@@ -8,9 +8,9 @@ import { IConfigCatClient, User } from "configcat-js";
 })
 
 export class SampleComponent implements OnInit {
-  public isAwesomeEnabled: boolean | undefined = void 0;
-  public isPOCEnabled: boolean | undefined = void 0;
-  public userEmail = "configcat@example.com";
+  isAwesomeEnabled: boolean | undefined = void 0;
+  isPOCEnabled: boolean | undefined = void 0;
+  userEmail = "configcat@example.com";
 
   @Input() configCatClient: IConfigCatClient;
 

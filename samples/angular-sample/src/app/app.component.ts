@@ -23,5 +23,5 @@ export class AppComponent {
     // See the Docs: https://configcat.com/docs/sdk-reference/js/#polling-modes
   }
 
-  public configCatClient: IConfigCatClient;
+  configCatClient: IConfigCatClient;
 }

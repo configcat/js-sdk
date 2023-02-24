@@ -54,6 +54,12 @@
         "@typescript-eslint/no-empty-function": "off",
         "@typescript-eslint/no-empty-interface": "off",
         "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/explicit-member-accessibility": [
+          "warn",
+          {
+            "accessibility": "no-public"
+          }
+        ],
         "@typescript-eslint/no-inferrable-types": "warn",
         "@typescript-eslint/no-non-null-assertion": "off",
         "no-unused-vars": "off",
