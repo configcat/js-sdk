@@ -147,6 +147,10 @@
       "warn",
       "never"
     ],
+    "semi": [
+      "error",
+      "always"
+    ],
     "semi-spacing": [
       "warn",
       {
@@ -154,6 +158,7 @@
         "after": true
       }
     ],
+    "semi-style": "warn",
     "space-before-blocks": [
       "warn",
       "always"
