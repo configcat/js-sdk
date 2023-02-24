@@ -67,6 +67,72 @@
           }
         ],
         "@typescript-eslint/member-delimiter-style": "warn",
+        // Based on: https://typescript-eslint.io/rules/naming-convention/#enforce-the-codebase-follows-eslints-camelcase-conventions
+        "@typescript-eslint/naming-convention": [
+          "warn",
+          {
+            "selector": "variable",
+            "format": [
+              "camelCase",
+              "UPPER_CASE"
+            ]
+          },
+          {
+            "selector": "parameter",
+            "format": [
+              "camelCase"
+            ],
+            "leadingUnderscore": "allow"
+          },
+          {
+            "selector": "variableLike",
+            "format": [
+              "camelCase"
+            ]
+          },
+          {
+            "selector": "enumMember",
+            "format": [
+              "PascalCase"
+            ]
+          },
+          {
+            "selector": [
+              "classProperty",
+              "objectLiteralProperty",
+              "typeProperty",
+              "accessor"
+            ],
+            "modifiers": [
+              "requiresQuotes"
+            ],
+            "format": null
+          },
+          {
+            "selector": [
+              "classProperty",
+              "objectLiteralProperty",
+              "typeProperty",
+              "accessor"
+            ],
+            "format": [
+              "camelCase",
+              "UPPER_CASE"
+            ]
+          },
+          {
+            "selector": "memberLike",
+            "format": [
+              "camelCase"
+            ]
+          },
+          {
+            "selector": "typeLike",
+            "format": [
+              "PascalCase"
+            ]
+          }
+        ],
         "@typescript-eslint/no-inferrable-types": "warn",
         "@typescript-eslint/no-invalid-void-type": "warn",
         "@typescript-eslint/no-mixed-enums": "warn",
