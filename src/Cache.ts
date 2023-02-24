@@ -1,4 +1,5 @@
-import { ICache, ProjectConfig } from "configcat-common";
+import type { ICache } from "configcat-common";
+import { ProjectConfig } from "configcat-common";
 
 export class LocalStorageCache implements ICache {
   cache: { [key: string]: ProjectConfig } = {};

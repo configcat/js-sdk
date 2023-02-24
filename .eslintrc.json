@@ -153,7 +153,31 @@
         "@typescript-eslint/prefer-return-this-type": "warn",
         "@typescript-eslint/switch-exhaustiveness-check": "warn",
         "@typescript-eslint/type-annotation-spacing": "warn"
-      }
+      },
+      "overrides": [
+        {
+          "files": [
+            "src/**"
+          ],
+          "rules": {
+            // NOTE: Deno doesn't like type exports without the "type" keyword.
+            "@typescript-eslint/consistent-type-exports": [
+              "error",
+              {
+                "fixMixedExportsWithInlineTypeSpecifier": false
+              }
+            ],
+            "@typescript-eslint/consistent-type-imports": [
+              "error",
+              {
+                "prefer": "type-imports",
+                "fixStyle": "separate-type-imports"
+              }
+            ],
+            "@typescript-eslint/no-import-type-side-effects": "warn"
+          }
+        }
+      ]
     }
   ],
   "rules": {

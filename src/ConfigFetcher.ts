@@ -1,4 +1,5 @@
-import { FetchError, IConfigFetcher, IFetchResponse, OptionsBase } from "configcat-common";
+import type { IConfigFetcher, IFetchResponse, OptionsBase } from "configcat-common";
+import { FetchError } from "configcat-common";
 
 export class HttpConfigFetcher implements IConfigFetcher {
   private handleStateChange(httpRequest: XMLHttpRequest, resolve: (value: IFetchResponse) => void, reject: (reason?: any) => void) {
