@@ -31,11 +31,11 @@ for (let sharedClient of [false, true]) {
 
       let client: IConfigCatClient;
 
-      beforeEach(function () {
+      beforeEach(function() {
         client = clientFactory(sdkKey, pollingMode, options);
       });
 
-      afterEach(function () {
+      afterEach(function() {
         client.dispose();
       });
 

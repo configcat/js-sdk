@@ -1,6 +1,6 @@
 const path = require("path");
 
-module.exports = new function (options) {
+module.exports = new function(options) {
   options = options || {};
 
   return Object.assign(this, {

@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   },
 
   value: {
-    margin:20
+    margin: 20
   },
 
   demo: {

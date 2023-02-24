@@ -21,7 +21,8 @@ module.exports = {
           loader: 'ts-loader',
           options: {
             configFile: "tsconfig.build.esm.json"
-          }}]
+          }
+        }]
       }
     ]
   }
