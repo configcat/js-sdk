@@ -1,7 +1,7 @@
 import { assert } from "chai";
-import { IConfigCatClient, IOptions, PollingMode, IEvaluationDetails, User, LogLevel, SettingKeyValue } from "configcat-common";
+import { IConfigCatClient, IEvaluationDetails, IOptions, LogLevel, PollingMode, SettingKeyValue, User } from "configcat-common";
 import * as configcatClient from "../src/index";
-import { createConsoleLogger, OptionsForPollingMode } from "../src/index";
+import { OptionsForPollingMode, createConsoleLogger } from "../src/index";
 
 type InitFunc = (callback: (...args: any[]) => void) => void;
 

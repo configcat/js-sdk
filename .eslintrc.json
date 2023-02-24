@@ -9,7 +9,8 @@
     "sourceType": "module"
   },
   "plugins": [
-    "@typescript-eslint"
+    "@typescript-eslint",
+    "import"
   ],
   "overrides": [
     {
@@ -209,6 +210,16 @@
     "prefer-promise-reject-errors": "warn",
     "prefer-rest-params": "warn",
     "require-await": "warn",
+    "sort-imports": [
+      "warn",
+      {
+        "ignoreCase": false,
+        "ignoreDeclarationSort": true,
+        "ignoreMemberSort": false,
+        "memberSyntaxSortOrder": ["none", "all", "multiple", "single"],
+        "allowSeparatedGroups": true
+      }
+    ],
     /* Layout & Formatting (https://eslint.org/docs/latest/rules/#layout--formatting) */
     "array-bracket-spacing": [
       "warn",
@@ -377,6 +388,26 @@
     "yield-star-spacing": [
       "warn",
       "after"
-    ]
+    ],
+    // Import declarations (https://github.com/import-js/eslint-plugin-import)
+    "import/order": [
+      "warn",
+      {
+        "groups": [
+          ["builtin", "external"],
+          "internal",
+          "parent",
+          "sibling",
+          "index",
+          "unknown"
+        ],
+        "newlines-between": "never",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ],
+    "import/newline-after-import": "warn"
   }
 }

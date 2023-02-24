@@ -1,6 +1,6 @@
 import { assert } from "chai";
-import * as configcatClient from "../src/index";
 import { FlagOverrides, IConfigCatClient, PollingMode } from "configcat-common";
+import * as configcatClient from "../src/index";
 
 describe("ConfigCatClient index (main)", () => {
   for (const pollingMode of [PollingMode.AutoPoll, PollingMode.LazyLoad, PollingMode.ManualPoll]) {
