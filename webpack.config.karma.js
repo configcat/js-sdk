@@ -19,14 +19,14 @@ module.exports = new function (options) {
       rules: [
         ...(options.enableCoverage
           ? [{
-              test: /\.ts$/,
-              include: [path.resolve('src')],
-              use: {
-                loader: '@ephesoft/webpack.istanbul.loader',
-                options: { esModules: true },
-              },
-              enforce: 'post'
-            }]
+            test: /\.ts$/,
+            include: [path.resolve('src')],
+            use: {
+              loader: '@ephesoft/webpack.istanbul.loader',
+              options: { esModules: true },
+            },
+            enforce: 'post'
+          }]
           : []
         ),
         // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`

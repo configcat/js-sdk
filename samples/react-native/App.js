@@ -15,7 +15,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text>Is my awesome feature enabled?</Text>
-        <Demo client={configcatClient}></Demo>
+      <Demo client={configcatClient}></Demo>
     </View>
   );
 }

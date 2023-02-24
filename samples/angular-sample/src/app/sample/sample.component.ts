@@ -19,14 +19,14 @@ export class SampleComponent implements OnInit {
   ngOnInit(): void {  }
 
   async checkAwesome(): Promise<void> {
-      this.isAwesomeEnabled = await this.configCatClient.getValueAsync('isAwesomeFeatureEnabled', false);
+    this.isAwesomeEnabled = await this.configCatClient.getValueAsync('isAwesomeFeatureEnabled', false);
   }
 
   async checkProofOfConcept(): Promise<void> {
-      const userObject = new User('#SOME-USER-ID#', this.userEmail);
+    const userObject = new User('#SOME-USER-ID#', this.userEmail);
 
-      // Read more about the User Object: https://configcat.com/docs/advanced/user-object
-      this.isPOCEnabled = await this.configCatClient.getValueAsync('isPOCFeatureEnabled', false, userObject);
+    // Read more about the User Object: https://configcat.com/docs/advanced/user-object
+    this.isPOCEnabled = await this.configCatClient.getValueAsync('isPOCFeatureEnabled', false, userObject);
   }
 
 }

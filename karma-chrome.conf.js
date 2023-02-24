@@ -1,28 +1,28 @@
 module.exports = function (config) {
-    config.set({
-        frameworks: ["mocha", "chai", "webpack"],
+  config.set({
+    frameworks: ["mocha", "chai", "webpack"],
 
-        files: [
-            "test/index.ts"
-        ],
+    files: [
+      "test/index.ts"
+    ],
 
-        preprocessors: {
-            "test/index.ts": ["webpack", "sourcemap"],
-        },
+    preprocessors: {
+      "test/index.ts": ["webpack", "sourcemap"],
+    },
 
-        mime: {
-            "text/x-typescript": ["ts", "tsx"],
-        },
+    mime: {
+      "text/x-typescript": ["ts", "tsx"],
+    },
 
-        webpack: require("./webpack.config.karma"),
-        webpackMiddleware: {
-            noInfo: true
-        },
+    webpack: require("./webpack.config.karma"),
+    webpackMiddleware: {
+      noInfo: true
+    },
 
-        reporters: ["progress"],
+    reporters: ["progress"],
 
-        browsers: ["ChromeHeadless"],
+    browsers: ["ChromeHeadless"],
 
-        singleRun: true
-    });
+    singleRun: true
+  });
 };

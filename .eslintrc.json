@@ -26,6 +26,19 @@
         "plugin:@typescript-eslint/recommended"
       ],
       "rules": {
+        // https://github.com/typescript-eslint/typescript-eslint/issues/1824#issuecomment-1378327382
+        "indent": "off",
+        "@typescript-eslint/indent": [
+          "warn",
+          2,
+          {
+            "SwitchCase": 1,
+            "flatTernaryExpressions": true,
+            "ignoredNodes": [
+              "TSUnionType"
+            ]
+          }
+        ],
         /* Disable temporarily */
         "@typescript-eslint/no-explicit-any": "off",
         "@typescript-eslint/no-empty-function": "off",
@@ -47,5 +60,18 @@
     }
   ],
   "rules": {
+    /* Layout & Formatting (https://eslint.org/docs/latest/rules/#layout--formatting) */
+    "eol-last": [
+      "warn",
+      "always"
+    ],
+    "indent": [
+      "warn",
+      2,
+      {
+        "SwitchCase": 1,
+        "flatTernaryExpressions": true
+      }
+    ]
   }
 }

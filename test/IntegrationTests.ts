@@ -14,10 +14,10 @@ for (let sharedClient of [false, true]) {
   }
   else {
     clientFactory = (sdkKey, pollingMode, options) =>
-    pollingMode === PollingMode.AutoPoll ? configcatClient.createClientWithAutoPoll(sdkKey, options) :
-    pollingMode === PollingMode.ManualPoll ? configcatClient.createClientWithManualPoll(sdkKey, options) :
-    pollingMode === PollingMode.LazyLoad ? configcatClient.createClientWithLazyLoad(sdkKey, options) :
-    (() => { throw new Error("Invalid 'pollingMode' value"); })();
+      pollingMode === PollingMode.AutoPoll ? configcatClient.createClientWithAutoPoll(sdkKey, options) :
+      pollingMode === PollingMode.ManualPoll ? configcatClient.createClientWithManualPoll(sdkKey, options) :
+      pollingMode === PollingMode.LazyLoad ? configcatClient.createClientWithLazyLoad(sdkKey, options) :
+      (() => { throw new Error("Invalid 'pollingMode' value"); })();
   }
 
   const clientMode = `${sharedClient ? "Shared" : "Normal"} client`;
