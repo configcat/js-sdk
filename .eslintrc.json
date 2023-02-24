@@ -86,6 +86,10 @@
       "warn",
       "never"
     ],
+    "dot-location": [
+      "warn",
+      "property"
+    ],
     "eol-last": [
       "warn",
       "always"
