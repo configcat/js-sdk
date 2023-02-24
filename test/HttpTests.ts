@@ -5,7 +5,7 @@ import { FakeLogger } from "./helpers/fakes";
 import { LogLevel } from "../src/index";
 
 describe("HTTP tests", () => {
-  const sdkKey: string = "PKDVCLf-Hq-h-kCzMp-L7Q/psuH7BGHoUmdONrzzUOY7A";
+  const sdkKey = "PKDVCLf-Hq-h-kCzMp-L7Q/psuH7BGHoUmdONrzzUOY7A";
   const baseUrl = "https://cdn-global.test.com";
 
   it("HTTP timeout", async () => {

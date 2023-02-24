@@ -26,6 +26,18 @@
         "plugin:@typescript-eslint/recommended"
       ],
       "rules": {
+        // Supported rules (https://typescript-eslint.io/rules/#supported-rules)
+        "@typescript-eslint/ban-types": [
+          "error",
+          {
+            "types": {
+              "Function": false,
+              "Object": false,
+              "{}": false
+            },
+            "extendDefaults": true
+          }
+        ],
         // https://github.com/typescript-eslint/typescript-eslint/issues/1824#issuecomment-1378327382
         "indent": "off",
         "@typescript-eslint/indent": [
@@ -39,19 +51,20 @@
             ]
           }
         ],
-        "no-useless-constructor": "off",
-        "@typescript-eslint/no-useless-constructor": "warn",
-        /* Disable temporarily */
-        "@typescript-eslint/no-explicit-any": "off",
         "@typescript-eslint/no-empty-function": "off",
-        "@typescript-eslint/ban-types": "off",
-        "@typescript-eslint/no-var-requires": "off",
-        "@typescript-eslint/no-non-null-assertion": "off",
-        "@typescript-eslint/no-extra-semi": "off",
         "@typescript-eslint/no-empty-interface": "off",
-        "@typescript-eslint/no-inferrable-types": "off",
-        "@typescript-eslint/no-unused-vars": "off",
-        "@typescript-eslint/no-array-constructor": "off"
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-inferrable-types": "warn",
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": [
+          "warn",
+          {
+            "args": "none"
+          }
+        ],
+        "no-useless-constructor": "off",
+        "@typescript-eslint/no-useless-constructor": "warn"
       }
     }
   ],

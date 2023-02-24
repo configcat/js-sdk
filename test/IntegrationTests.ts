@@ -5,7 +5,7 @@ import { createConsoleLogger, OptionsForPollingMode } from "../src/index";
 
 type InitFunc = (callback: (...args: any[]) => void) => void;
 
-const sdkKey: string = "PKDVCLf-Hq-h-kCzMp-L7Q/psuH7BGHoUmdONrzzUOY7A";
+const sdkKey = "PKDVCLf-Hq-h-kCzMp-L7Q/psuH7BGHoUmdONrzzUOY7A";
 
 for (const sharedClient of [false, true]) {
   let clientFactory: <TPollingMode extends PollingMode>(sdkKey: string, pollingMode: TPollingMode, options: OptionsForPollingMode<TPollingMode>) => IConfigCatClient;
@@ -41,7 +41,7 @@ for (const sharedClient of [false, true]) {
 
       it(`${clientAndPollingMode} - getValue() with key: 'stringDefaultCat' should return 'Cat'`, (done) => {
 
-        const defaultValue: string = "NOT_CAT";
+        const defaultValue = "NOT_CAT";
 
         const init: InitFunc = pollingMode === PollingMode.ManualPoll ? callback => client.forceRefresh(callback) : callback => callback();
 
@@ -56,7 +56,7 @@ for (const sharedClient of [false, true]) {
 
       it(`${clientAndPollingMode} - getValueAsync() with key: 'stringDefaultCat' should return 'Cat'`, async () => {
 
-        const defaultValue: string = "NOT_CAT";
+        const defaultValue = "NOT_CAT";
 
         if (pollingMode === PollingMode.ManualPoll) {
           await client.forceRefreshAsync();
@@ -69,7 +69,7 @@ for (const sharedClient of [false, true]) {
 
       it(`${clientAndPollingMode} - getValue() with key: 'NotExistsKey' should return default value`, (done) => {
 
-        const defaultValue: string = "NOT_CAT";
+        const defaultValue = "NOT_CAT";
 
         const init: InitFunc = pollingMode === PollingMode.ManualPoll ? callback => client.forceRefresh(callback) : callback => callback();
 
@@ -83,7 +83,7 @@ for (const sharedClient of [false, true]) {
 
       it(`${clientAndPollingMode} - getValueAsync() with key: 'NotExistsKey' should return default value`, async () => {
 
-        const defaultValue: string = "NOT_CAT";
+        const defaultValue = "NOT_CAT";
 
         if (pollingMode === PollingMode.ManualPoll) {
           await client.forceRefreshAsync();
@@ -116,7 +116,7 @@ for (const sharedClient of [false, true]) {
 
       it(`${clientAndPollingMode} - getValueDetails() with key: 'stringDefaultCat' should return 'Cat'`, (done) => {
 
-        const defaultValue: string = "NOT_CAT";
+        const defaultValue = "NOT_CAT";
 
         const init: InitFunc = pollingMode === PollingMode.ManualPoll ? callback => client.forceRefresh(callback) : callback => callback();
 
@@ -131,7 +131,7 @@ for (const sharedClient of [false, true]) {
 
       it(`${clientAndPollingMode} - getValueDetailsAsync() with key: 'stringDefaultCat' should return 'Cat'`, async () => {
 
-        const defaultValue: string = "NOT_CAT";
+        const defaultValue = "NOT_CAT";
 
         if (pollingMode === PollingMode.ManualPoll) {
           await client.forceRefreshAsync();
@@ -144,7 +144,7 @@ for (const sharedClient of [false, true]) {
 
       it(`${clientAndPollingMode} - getValueDetails() with key: 'NotExistsKey' should return default value`, (done) => {
 
-        const defaultValue: string = "NOT_CAT";
+        const defaultValue = "NOT_CAT";
 
         const init: InitFunc = pollingMode === PollingMode.ManualPoll ? callback => client.forceRefresh(callback) : callback => callback();
 
@@ -159,7 +159,7 @@ for (const sharedClient of [false, true]) {
 
       it(`${clientAndPollingMode} - getValueDetailsAsync() with key: 'NotExistsKey' should return default value`, async () => {
 
-        const defaultValue: string = "NOT_CAT";
+        const defaultValue = "NOT_CAT";
 
         if (pollingMode === PollingMode.ManualPoll) {
           await client.forceRefreshAsync();
@@ -248,7 +248,7 @@ for (const sharedClient of [false, true]) {
 
       it(`${clientAndPollingMode} - getVariationId() works`, (done) => {
 
-        const defaultValue: string = "NOT_CAT";
+        const defaultValue = "NOT_CAT";
 
         const init: InitFunc = pollingMode === PollingMode.ManualPoll ? callback => client.forceRefresh(callback) : callback => callback();
 
@@ -266,7 +266,7 @@ for (const sharedClient of [false, true]) {
 
       it(`${clientAndPollingMode} - getVariationIdAsync() works`, async () => {
 
-        const defaultValue: string = "NOT_CAT";
+        const defaultValue = "NOT_CAT";
 
         if (pollingMode === PollingMode.ManualPoll) {
           await client.forceRefreshAsync();
@@ -473,7 +473,7 @@ for (const sharedClient of [false, true]) {
 
     it(`${clientMode} - Auto poll with wrong SDK Key - getValue() should return default value`, (done) => {
 
-      const defaultValue: string = "NOT_CAT";
+      const defaultValue = "NOT_CAT";
       const client: IConfigCatClient = clientFactory("WRONG_SDK_KEY", PollingMode.AutoPoll,
         { requestTimeoutMs: 500, maxInitWaitTimeSeconds: 1 });
 
@@ -488,7 +488,7 @@ for (const sharedClient of [false, true]) {
 
     it(`${clientMode} - Auto poll with wrong SDK Key - getValueAsync() should return default value`, async () => {
 
-      const defaultValue: string = "NOT_CAT";
+      const defaultValue = "NOT_CAT";
       const client: IConfigCatClient = clientFactory("WRONG_SDK_KEY", PollingMode.AutoPoll,
         { requestTimeoutMs: 500, maxInitWaitTimeSeconds: 1 });
 
@@ -500,7 +500,7 @@ for (const sharedClient of [false, true]) {
 
     it(`${clientMode} - Manual poll with wrong SDK Key - getValue() should return default value`, (done) => {
 
-      const defaultValue: string = "NOT_CAT";
+      const defaultValue = "NOT_CAT";
       const client: IConfigCatClient = clientFactory("WRONG_SDK_KEY", PollingMode.ManualPoll, { requestTimeoutMs: 500 });
 
       client.getValue("stringDefaultCat", defaultValue, actual => {
@@ -521,7 +521,7 @@ for (const sharedClient of [false, true]) {
 
     it(`${clientMode} - Manual poll with wrong SDK Key - getValueAsync() should return default value`, async () => {
 
-      const defaultValue: string = "NOT_CAT";
+      const defaultValue = "NOT_CAT";
       const client: IConfigCatClient = clientFactory("WRONG_SDK_KEY", PollingMode.ManualPoll, { requestTimeoutMs: 500 });
 
       const actual: string = await client.getValueAsync("stringDefaultCat", defaultValue);
@@ -535,7 +535,7 @@ for (const sharedClient of [false, true]) {
 
     it(`${clientMode} - Lazy load with wrong SDK Key - getValue() should return default value`, (done) => {
 
-      const defaultValue: string = "NOT_CAT";
+      const defaultValue = "NOT_CAT";
       const client: IConfigCatClient = clientFactory("WRONG_SDK_KEY", PollingMode.LazyLoad, { requestTimeoutMs: 500 });
 
       client.getValue("stringDefaultCat", defaultValue, actual => {
@@ -549,7 +549,7 @@ for (const sharedClient of [false, true]) {
 
     it(`${clientMode} - Lazy load with wrong SDK Key - getValueAsync() should return default value`, async () => {
 
-      const defaultValue: string = "NOT_CAT";
+      const defaultValue = "NOT_CAT";
       const client: IConfigCatClient = clientFactory("WRONG_SDK_KEY", PollingMode.LazyLoad, { requestTimeoutMs: 500 });
 
       const actual: string = await client.getValueAsync("stringDefaultCat", defaultValue);
