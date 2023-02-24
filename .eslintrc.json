@@ -72,6 +72,16 @@
         "SwitchCase": 1,
         "flatTernaryExpressions": true
       }
-    ]
+    ],
+    "no-multi-spaces": "warn",
+    "no-multiple-empty-lines": [
+      "warn",
+      {
+        "max": 1,
+        "maxBOF": 0
+      }
+    ],
+    "no-tabs": "warn",
+    "no-trailing-spaces": "warn"
   }
 }

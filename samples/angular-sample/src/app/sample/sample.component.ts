@@ -16,7 +16,7 @@ export class SampleComponent implements OnInit {
 
   @Input() configCatClient: IConfigCatClient;
 
-  ngOnInit(): void {  }
+  ngOnInit(): void { }
 
   async checkAwesome(): Promise<void> {
     this.isAwesomeEnabled = await this.configCatClient.getValueAsync('isAwesomeFeatureEnabled', false);

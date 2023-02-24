@@ -9,7 +9,7 @@ export class HttpConfigFetcher implements IConfigFetcher {
         if (statusCode === 200) {
           const eTag: string | undefined = httpRequest.getResponseHeader("ETag") ?? void 0;
           resolve({ statusCode, reasonPhrase, eTag, body: httpRequest.responseText });
-        } 
+        }
         // The readystatechange event is emitted even in the case of abort or error.
         // We can detect this by checking for zero status code (see https://stackoverflow.com/a/19247992/8656352).
         else if (statusCode) {

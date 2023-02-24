@@ -32,7 +32,7 @@ describe("HTTP tests", () => {
 
       const defaultValue = "NOT_CAT"
       assert.strictEqual(defaultValue, await client.getValueAsync("stringDefaultCat", defaultValue));
-  
+
       assert.isDefined(logger.messages.find(([level, msg]) => level == LogLevel.Error && msg.startsWith("Request timed out.")));
     }
     finally {
@@ -67,7 +67,7 @@ describe("HTTP tests", () => {
       server.remove();
     }
   });
-    
+
   it("Unexpected status code", async () => {
     const server = mockxmlhttprequest.newServer({
       get: [url => url.startsWith(baseUrl), { status: 502, statusText: "Bad Gateway" }],
@@ -111,12 +111,12 @@ describe("HTTP tests", () => {
         baseUrl,
         logger
       });
-  
+
       await client.forceRefreshAsync();
-  
+
       const defaultValue = "NOT_CAT"
       assert.strictEqual(defaultValue, await client.getValueAsync("stringDefaultCat", defaultValue));
-  
+
       console.log(logger.messages);
 
       assert.isDefined(logger.messages.find(([level, msg]) => level == LogLevel.Error && msg.startsWith("Request failed due to a network or protocol error.")));

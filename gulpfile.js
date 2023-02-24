@@ -27,8 +27,8 @@ function updateVersion_legacy(){
   return updateVersion(OUT_LEGACY, 'Version.js');
 }
 
-exports.tsc = gulp.series(    
+exports.tsc = gulp.series(
   gulp.parallel(updateVersion_esm, updateVersion_legacy));
 
-exports.webpack = gulp.series(    
+exports.webpack = gulp.series(
   gulp.parallel(updateVersion_dist));
