@@ -8,7 +8,8 @@ export class LocalStorageCache implements ICache {
 
     try {
       localStorage.setItem(key, btoa(JSON.stringify(config)));
-    } catch (ex) {
+    }
+    catch (ex) {
       // local storage is unavailable
     }
   }
@@ -32,7 +33,8 @@ export class LocalStorageCache implements ICache {
           return config;
         }
       }
-    } catch (ex) {
+    }
+    catch (ex) {
       // local storage is unavailable or invalid cache value in localstorage
     }
 

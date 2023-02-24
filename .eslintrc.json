@@ -60,6 +60,12 @@
     }
   ],
   "rules": {
+    /* Suggestions (https://eslint.org/docs/latest/rules/#suggestions) */
+    "curly": [
+      "error",
+      "multi-line",
+      "consistent"
+    ],
     /* Layout & Formatting (https://eslint.org/docs/latest/rules/#layout--formatting) */
     "array-bracket-spacing": [
       "warn",
@@ -75,6 +81,13 @@
     "block-spacing": [
       "warn",
       "always"
+    ],
+    "brace-style": [
+      "warn",
+      "stroustrup",
+      {
+        "allowSingleLine": true
+      }
     ],
     "comma-spacing": [
       "warn",
