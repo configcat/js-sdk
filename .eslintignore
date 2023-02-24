@@ -1,6 +1,6 @@
-coverage
-dist
-lib
-node_modules
-samples
-media
+build/
+coverage/
+dist/
+lib/
+media/
+node_modules/
