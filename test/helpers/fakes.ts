@@ -5,7 +5,7 @@ export class FakeLogger implements IConfigCatLogger {
 
   constructor(public level = LogLevel.Info) { }
 
-  reset() { this.messages.splice(0); }
+  reset(): void { this.messages.splice(0); }
 
   log(message: string): void {
     this.info(message);

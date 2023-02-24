@@ -60,6 +60,12 @@
             "accessibility": "no-public"
           }
         ],
+        "@typescript-eslint/explicit-module-boundary-types": [
+          "warn",
+          {
+            "allowArgumentsExplicitlyTypedAsAny": true
+          }
+        ],
         "@typescript-eslint/no-inferrable-types": "warn",
         "@typescript-eslint/no-non-null-assertion": "off",
         "no-unused-vars": "off",

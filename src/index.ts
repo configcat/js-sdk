@@ -157,6 +157,6 @@ export type { IProvidesHooks, HookEvents } from "configcat-common";
 
 /* Default export */
 
-export default function(sdkKey: string, options?: IJSAutoPollOptions) {
+export default function(sdkKey: string, options?: IJSAutoPollOptions): IConfigCatClient {
   return getClient(sdkKey, PollingMode.AutoPoll, options);
 }
