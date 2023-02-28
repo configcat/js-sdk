@@ -1,6 +1,6 @@
 const path = require("path");
 
-module.exports = new function (options) {
+module.exports = new function(options) {
   options = options || {};
 
   return Object.assign(this, {
@@ -19,21 +19,21 @@ module.exports = new function (options) {
       rules: [
         ...(options.enableCoverage
           ? [{
-              test: /\.ts$/,
-              include: [path.resolve('src')],
-              use: {
-                loader: '@ephesoft/webpack.istanbul.loader',
-                options: { esModules: true },
-              },
-              enforce: 'post'
-            }]
+            test: /\.ts$/,
+            include: [path.resolve("src")],
+            use: {
+              loader: "@ephesoft/webpack.istanbul.loader",
+              options: { esModules: true },
+            },
+            enforce: "post"
+          }]
           : []
         ),
         // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
         {
           test: /\.tsx?$/,
           use: [{
-            loader: 'ts-loader',
+            loader: "ts-loader",
             options: {
               configFile: "tsconfig.karma.json"
             }

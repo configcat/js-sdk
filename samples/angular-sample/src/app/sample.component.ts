@@ -1,30 +1,28 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { IConfigCatClient, User } from 'configcat-js';
+import { Component, Input, OnInit } from "@angular/core";
+import { IConfigCatClient, User } from "configcat-js";
 
 @Component({
-    selector: 'app-sample',
-    templateUrl: 'sample.component.html',
-    styleUrls: ['./sample.component.scss']
+  selector: "app-sample",
+  templateUrl: "sample.component.html",
+  styleUrls: ["./sample.component.scss"]
 })
 
 export class SampleComponent implements OnInit {
-    constructor() { }
+  isAwesomeEnabled: boolean | undefined = void 0;
+  isPOCEnabled: boolean | undefined = void 0;
+  userEmail = "configcat@example.com";
 
-    public isAwesomeEnabled: boolean = undefined;
-    public isPOCEnabled: boolean = undefined;
-    public userEmail = 'configcat@example.com';
+  @Input() configCatClient: IConfigCatClient;
 
-    @Input() configCatClient: IConfigCatClient;
+  ngOnInit(): void { }
 
-    ngOnInit() { }
+  async checkAwesome(): Promise<void> {
+    this.isAwesomeEnabled = await this.configCatClient.getValueAsync("isAwesomeFeatureEnabled", false);
+  }
 
-    async checkAwesome() {
-        this.isAwesomeEnabled = await this.configCatClient.getValueAsync('isAwesomeFeatureEnabled', false);
-    }
-
-    async checkProofOfConcept() {
-        const userObject = new User('#SOME-USER-ID#', this.userEmail);
-        // Read more about the User Object: https://configcat.com/docs/advanced/user-object
-        this.isPOCEnabled = await this.configCatClient.getValueAsync('isPOCFeatureEnabled', false, userObject);
-    }
+  async checkProofOfConcept(): Promise<void> {
+    const userObject = new User("#SOME-USER-ID#", this.userEmail);
+    // Read more about the User Object: https://configcat.com/docs/advanced/user-object
+    this.isPOCEnabled = await this.configCatClient.getValueAsync("isPOCFeatureEnabled", false, userObject);
+  }
 }

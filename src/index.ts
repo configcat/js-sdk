@@ -1,34 +1,35 @@
+import type { IAutoPollOptions, IConfigCatClient, IConfigCatLogger, ILazyLoadingOptions, IManualPollOptions, LogLevel } from "configcat-common";
 import * as configcatcommon from "configcat-common";
-import { FlagOverrides, IAutoPollOptions, IConfigCatClient, IConfigCatLogger, ILazyLoadingOptions, IManualPollOptions, InMemoryCache, LogLevel, MapOverrideDataSource, PollingMode } from "configcat-common";
-import { HttpConfigFetcher } from "./ConfigFetcher";
+import { FlagOverrides, InMemoryCache, MapOverrideDataSource, PollingMode } from "configcat-common";
 import { LocalStorageCache } from "./Cache";
+import { HttpConfigFetcher } from "./ConfigFetcher";
 import CONFIGCAT_SDK_VERSION from "./Version";
 
 /**
  * Returns an instance of ConfigCatClient for the specified SDK Key.
  * @remarks This method returns a single, shared instance per each distinct SDK Key.
  * That is, a new client object is created only when there is none available for the specified SDK Key.
- * Otherwise, the already created instance is returned (in which case the 'pollingMode', 'options' and 'configCatKernel' arguments are ignored).
+ * Otherwise, the already created instance is returned (in which case the 'pollingMode' and 'options' arguments are ignored).
  * So, please keep in mind that when you make multiple calls to this method using the same SDK Key, you may end up with multiple references to the same client object.
  * @param sdkKey SDK Key to access configuration
  * @param pollingMode The polling mode to use
  * @param options Options for the specified polling mode
  */
 export function getClient<TMode extends PollingMode | undefined>(sdkKey: string, pollingMode?: TMode, options?: OptionsForPollingMode<TMode>): IConfigCatClient {
-    return configcatcommon.getClient(sdkKey, pollingMode ?? PollingMode.AutoPoll, options,
-        {
-            configFetcher: new HttpConfigFetcher(),
-            cache: new InMemoryCache(),
-            sdkType: "ConfigCat-JS",
-            sdkVersion: CONFIGCAT_SDK_VERSION
-        });
+  return configcatcommon.getClient(sdkKey, pollingMode ?? PollingMode.AutoPoll, options,
+    {
+      configFetcher: new HttpConfigFetcher(),
+      cache: new InMemoryCache(),
+      sdkType: "ConfigCat-JS",
+      sdkVersion: CONFIGCAT_SDK_VERSION
+    });
 }
 
 /**
  * Disposes all existing ConfigCatClient instances.
  */
 export function disposeAllClients(): void {
-    configcatcommon.disposeAllClients();
+  configcatcommon.disposeAllClients();
 }
 
 /**
@@ -38,7 +39,7 @@ export function disposeAllClients(): void {
  * @deprecated This function is obsolete and will be removed from the public API in a future major version. To obtain a ConfigCatClient instance with auto polling for a specific SDK Key, please use the 'getClient(sdkKey, PollingMode.AutoPoll, options, ...)' format.
  */
 export function createClient(sdkkey: string, options?: IJSAutoPollOptions): IConfigCatClient {
-    return createClientWithAutoPoll(sdkkey, options);
+  return createClientWithAutoPoll(sdkkey, options);
 }
 
 /**
@@ -48,15 +49,15 @@ export function createClient(sdkkey: string, options?: IJSAutoPollOptions): ICon
  * @deprecated This function is obsolete and will be removed from the public API in a future major version. To obtain a ConfigCatClient instance with auto polling for a specific SDK Key, please use the 'getClient(sdkKey, PollingMode.AutoPoll, options, ...)' format.
  */
 export function createClientWithAutoPoll(sdkKey: string, options?: IJSAutoPollOptions): IConfigCatClient {
-    return configcatcommon.createClientWithAutoPoll(
-        sdkKey,
-        {
-            configFetcher: new HttpConfigFetcher(),
-            cache: new LocalStorageCache(),
-            sdkType: "ConfigCat-JS",
-            sdkVersion: CONFIGCAT_SDK_VERSION
-        },
-        options);
+  return configcatcommon.createClientWithAutoPoll(
+    sdkKey,
+    {
+      configFetcher: new HttpConfigFetcher(),
+      cache: new LocalStorageCache(),
+      sdkType: "ConfigCat-JS",
+      sdkVersion: CONFIGCAT_SDK_VERSION
+    },
+    options);
 }
 
 /**
@@ -66,15 +67,15 @@ export function createClientWithAutoPoll(sdkKey: string, options?: IJSAutoPollOp
  * @deprecated This function is obsolete and will be removed from the public API in a future major version. To obtain a ConfigCatClient instance with manual polling for a specific SDK Key, please use the 'getClient(sdkKey, PollingMode.ManualPoll, options, ...)' format.
  */
 export function createClientWithManualPoll(sdkKey: string, options?: IJSManualPollOptions): IConfigCatClient {
-    return configcatcommon.createClientWithManualPoll(
-        sdkKey,
-        {
-            configFetcher: new HttpConfigFetcher(),
-            cache: new LocalStorageCache(),
-            sdkType: "ConfigCat-JS",
-            sdkVersion: CONFIGCAT_SDK_VERSION
-        },
-        options);
+  return configcatcommon.createClientWithManualPoll(
+    sdkKey,
+    {
+      configFetcher: new HttpConfigFetcher(),
+      cache: new LocalStorageCache(),
+      sdkType: "ConfigCat-JS",
+      sdkVersion: CONFIGCAT_SDK_VERSION
+    },
+    options);
 }
 
 /**
@@ -84,23 +85,23 @@ export function createClientWithManualPoll(sdkKey: string, options?: IJSManualPo
  * @deprecated This function is obsolete and will be removed from the public API in a future major version. To obtain a ConfigCatClient instance with lazy loading for a specific SDK Key, please use the 'getClient(sdkKey, PollingMode.LazyLoad, options, ...)' format.
  */
 export function createClientWithLazyLoad(sdkKey: string, options?: IJSLazyLoadingOptions): IConfigCatClient {
-    return configcatcommon.createClientWithLazyLoad(
-        sdkKey,
-        {
-            configFetcher: new HttpConfigFetcher(),
-            cache: new LocalStorageCache(),
-            sdkType: "ConfigCat-JS",
-            sdkVersion: CONFIGCAT_SDK_VERSION
-        },
-        options);
+  return configcatcommon.createClientWithLazyLoad(
+    sdkKey,
+    {
+      configFetcher: new HttpConfigFetcher(),
+      cache: new LocalStorageCache(),
+      sdkType: "ConfigCat-JS",
+      sdkVersion: CONFIGCAT_SDK_VERSION
+    },
+    options);
 }
 
 export function createConsoleLogger(logLevel: LogLevel): IConfigCatLogger {
-    return configcatcommon.createConsoleLogger(logLevel);
+  return configcatcommon.createConsoleLogger(logLevel);
 }
 
 export function createFlagOverridesFromMap(map: { [name: string]: any }, behaviour: number): FlagOverrides {
-    return new FlagOverrides(new MapOverrideDataSource(map), behaviour);
+  return new FlagOverrides(new MapOverrideDataSource(map), behaviour);
 }
 
 export interface IJSAutoPollOptions extends IAutoPollOptions {
@@ -157,6 +158,6 @@ export type { IProvidesHooks, HookEvents } from "configcat-common";
 
 /* Default export */
 
-export default function(sdkKey: string, options?: IJSAutoPollOptions) {
-    return getClient(sdkKey, PollingMode.AutoPoll, options);
+export default function(sdkKey: string, options?: IJSAutoPollOptions): IConfigCatClient {
+  return getClient(sdkKey, PollingMode.AutoPoll, options);
 }

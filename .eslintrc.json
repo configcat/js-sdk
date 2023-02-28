@@ -1,0 +1,413 @@
+{
+  "root": true,
+  "extends": [
+    "eslint:recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "import"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts",
+        "*.tsx"
+      ],
+      "parserOptions": {
+        "project": [
+          "tsconfig.json"
+        ]
+      },
+      "extends": [
+        "plugin:@typescript-eslint/recommended"
+      ],
+      "rules": {
+        // Supported rules (https://typescript-eslint.io/rules/#supported-rules)
+        "@typescript-eslint/ban-types": [
+          "error",
+          {
+            "types": {
+              "Function": false,
+              "Object": false,
+              "{}": false
+            },
+            "extendDefaults": true
+          }
+        ],
+        // https://github.com/typescript-eslint/typescript-eslint/issues/1824#issuecomment-1378327382
+        "indent": "off",
+        "@typescript-eslint/indent": [
+          "warn",
+          2,
+          {
+            "SwitchCase": 1,
+            "flatTernaryExpressions": true,
+            "ignoredNodes": [
+              "TSUnionType"
+            ]
+          }
+        ],
+        "@typescript-eslint/no-empty-function": "off",
+        "@typescript-eslint/no-empty-interface": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/explicit-member-accessibility": [
+          "warn",
+          {
+            "accessibility": "no-public"
+          }
+        ],
+        "@typescript-eslint/explicit-module-boundary-types": [
+          "warn",
+          {
+            "allowArgumentsExplicitlyTypedAsAny": true
+          }
+        ],
+        "@typescript-eslint/member-delimiter-style": "warn",
+        // Based on: https://typescript-eslint.io/rules/naming-convention/#enforce-the-codebase-follows-eslints-camelcase-conventions
+        "@typescript-eslint/naming-convention": [
+          "warn",
+          {
+            "selector": "variable",
+            "format": [
+              "camelCase",
+              "UPPER_CASE"
+            ]
+          },
+          {
+            "selector": "parameter",
+            "format": [
+              "camelCase"
+            ],
+            "leadingUnderscore": "allow"
+          },
+          {
+            "selector": "variableLike",
+            "format": [
+              "camelCase"
+            ]
+          },
+          {
+            "selector": "enumMember",
+            "format": [
+              "PascalCase"
+            ]
+          },
+          {
+            "selector": [
+              "classProperty",
+              "objectLiteralProperty",
+              "typeProperty",
+              "accessor"
+            ],
+            "modifiers": [
+              "requiresQuotes"
+            ],
+            "format": null
+          },
+          {
+            "selector": [
+              "classProperty",
+              "objectLiteralProperty",
+              "typeProperty",
+              "accessor"
+            ],
+            "format": [
+              "camelCase",
+              "UPPER_CASE"
+            ]
+          },
+          {
+            "selector": "memberLike",
+            "format": [
+              "camelCase"
+            ]
+          },
+          {
+            "selector": "typeLike",
+            "format": [
+              "PascalCase"
+            ]
+          }
+        ],
+        "@typescript-eslint/no-inferrable-types": "warn",
+        "@typescript-eslint/no-invalid-void-type": "warn",
+        "@typescript-eslint/no-mixed-enums": "warn",
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "@typescript-eslint/no-non-null-asserted-nullish-coalescing": "warn",
+        "@typescript-eslint/no-require-imports": "error",
+        "@typescript-eslint/no-unsafe-declaration-merging": "warn",
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": [
+          "warn",
+          {
+            "args": "none"
+          }
+        ],
+        "no-useless-constructor": "off",
+        "@typescript-eslint/no-useless-constructor": "warn",
+        "@typescript-eslint/prefer-readonly": "warn",
+        "@typescript-eslint/prefer-return-this-type": "warn",
+        "@typescript-eslint/switch-exhaustiveness-check": "warn",
+        "@typescript-eslint/type-annotation-spacing": "warn"
+      },
+      "overrides": [
+        {
+          "files": [
+            "src/**"
+          ],
+          "rules": {
+            // NOTE: Deno doesn't like type exports without the "type" keyword.
+            "@typescript-eslint/consistent-type-exports": [
+              "error",
+              {
+                "fixMixedExportsWithInlineTypeSpecifier": false
+              }
+            ],
+            "@typescript-eslint/consistent-type-imports": [
+              "error",
+              {
+                "prefer": "type-imports",
+                "fixStyle": "separate-type-imports"
+              }
+            ],
+            "@typescript-eslint/no-import-type-side-effects": "warn"
+          }
+        }
+      ]
+    }
+  ],
+  "rules": {
+    /* Suggestions (https://eslint.org/docs/latest/rules/#suggestions) */
+    "curly": [
+      "error",
+      "multi-line",
+      "consistent"
+    ],
+    "eqeqeq": [
+      "error",
+      "always",
+      {
+        "null": "ignore"
+      }
+    ],
+    "grouped-accessor-pairs": "warn",
+    "no-case-declarations": "off",
+    "no-eval": "error",
+    "no-implied-eval": "error",
+    "no-prototype-builtins": "warn",
+    "no-sparse-arrays": "warn",
+    "no-undef-init": "warn",
+    "no-undefined": "error",
+    "no-useless-catch": "warn",
+    "no-useless-constructor": "warn",
+    "no-useless-escape": "warn",
+    "no-useless-return": "warn",
+    "prefer-promise-reject-errors": "warn",
+    "prefer-rest-params": "warn",
+    "require-await": "warn",
+    "sort-imports": [
+      "warn",
+      {
+        "ignoreCase": false,
+        "ignoreDeclarationSort": true,
+        "ignoreMemberSort": false,
+        "memberSyntaxSortOrder": ["none", "all", "multiple", "single"],
+        "allowSeparatedGroups": true
+      }
+    ],
+    /* Layout & Formatting (https://eslint.org/docs/latest/rules/#layout--formatting) */
+    "array-bracket-spacing": [
+      "warn",
+      "never"
+    ],
+    "arrow-spacing": [
+      "warn",
+      {
+        "before": true,
+        "after": true
+      }
+    ],
+    "block-spacing": [
+      "warn",
+      "always"
+    ],
+    "brace-style": [
+      "warn",
+      "stroustrup",
+      {
+        "allowSingleLine": true
+      }
+    ],
+    "comma-spacing": [
+      "warn",
+      {
+        "after": true
+      }
+    ],
+    "computed-property-spacing": [
+      "warn",
+      "never"
+    ],
+    "dot-location": [
+      "warn",
+      "property"
+    ],
+    "eol-last": [
+      "warn",
+      "always"
+    ],
+    "func-call-spacing": [
+      "warn",
+      "never"
+    ],
+    "generator-star-spacing": [
+      "warn",
+      {
+        "before": false,
+        "after": true,
+        "method": {
+          "before": true,
+          "after": false
+        }
+      }
+    ],
+    "indent": [
+      "warn",
+      2,
+      {
+        "SwitchCase": 1,
+        "flatTernaryExpressions": true
+      }
+    ],
+    "key-spacing": [
+      "warn",
+      {
+        "beforeColon": false,
+        "afterColon": true,
+        "mode": "strict"
+      }
+    ],
+    "keyword-spacing": [
+      "warn",
+      {
+        "before": true,
+        "after": true
+      }
+    ],
+    "max-len": [
+      "off",
+      {
+        "code": 160,
+        "ignoreStrings": true,
+        "ignoreTemplateLiterals": true,
+        "ignoreRegExpLiterals": true
+      }
+    ],
+    "no-multi-spaces": "warn",
+    "no-multiple-empty-lines": [
+      "warn",
+      {
+        "max": 1,
+        "maxBOF": 0
+      }
+    ],
+    "no-tabs": "warn",
+    "no-trailing-spaces": "warn",
+    "no-whitespace-before-property": "warn",
+    "object-curly-spacing": [
+      "warn",
+      "always"
+    ],
+    "quotes": [
+      "warn",
+      "double",
+      {
+        "avoidEscape": true
+      }
+    ],
+    "rest-spread-spacing": [
+      "warn",
+      "never"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "semi-spacing": [
+      "warn",
+      {
+        "before": false,
+        "after": true
+      }
+    ],
+    "semi-style": "warn",
+    "space-before-blocks": [
+      "warn",
+      "always"
+    ],
+    "space-before-function-paren": [
+      "warn",
+      {
+        "anonymous": "never",
+        "named": "never",
+        "asyncArrow": "always"
+      }
+    ],
+    "space-in-parens": [
+      "warn",
+      "never"
+    ],
+    "space-infix-ops": "warn",
+    "space-unary-ops": [
+      "warn",
+      {
+        "words": true,
+        "nonwords": false
+      }
+    ],
+    "switch-colon-spacing": [
+      "warn",
+      {
+        "before": false,
+        "after": true
+      }
+    ],
+    "template-curly-spacing": [
+      "warn",
+      "never"
+    ],
+    "template-tag-spacing": [
+      "warn",
+      "never"
+    ],
+    "yield-star-spacing": [
+      "warn",
+      "after"
+    ],
+    // Import declarations (https://github.com/import-js/eslint-plugin-import)
+    "import/order": [
+      "warn",
+      {
+        "groups": [
+          ["builtin", "external"],
+          "internal",
+          "parent",
+          "sibling",
+          "index",
+          "unknown"
+        ],
+        "newlines-between": "never",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ],
+    "import/newline-after-import": "warn"
+  }
+}
