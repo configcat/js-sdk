@@ -34,7 +34,6 @@
   "homepage": "https://configcat.com",
   "dependencies": {
     "configcat-common": "^7.0.1",
-    "eslint-plugin-import": "^2.27.5",
     "tslib": "^2.4.1"
   },
   "devDependencies": {
@@ -50,6 +49,7 @@
     "core-js": "^3.24.1",
     "eslint": "^8.34.0",
     "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-prettier": "^4.2.1",
     "gulp": "^4.0.2",
     "gulp-replace": "^1.1.3",
