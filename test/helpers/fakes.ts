@@ -1,4 +1,4 @@
-import { IConfigCatLogger, LogLevel } from "../../src/index";
+import { IConfigCatLogger, LogEventId, LogLevel, LogMessage } from "../../src";
 
 export class FakeLogger implements IConfigCatLogger {
   messages: [LogLevel, string][] = [];
@@ -7,23 +7,7 @@ export class FakeLogger implements IConfigCatLogger {
 
   reset(): void { this.messages.splice(0); }
 
-  log(message: string): void {
-    this.info(message);
-  }
-
-  debug(message: string): void {
-    this.messages.push([LogLevel.Debug, message]);
-  }
-
-  info(message: string): void {
-    this.messages.push([LogLevel.Info, message]);
-  }
-
-  warn(message: string): void {
-    this.messages.push([LogLevel.Warn, message]);
-  }
-
-  error(message: string): void {
-    this.messages.push([LogLevel.Error, message]);
+  log(level: LogLevel, eventId: LogEventId, message: LogMessage, exception?: any): void {
+    this.messages.push([level, message.toString()]);
   }
 }
