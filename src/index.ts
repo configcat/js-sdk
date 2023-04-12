@@ -32,70 +32,6 @@ export function disposeAllClients(): void {
   configcatcommon.disposeAllClients();
 }
 
-/**
- * Create an instance of ConfigCatClient and setup Auto polling with default options.
- * @param {string} sdkkey - SDK Key to access your configuration.
- * @param options - Options for Auto polling
- * @deprecated This function is obsolete and will be removed from the public API in a future major version. To obtain a ConfigCatClient instance with auto polling for a specific SDK Key, please use the 'getClient(sdkKey, PollingMode.AutoPoll, options, ...)' format.
- */
-export function createClient(sdkkey: string, options?: IJSAutoPollOptions): IConfigCatClient {
-  return createClientWithAutoPoll(sdkkey, options);
-}
-
-/**
- * Create an instance of ConfigCatClient and setup Auto polling.
- * @param {string} sdkkey - SDK Key to access your configuration.
- * @param options - Options for Auto polling
- * @deprecated This function is obsolete and will be removed from the public API in a future major version. To obtain a ConfigCatClient instance with auto polling for a specific SDK Key, please use the 'getClient(sdkKey, PollingMode.AutoPoll, options, ...)' format.
- */
-export function createClientWithAutoPoll(sdkKey: string, options?: IJSAutoPollOptions): IConfigCatClient {
-  return configcatcommon.createClientWithAutoPoll(
-    sdkKey,
-    {
-      configFetcher: new HttpConfigFetcher(),
-      cache: new LocalStorageCache(),
-      sdkType: "ConfigCat-JS",
-      sdkVersion: CONFIGCAT_SDK_VERSION
-    },
-    options);
-}
-
-/**
- * Create an instance of ConfigCatClient and setup Manual polling.
- * @param {string} sdkKey - SDK Key to access your configuration.
- * @param options - Options for Manual polling
- * @deprecated This function is obsolete and will be removed from the public API in a future major version. To obtain a ConfigCatClient instance with manual polling for a specific SDK Key, please use the 'getClient(sdkKey, PollingMode.ManualPoll, options, ...)' format.
- */
-export function createClientWithManualPoll(sdkKey: string, options?: IJSManualPollOptions): IConfigCatClient {
-  return configcatcommon.createClientWithManualPoll(
-    sdkKey,
-    {
-      configFetcher: new HttpConfigFetcher(),
-      cache: new LocalStorageCache(),
-      sdkType: "ConfigCat-JS",
-      sdkVersion: CONFIGCAT_SDK_VERSION
-    },
-    options);
-}
-
-/**
- * Create an instance of ConfigCatClient and setup Lazy loading.
- * @param {string} sdkKey - SDK Key to access your configuration.
- * @param options - Options for Lazy loading
- * @deprecated This function is obsolete and will be removed from the public API in a future major version. To obtain a ConfigCatClient instance with lazy loading for a specific SDK Key, please use the 'getClient(sdkKey, PollingMode.LazyLoad, options, ...)' format.
- */
-export function createClientWithLazyLoad(sdkKey: string, options?: IJSLazyLoadingOptions): IConfigCatClient {
-  return configcatcommon.createClientWithLazyLoad(
-    sdkKey,
-    {
-      configFetcher: new HttpConfigFetcher(),
-      cache: new LocalStorageCache(),
-      sdkType: "ConfigCat-JS",
-      sdkVersion: CONFIGCAT_SDK_VERSION
-    },
-    options);
-}
-
 export function createConsoleLogger(logLevel: LogLevel): IConfigCatLogger {
   return configcatcommon.createConsoleLogger(logLevel);
 }
@@ -134,7 +70,11 @@ export { DataGovernance } from "configcat-common";
 
 export type { IConfigCatLogger } from "configcat-common";
 
+export type { LogEventId, LogMessage } from "configcat-common";
+
 export { LogLevel } from "configcat-common";
+
+export { FormattableLogMessage } from "configcat-common";
 
 export type { ICache } from "configcat-common";
 
@@ -144,7 +84,7 @@ export type { IConfigCatClient } from "configcat-common";
 
 export { SettingKeyValue } from "configcat-common";
 
-export type { IEvaluationDetails, SettingTypeOf, SettingValue, VariationIdTypeOf, VariationIdValue } from "configcat-common";
+export type { IEvaluationDetails, SettingTypeOf, SettingValue, VariationIdValue } from "configcat-common";
 
 export { User } from "configcat-common";
 
