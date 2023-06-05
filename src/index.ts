@@ -1,4 +1,5 @@
-import type { IAutoPollOptions, IConfigCatClient, IConfigCatLogger, ILazyLoadingOptions, IManualPollOptions, LogLevel } from "configcat-common";
+import type { IAutoPollOptions, IConfigCatClient, IConfigCatLogger, ILazyLoadingOptions, IManualPollOptions, LogLevel, OverrideBehaviour, SettingValue } from "configcat-common";
+import { ExternalConfigCache } from "configcat-common";
 import * as configcatcommon from "configcat-common";
 import { FlagOverrides, MapOverrideDataSource, PollingMode } from "configcat-common";
 import { LocalStorageCache } from "./Cache";
@@ -19,9 +20,9 @@ export function getClient<TMode extends PollingMode | undefined>(sdkKey: string,
   return configcatcommon.getClient(sdkKey, pollingMode ?? PollingMode.AutoPoll, options,
     {
       configFetcher: new HttpConfigFetcher(),
-      cache: new LocalStorageCache(),
       sdkType: "ConfigCat-JS",
-      sdkVersion: CONFIGCAT_SDK_VERSION
+      sdkVersion: CONFIGCAT_SDK_VERSION,
+      defaultCacheFactory: options => new ExternalConfigCache(new LocalStorageCache(), options.logger)
     });
 }
 
@@ -36,7 +37,7 @@ export function createConsoleLogger(logLevel: LogLevel): IConfigCatLogger {
   return configcatcommon.createConsoleLogger(logLevel);
 }
 
-export function createFlagOverridesFromMap(map: { [name: string]: any }, behaviour: number): FlagOverrides {
+export function createFlagOverridesFromMap(map: { [name: string]: NonNullable<SettingValue> }, behaviour: OverrideBehaviour): FlagOverrides {
   return new FlagOverrides(new MapOverrideDataSource(map), behaviour);
 }
 
@@ -76,21 +77,23 @@ export { LogLevel } from "configcat-common";
 
 export { FormattableLogMessage } from "configcat-common";
 
-export type { ICache } from "configcat-common";
+export type { IConfigCatCache } from "configcat-common";
 
-export { ProjectConfig, RolloutRule, RolloutPercentageItem, Setting } from "configcat-common";
+export type { IConfig, ISetting, ITargetingRule, IPercentageOption, SettingValue, VariationIdValue } from "configcat-common";
+
+export { SettingType, Comparator } from "configcat-common";
 
 export type { IConfigCatClient } from "configcat-common";
 
 export { SettingKeyValue } from "configcat-common";
 
-export type { IEvaluationDetails, SettingTypeOf, SettingValue, VariationIdValue } from "configcat-common";
+export type { IEvaluationDetails, SettingTypeOf } from "configcat-common";
 
 export { User } from "configcat-common";
 
-export type { IOverrideDataSource } from "configcat-common";
+export type { FlagOverrides } from "configcat-common";
 
-export { FlagOverrides, MapOverrideDataSource, OverrideBehaviour } from "configcat-common";
+export { OverrideBehaviour } from "configcat-common";
 
 export { RefreshResult } from "configcat-common";
 
