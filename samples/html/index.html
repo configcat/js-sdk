@@ -16,7 +16,7 @@
     });
     // You can instantiate the client with different polling modes. See the Docs: https://configcat.com/docs/sdk-reference/js/#polling-modes
 
-    configCatClient.getValue("isAwesomeFeatureEnabled", false, function (value) {
+    configCatClient.getValueAsync("isAwesomeFeatureEnabled", false).then(function (value) {
       console.log("isAwesomeFeatureEnabled: " + value);
     });
 
@@ -25,11 +25,9 @@
       email: "configcat@example.com"
     };
     // Read more about the User Object: https://configcat.com/docs/sdk-reference/js/#user-object
-    configCatClient.getValue("isPOCFeatureEnabled", false, function (value) {
-        console.log("isPOCFeatureEnabled: " + value);
-      },
-      userObject
-    );
+    configCatClient.getValueAsync("isPOCFeatureEnabled", false, userObject).then(function (value) {
+      console.log("isPOCFeatureEnabled: " + value);
+    });
   </script>
 </head>
 

@@ -7,7 +7,10 @@ module.exports = new function(options) {
     mode: "production",
     resolve: {
       // Add `.ts` and `.tsx` as a resolvable extension.
-      extensions: [".ts", ".tsx", ".js"]
+      extensions: [".ts", ".tsx", ".js"],
+      alias: {
+        "configcat-common/lib": "configcat-common/lib/esm"
+      }
     },
     devtool: "inline-source-map",
     optimization: {
