@@ -1,7 +1,6 @@
 import type { IAutoPollOptions, IConfigCatClient, IConfigCatLogger, ILazyLoadingOptions, IManualPollOptions, LogLevel, OverrideBehaviour, SettingValue } from "configcat-common";
-import { ExternalConfigCache } from "configcat-common";
+import { ExternalConfigCache, FlagOverrides, MapOverrideDataSource, PollingMode } from "configcat-common";
 import * as configcatcommon from "configcat-common";
-import { FlagOverrides, MapOverrideDataSource, PollingMode } from "configcat-common";
 import { LocalStorageCache } from "./Cache";
 import { HttpConfigFetcher } from "./ConfigFetcher";
 import CONFIGCAT_SDK_VERSION from "./Version";
