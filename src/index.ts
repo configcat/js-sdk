@@ -6,14 +6,14 @@ import { HttpConfigFetcher } from "./ConfigFetcher";
 import CONFIGCAT_SDK_VERSION from "./Version";
 
 /**
- * Returns an instance of ConfigCatClient for the specified SDK Key.
+ * Returns an instance of `ConfigCatClient` for the specified SDK Key.
  * @remarks This method returns a single, shared instance per each distinct SDK Key.
  * That is, a new client object is created only when there is none available for the specified SDK Key.
- * Otherwise, the already created instance is returned (in which case the 'pollingMode' and 'options' arguments are ignored).
+ * Otherwise, the already created instance is returned (in which case the `pollingMode` and `options` arguments are ignored).
  * So, please keep in mind that when you make multiple calls to this method using the same SDK Key, you may end up with multiple references to the same client object.
- * @param sdkKey SDK Key to access configuration
- * @param pollingMode The polling mode to use
- * @param options Options for the specified polling mode
+ * @param sdkKey SDK Key to access the ConfigCat config.
+ * @param pollingMode The polling mode to use.
+ * @param options Options for the specified polling mode.
  */
 export function getClient<TMode extends PollingMode | undefined>(sdkKey: string, pollingMode?: TMode, options?: OptionsForPollingMode<TMode>): IConfigCatClient {
   return configcatcommon.getClient(sdkKey, pollingMode ?? PollingMode.AutoPoll, options,
@@ -26,26 +26,41 @@ export function getClient<TMode extends PollingMode | undefined>(sdkKey: string,
 }
 
 /**
- * Disposes all existing ConfigCatClient instances.
+ * Disposes all existing `ConfigCatClient` instances.
  */
 export function disposeAllClients(): void {
   configcatcommon.disposeAllClients();
 }
 
+/**
+ * Creates an instance of `ConfigCatConsoleLogger`.
+ * @param logLevel Log level (the minimum level to use for filtering log events).
+ */
 export function createConsoleLogger(logLevel: LogLevel): IConfigCatLogger {
   return configcatcommon.createConsoleLogger(logLevel);
 }
 
+/**
+ * Creates an instance of `FlagOverrides` that uses a map data source.
+ * @param map The map that contains the overrides.
+ * @param behaviour The override behaviour.
+ * Specifies whether the local values should override the remote values
+ * or local values should only be used when a remote value doesn't exist
+ * or the local values should be used only.
+ */
 export function createFlagOverridesFromMap(map: { [name: string]: NonNullable<SettingValue> }, behaviour: OverrideBehaviour): FlagOverrides {
   return new FlagOverrides(new MapOverrideDataSource(map), behaviour);
 }
 
+/** Options used to configure the ConfigCat SDK in the case of Auto Polling mode. */
 export interface IJSAutoPollOptions extends IAutoPollOptions {
 }
 
+/** Options used to configure the ConfigCat SDK in the case of Lazy Loading mode. */
 export interface IJSLazyLoadingOptions extends ILazyLoadingOptions {
 }
 
+/** Options used to configure the ConfigCat SDK in the case of Manual Polling mode. */
 export interface IJSManualPollOptions extends IManualPollOptions {
 }
 
