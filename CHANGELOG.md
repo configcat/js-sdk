@@ -1,0 +1,1 @@
+Please check the [Github Releases](https://github.com/configcat/js-sdk/releases) page for the changelog of the ConfigCat SDK for JavaScript frontend applications.

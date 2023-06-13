@@ -45,7 +45,9 @@ import * as configcat from "configcat-js";
 ```js
 const configCatClient = configcat.getClient("#YOUR-SDK-KEY#");
 ```
-> We strongly recommend using the *ConfigCat Client* as a Singleton object in your application.
+
+> You can acquire singleton client instances for your SDK keys using the `getClient("<sdkKey>")` factory function.
+(However, please keep in mind that subsequent calls to `getClient()` with the *same SDK Key* return a *shared* client instance, which was set up by the first call.)
 
 ### 4. Get your setting value:
 The async/await way:
