@@ -1,6 +1,6 @@
 {
   "name": "configcat-js",
-  "version": "8.0.2",
+  "version": "8.1.0",
   "description": "ConfigCat is a configuration as a service that lets you manage your features and configurations without actually deploying new code.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -33,7 +33,7 @@
   "license": "MIT",
   "homepage": "https://configcat.com",
   "dependencies": {
-    "configcat-common": "^8.0.2",
+    "configcat-common": "^8.1.0",
     "tslib": "^2.4.1"
   },
   "devDependencies": {

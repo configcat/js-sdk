@@ -97,7 +97,7 @@ export type { IConfig, ISetting, ITargetingRule, IPercentageOption, SettingValue
 
 export { SettingType, Comparator } from "configcat-common";
 
-export type { IConfigCatClient } from "configcat-common";
+export type { IConfigCatClient, IConfigCatClientSnapshot } from "configcat-common";
 
 export { SettingKeyValue } from "configcat-common";
 
@@ -112,6 +112,8 @@ export { OverrideBehaviour } from "configcat-common";
 export { RefreshResult } from "configcat-common";
 
 export type { IProvidesHooks, HookEvents } from "configcat-common";
+
+export { ClientReadyState } from "configcat-common";
 
 /* Default export */
 
