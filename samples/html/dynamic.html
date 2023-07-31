@@ -20,8 +20,10 @@
                 var configCatClient = configcat.getClient(
                     $('#sdkkey').val(), configcat.PollingMode.AutoPoll, {
                         pollIntervalSeconds: 4,
-                        configChanged: function () {
-                            updateFeatureFlagValue();
+                        setupHooks: function(hooks) {
+                            hooks.on('configChanged', function () {
+                                updateFeatureFlagValue();
+                            });
                         }
                     }
                 );
@@ -31,7 +33,7 @@
                 $('#start').prop("disabled", true);
 
                 function updateFeatureFlagValue() {
-                    configCatClient.getValue($('#flagkey').val(), false, function (value) {
+                    configCatClient.getValueAsync($('#flagkey').val(), false).then(function (value) {
                         $('#unknown').prop('hidden', true);
                         $('#flip').prop('hidden', false);
                         if (value) {
