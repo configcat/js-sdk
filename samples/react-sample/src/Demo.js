@@ -1,3 +1,4 @@
+import { User } from 'configcat-js';
 import React, { Component } from 'react';
 import './App.css';
 
@@ -19,7 +20,7 @@ class Demo extends Component {
   }
 
   async checkProofOfConcept() {
-    const userObject = { identifier: '#SOME-USER-ID#', email: this.state.userEmail };
+    const userObject = new User('#SOME-USER-ID#', this.state.userEmail);
     // Read more about the User Object: https://configcat.com/docs/advanced/user-object
     const value = await this.client.getValueAsync('isPOCFeatureEnabled', false, userObject)
     this.setState({ isPOCEnabled: value })
