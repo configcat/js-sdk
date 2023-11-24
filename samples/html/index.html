@@ -20,10 +20,7 @@
       console.log("isAwesomeFeatureEnabled: " + value);
     });
 
-    var userObject = {
-      identifier: "#SOME-USER-ID#",
-      email: "configcat@example.com"
-    };
+    var userObject = new configcat.User("#SOME-USER-ID#", "configcat@example.com");
     // Read more about the User Object: https://configcat.com/docs/sdk-reference/js/#user-object
     configCatClient.getValueAsync("isPOCFeatureEnabled", false, userObject).then(function (value) {
       console.log("isPOCFeatureEnabled: " + value);
