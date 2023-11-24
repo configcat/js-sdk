@@ -93,9 +93,12 @@ export { FormattableLogMessage } from "configcat-common";
 
 export type { IConfigCatCache } from "configcat-common";
 
-export type { IConfig, ISetting, ITargetingRule, IPercentageOption, SettingValue, VariationIdValue } from "configcat-common";
+export type {
+  IConfig, ISegment, SettingTypeMap, SettingValue, VariationIdValue, ISettingValueContainer, ISettingUnion, ISetting, ITargetingRule, IPercentageOption,
+  ConditionTypeMap, IConditionUnion, ICondition, UserConditionComparisonValueTypeMap, IUserConditionUnion, IUserCondition, IPrerequisiteFlagCondition, ISegmentCondition
+} from "configcat-common";
 
-export { SettingType, Comparator } from "configcat-common";
+export { SettingType, UserComparator, PrerequisiteFlagComparator, SegmentComparator } from "configcat-common";
 
 export type { IConfigCatClient, IConfigCatClientSnapshot } from "configcat-common";
 
@@ -103,17 +106,17 @@ export { SettingKeyValue } from "configcat-common";
 
 export type { IEvaluationDetails, SettingTypeOf } from "configcat-common";
 
+export type { UserAttributeValue } from "configcat-common";
+
 export { User } from "configcat-common";
 
 export type { FlagOverrides } from "configcat-common";
 
 export { OverrideBehaviour } from "configcat-common";
 
-export { RefreshResult } from "configcat-common";
+export { ClientCacheState, RefreshResult } from "configcat-common";
 
 export type { IProvidesHooks, HookEvents } from "configcat-common";
-
-export { ClientReadyState } from "configcat-common";
 
 /* Default export */
 
