@@ -20,6 +20,8 @@ export class LocalStorageCache implements IConfigCatCache {
     catch (ex) {
       // local storage is unavailable or invalid cache value in localstorage
     }
+
+    return void 0;
   }
 
   private b64EncodeUnicode(str: string): string {
