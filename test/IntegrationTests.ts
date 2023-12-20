@@ -3,7 +3,7 @@ import { IConfigCatClient, IEvaluationDetails, IOptions, LogLevel, PollingMode, 
 import * as configcatClient from "../src";
 import { createConsoleLogger } from "../src";
 
-const sdkKey = "PKDVCLf-Hq-h-kCzMp-L7Q/psuH7BGHoUmdONrzzUOY7A";
+const sdkKey = "configcat-sdk-1/PKDVCLf-Hq-h-kCzMp-L7Q/AG6C1ngVb0CvM07un6JisQ";
 
 describe("Integration tests - Normal use", () => {
 
