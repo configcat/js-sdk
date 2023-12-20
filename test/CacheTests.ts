@@ -9,6 +9,6 @@ describe("LocalStorageCache cache tests", () => {
         const text = "äöüÄÖÜçéèñışğâ¢™✓😀";
         cache.set(key, text);
         const retrievedValue = cache.get(key);
-        assert.equal(retrievedValue, text);
+        assert.strictEqual(retrievedValue, text);
     });
 });
