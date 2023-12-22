@@ -35,7 +35,11 @@ export class HttpConfigFetcher implements IConfigFetcher {
         httpRequest.onabort = () => reject(new FetchError("abort"));
         httpRequest.onerror = () => reject(new FetchError("failure"));
 
-        httpRequest.open("GET", options.getUrl(), true);
+        let url = options.getUrl();
+        if (lastEtag) {
+          url += '&ccetag=' + lastEtag;
+        }
+        httpRequest.open("GET", url, true);
         httpRequest.timeout = options.requestTimeoutMs;
         // NOTE: It's intentional that we don't specify the If-None-Match header.
         // The browser automatically handles it, adding it manually would cause an unnecessary CORS OPTIONS request.
