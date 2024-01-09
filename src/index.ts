@@ -1,5 +1,5 @@
 import type { IAutoPollOptions, IConfigCatClient, IConfigCatLogger, ILazyLoadingOptions, IManualPollOptions, LogLevel, OverrideBehaviour, SettingValue } from "configcat-common";
-import { ExternalConfigCache, FlagOverrides, MapOverrideDataSource, PollingMode } from "configcat-common";
+import { FlagOverrides, MapOverrideDataSource, PollingMode } from "configcat-common";
 import * as configcatcommon from "configcat-common";
 import { LocalStorageCache } from "./Cache";
 import { HttpConfigFetcher } from "./ConfigFetcher";
@@ -17,12 +17,11 @@ import CONFIGCAT_SDK_VERSION from "./Version";
  */
 export function getClient<TMode extends PollingMode | undefined>(sdkKey: string, pollingMode?: TMode, options?: OptionsForPollingMode<TMode>): IConfigCatClient {
   return configcatcommon.getClient(sdkKey, pollingMode ?? PollingMode.AutoPoll, options,
-    {
+    LocalStorageCache.setup({
       configFetcher: new HttpConfigFetcher(),
       sdkType: "ConfigCat-JS",
       sdkVersion: CONFIGCAT_SDK_VERSION,
-      defaultCacheFactory: options => new ExternalConfigCache(new LocalStorageCache(), options.logger)
-    });
+    }));
 }
 
 /**
