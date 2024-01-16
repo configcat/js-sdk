@@ -1,6 +1,5 @@
-import type { IAutoPollOptions, IConfigCatClient, IConfigCatLogger, ILazyLoadingOptions, IManualPollOptions, LogLevel, OverrideBehaviour, SettingValue } from "configcat-common";
-import { FlagOverrides, MapOverrideDataSource, PollingMode } from "configcat-common";
-import * as configcatcommon from "configcat-common";
+import type { IAutoPollOptions, IConfigCatClient, ILazyLoadingOptions, IManualPollOptions } from "configcat-common";
+import { PollingMode, getClient as getClientCommon } from "configcat-common";
 import { LocalStorageCache } from "./Cache";
 import { HttpConfigFetcher } from "./ConfigFetcher";
 import CONFIGCAT_SDK_VERSION from "./Version";
@@ -16,7 +15,7 @@ import CONFIGCAT_SDK_VERSION from "./Version";
  * @param options Options for the specified polling mode.
  */
 export function getClient<TMode extends PollingMode | undefined>(sdkKey: string, pollingMode?: TMode, options?: OptionsForPollingMode<TMode>): IConfigCatClient {
-  return configcatcommon.getClient(sdkKey, pollingMode ?? PollingMode.AutoPoll, options,
+  return getClientCommon(sdkKey, pollingMode ?? PollingMode.AutoPoll, options,
     LocalStorageCache.setup({
       configFetcher: new HttpConfigFetcher(),
       sdkType: "ConfigCat-JS",
@@ -24,32 +23,7 @@ export function getClient<TMode extends PollingMode | undefined>(sdkKey: string,
     }));
 }
 
-/**
- * Disposes all existing `ConfigCatClient` instances.
- */
-export function disposeAllClients(): void {
-  configcatcommon.disposeAllClients();
-}
-
-/**
- * Creates an instance of `ConfigCatConsoleLogger`.
- * @param logLevel Log level (the minimum level to use for filtering log events).
- */
-export function createConsoleLogger(logLevel: LogLevel): IConfigCatLogger {
-  return configcatcommon.createConsoleLogger(logLevel);
-}
-
-/**
- * Creates an instance of `FlagOverrides` that uses a map data source.
- * @param map The map that contains the overrides.
- * @param behaviour The override behaviour.
- * Specifies whether the local values should override the remote values
- * or local values should only be used when a remote value doesn't exist
- * or the local values should be used only.
- */
-export function createFlagOverridesFromMap(map: { [name: string]: NonNullable<SettingValue> }, behaviour: OverrideBehaviour): FlagOverrides {
-  return new FlagOverrides(new MapOverrideDataSource(map), behaviour);
-}
+export { disposeAllClients, createConsoleLogger, createFlagOverridesFromMap } from "configcat-common";
 
 /** Options used to configure the ConfigCat SDK in the case of Auto Polling mode. */
 export interface IJSAutoPollOptions extends IAutoPollOptions {

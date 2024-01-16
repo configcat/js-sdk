@@ -250,13 +250,43 @@ describe("Integration tests - Other cases", () => {
   it("Override - local only", async () => {
     const defaultValue = "DEFAULT_CAT";
 
-    const clientOverride: IConfigCatClient = configcatClient.getClient(sdkKey, PollingMode.AutoPoll, {
-      flagOverrides: configcatClient.createFlagOverridesFromMap({ stringDefaultCat: "NOT_CAT" }, configcatClient.OverrideBehaviour.LocalOnly),
+    const overrideMap = { stringDefaultCat: "NOT_CAT" };
+
+    const clientOverride: IConfigCatClient = configcatClient.getClient("localonly", PollingMode.AutoPoll, {
+      flagOverrides: configcatClient.createFlagOverridesFromMap(overrideMap, configcatClient.OverrideBehaviour.LocalOnly),
       logger: createConsoleLogger(LogLevel.Off)
     });
+    try {
+      let actual = await clientOverride.getValueAsync("stringDefaultCat", defaultValue);
+      assert.strictEqual(actual, "NOT_CAT");
 
-    const actual: string = await clientOverride.getValueAsync("stringDefaultCat", defaultValue);
-    assert.strictEqual(actual, "NOT_CAT");
+      overrideMap.stringDefaultCat = "ANOTHER_CAT";
+
+      actual = await clientOverride.getValueAsync("stringDefaultCat", defaultValue);
+      assert.strictEqual(actual, "NOT_CAT");
+    }
+    finally { clientOverride.dispose(); }
+  });
+
+  it("Override - local only - watch changes", async () => {
+    const defaultValue = "DEFAULT_CAT";
+
+    const overrideMap = { stringDefaultCat: "NOT_CAT" };
+
+    const clientOverride: IConfigCatClient = configcatClient.getClient("localonly", PollingMode.AutoPoll, {
+      flagOverrides: configcatClient.createFlagOverridesFromMap(overrideMap, configcatClient.OverrideBehaviour.LocalOnly, true),
+      logger: createConsoleLogger(LogLevel.Off)
+    });
+    try {
+      let actual = await clientOverride.getValueAsync("stringDefaultCat", defaultValue);
+      assert.strictEqual(actual, "NOT_CAT");
+
+      overrideMap.stringDefaultCat = "ANOTHER_CAT";
+
+      actual = await clientOverride.getValueAsync("stringDefaultCat", defaultValue);
+      assert.strictEqual(actual, "ANOTHER_CAT");
+    }
+    finally { clientOverride.dispose(); }
   });
 
 });
