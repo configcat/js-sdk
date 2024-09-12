@@ -46,7 +46,7 @@ jobs:
       - name: 📦Pack
         run: npm pack
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         with:
           name: npm-package
           path: configcat-js*.tgz
