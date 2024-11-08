@@ -20,7 +20,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 14
+          node-version: 18
 
       - name: Setup chrome
         uses: browser-actions/setup-chrome@latest
@@ -29,7 +29,9 @@ jobs:
 
       - name: Install dependencies
         run: |
-          npm install codecov -g
+          mkdir -p coverage
+          curl -s -o coverage/codecov https://uploader.codecov.io/latest/linux/codecov
+          chmod +x coverage/codecov
           npm install
 
       - name: Build
@@ -41,7 +43,7 @@ jobs:
         run: CHROME_BIN=$(which chrome) npm run test
 
       - name: Upload coverage report
-        run: codecov
+        run: coverage/codecov -t ${CODECOV_TOKEN}
 
       - name: 📦Pack
         run: npm pack
@@ -62,7 +64,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 14
+          node-version: 18
 
       - name: Setup chrome
         uses: browser-actions/setup-chrome@latest
@@ -93,7 +95,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 14
+          node-version: 18
 
       - name: Setup chrome
         uses: browser-actions/setup-chrome@latest
@@ -123,7 +125,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 14
+          node-version: 18
 
       - name: Setup firefox
         uses: browser-actions/setup-firefox@latest
@@ -151,7 +153,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 14
+          node-version: 18
           registry-url: "https://registry.npmjs.org"
 
       - name: Install dependencies
