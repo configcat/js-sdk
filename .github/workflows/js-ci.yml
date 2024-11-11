@@ -16,11 +16,11 @@ jobs:
     runs-on: ubuntu-latest
     name: Test on latest Chrome and report coverage
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v4
         with:
-          node-version: 14
+          node-version: 18
 
       - name: Setup chrome
         uses: browser-actions/setup-chrome@latest
@@ -29,7 +29,9 @@ jobs:
 
       - name: Install dependencies
         run: |
-          npm install codecov -g
+          mkdir -p coverage
+          curl -s -o coverage/codecov https://uploader.codecov.io/latest/linux/codecov
+          chmod +x coverage/codecov
           npm install
 
       - name: Build
@@ -41,7 +43,7 @@ jobs:
         run: CHROME_BIN=$(which chrome) npm run test
 
       - name: Upload coverage report
-        run: codecov
+        run: coverage/codecov -t ${CODECOV_TOKEN}
 
       - name: 📦Pack
         run: npm pack
@@ -58,11 +60,11 @@ jobs:
         chrome: ["beta", "stable"]
     name: Chrome ${{ matrix.chrome }} test
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v4
         with:
-          node-version: 14
+          node-version: 18
 
       - name: Setup chrome
         uses: browser-actions/setup-chrome@latest
@@ -89,11 +91,11 @@ jobs:
         chrome: ["520847", "612434", "722278"]
     name: Chromium ${{ matrix.chrome }} test
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v4
         with:
-          node-version: 14
+          node-version: 18
 
       - name: Setup chrome
         uses: browser-actions/setup-chrome@latest
@@ -119,11 +121,11 @@ jobs:
         firefox: ["84.0", "latest-beta", "latest"]
     name: Firefox ${{ matrix.firefox }} test
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v4
         with:
-          node-version: 14
+          node-version: 18
 
       - name: Setup firefox
         uses: browser-actions/setup-firefox@latest
@@ -147,11 +149,11 @@ jobs:
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags')
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v4
         with:
-          node-version: 14
+          node-version: 18
           registry-url: "https://registry.npmjs.org"
 
       - name: Install dependencies
