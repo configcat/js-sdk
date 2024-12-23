@@ -13,7 +13,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     name: Test on latest Chrome and report coverage
     steps:
       - uses: actions/checkout@v4
@@ -54,7 +54,7 @@ jobs:
           path: configcat-js*.tgz
 
   test-chrome:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
         chrome: ["beta", "stable"]
@@ -115,7 +115,7 @@ jobs:
         run: CHROMIUM_BIN=$(which chrome) npm run test-chromium
 
   test-firefox:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
         firefox: ["84.0", "latest-beta", "latest"]
