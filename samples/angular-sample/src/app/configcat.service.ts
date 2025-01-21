@@ -6,7 +6,11 @@ import { BehaviorSubject, distinctUntilChanged, map, type Observable } from 'rxj
 @Injectable({ providedIn: 'root' })
 export class ConfigCatService implements OnDestroy {
   public readonly client: IConfigCatClient;
+
   private readonly snapshotSubject = new BehaviorSubject<IConfigCatClientSnapshot | null>(null);
+  readonly snapshot$ = this.snapshotSubject.asObservable();
+  get currentSnapshot() { return this.snapshotSubject.value; }
+
   private defaultUser?: User;
   
   constructor() { 
@@ -36,6 +40,30 @@ export class ConfigCatService implements OnDestroy {
     return this.snapshotSubject.pipe(
       map(snapshot => snapshot ? snapshot.getValue(key, defaultValue, user ?? this.defaultUser) : defaultValue as SettingTypeOf<T>),
       distinctUntilChanged()
+    );
+  }
+
+  getAllValues(user?: User): Observable<Map<string, SettingValue>> {
+    return this.snapshotSubject.pipe(
+      map(snapshot => snapshot
+        // Evaluate feature flags and build a key-value map.
+        ? snapshot.getAllKeys()
+          .reduce(
+            (keyValues, key) => (keyValues.set(key, snapshot.getValue(key, void 0, user ?? this.defaultUser)), keyValues),
+            new Map<string, SettingValue>()
+          )
+        : new Map<string, SettingValue>()
+      ),
+      distinctUntilChanged((prev, current) => {
+        // Check if there are any changes compared to the previous key-value map.
+        if (prev.size !== current.size) return false;
+        for (const key of prev.keys()) {
+          if (!current.has(key) || current.get(key) !== prev.get(key)) {
+            return false;
+          }
+        }
+        return true;
+      })
     );
   }
 }
