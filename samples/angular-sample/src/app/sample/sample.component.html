@@ -1,5 +1,5 @@
 <div class="wrapper">
-    <h2>Simple feature flag.</h2>
+    <h2>Simple feature flag</h2>
     <p>
         @if (isAwesomeEnabled$ | async) {
             Awesome Feature is turned <strong>ON</strong>
@@ -14,6 +14,14 @@
     <input type="text" [(ngModel)]="userEmail">
     <button (click)="checkProofOfConcept()">Check POC feature with Email</button>
     <p>Value returned from ConfigCat: <strong>{{isPOCEnabled}}</strong></p>
+    <br />
+    <h2>All feature flags</h2>
+    <p>Values of all the feature flags in the config, evaluated for a user with the e-mail address specified above:</p>
+    <ul>
+        @for (item of allKeyValues$ | async; track item[0]) {
+            <li><strong>{{ item[0] }}:</strong> {{ item[1] }}</li>
+        }
+    </ul>
     <br />
     <h2>ConfigCat Dashboard</h2>
     <p>A screenshot to see how the ConfigCat Dashboard looks like for this Sample Project.</p>
