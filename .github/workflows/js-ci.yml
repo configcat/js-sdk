@@ -85,10 +85,10 @@ jobs:
 
 
   test-chromium:
-    runs-on: ubuntu-20.04
+    runs-on: windows-latest
     strategy:
       matrix:
-        chrome: ["520847", "612434", "722278"]
+        chrome: ["592002", "612439", "722274"]
     name: Chromium ${{ matrix.chrome }} test
     steps:
       - uses: actions/checkout@v4
@@ -98,6 +98,7 @@ jobs:
           node-version: 18
 
       - name: Setup chrome
+        id: setup-chrome
         uses: browser-actions/setup-chrome@latest
         with:
           chrome-version: ${{ matrix.chrome }}
@@ -112,7 +113,8 @@ jobs:
           npm run buildPure
 
       - name: Test
-        run: CHROMIUM_BIN=$(which chrome) npm run test-chromium
+        run: |
+          $env:CHROMIUM_BIN='${{ steps.setup-chrome.outputs.chrome-path }}'; npm run test-chromium
 
   test-firefox:
     runs-on: ubuntu-22.04

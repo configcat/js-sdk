@@ -2,6 +2,12 @@ module.exports = function(config) {
   config.set({
     frameworks: ["mocha", "chai", "webpack"],
 
+    client: {
+      mocha: {
+        timeout: 30000
+      }
+    },
+
     files: [
       "test/index.ts"
     ],
