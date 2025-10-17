@@ -16,9 +16,9 @@ jobs:
     runs-on: ubuntu-22.04
     name: Test on latest Chrome and report coverage
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: 18
 
@@ -60,9 +60,9 @@ jobs:
         chrome: ["beta", "stable"]
     name: Chrome ${{ matrix.chrome }} test
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: 18
 
@@ -91,9 +91,9 @@ jobs:
         chrome: ["592002", "612439", "722274"]
     name: Chromium ${{ matrix.chrome }} test
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: 18
 
@@ -123,9 +123,9 @@ jobs:
         firefox: ["84.0", "latest-beta", "latest"]
     name: Firefox ${{ matrix.firefox }} test
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: 18
 
@@ -148,15 +148,22 @@ jobs:
 
   publish:
     needs: [test, test-chrome, test-chromium, test-firefox]
-    runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags')
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write # Required for OIDC (see also https://docs.npmjs.com/trusted-publishers)
+      contents: read
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
-          node-version: 18
+          node-version: 22
           registry-url: "https://registry.npmjs.org"
+
+      # Ensure npm 11.5.1 or later is installed
+      - name: Update npm
+        run: npm install -g npm@latest
 
       - name: Install dependencies
         run: npm install
@@ -168,5 +175,3 @@ jobs:
 
       - name: 🚀Publish
         run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_API_KEY }}
