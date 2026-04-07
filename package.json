@@ -70,11 +70,8 @@
     "webpack-cli": "^4.10.0"
   },
   "overrides": {
-    "brace-expansion": "2.0.2",
-    "chokidar": "3.5.3",
-    "cookie": "0.7.2",
-    "glob-parent": "5.1.2",
-    "loader-utils": "1.4.2"
+    "loader-utils": "1.4.2",
+    "serialize-javascript": "^7.0.5"
   },
   "repository": {
     "type": "git",
