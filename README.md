@@ -1,6 +1,6 @@
 | :mega: Important notice |
 |-------------------------|
-| This SDK is superseded by the [new, unified ConfigCat SDK for JavaScript](https://github.com/configcat/js-unified-sdk#configcat-sdk-for-javascript).<br/>This legacy SDK is in maintenance mode now, it will receive only critical security patches until **official support ends on August 31, 2026**.<br/> We recommend migrating to the new SDK as described [here](https://configcat.com/docs/sdk-reference/js/#migration-to-the-new-sdk). |
+| Official support for this SDK has ended. Although it may continue to work, its use is not recommended as it will no longer receive security patches. Please migrate to the [unified ConfigCat SDK for JavaScript](https://github.com/configcat/js-unified-sdk#configcat-sdk-for-javascript), as explained [here](https://configcat.com/docs/sdk-reference/js/#migration-to-the-new-sdk). |
 
 # ConfigCat SDK for JavaScript frontend applications
 https://configcat.com
